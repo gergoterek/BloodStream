@@ -19,7 +19,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Install with Maven
-      run: mvn install
+      run: mvn clean install -X
     - name: Build with Maven
       run: mvn compile
       
