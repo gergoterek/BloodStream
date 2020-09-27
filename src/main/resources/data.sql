@@ -1,0 +1,1 @@
+INSERT INTO gyik (text) VALUES ('rgreg');
