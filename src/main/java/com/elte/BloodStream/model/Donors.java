@@ -34,7 +34,7 @@ public class Donors {
     private String donorName;
 
     @Column(columnDefinition="tinyint(1) default 0")            //(name = "correct_q", columnDefinition="tinyint(1) default 0")
-    private final int totalDonations = 0;
+    private int totalDonations = 0;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

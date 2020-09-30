@@ -19,9 +19,9 @@ public class Donations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer donationId;
 
-    @Column(updatable = false)
+    @Column
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private LocalDateTime donationTime;
 
     @Column(nullable = false)
     private boolean isUsed;

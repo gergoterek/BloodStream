@@ -20,7 +20,7 @@ public class AppliedUsers {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer applyId;
 
-    @Column(updatable = false)
+    @Column
     @CreationTimestamp
     private LocalDateTime appliedAt;
 

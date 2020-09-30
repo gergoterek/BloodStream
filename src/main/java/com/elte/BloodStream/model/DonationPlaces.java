@@ -18,7 +18,7 @@ public class DonationPlaces {
     private Integer ID;                         //placeID
 
     @Column(nullable = false)
-    private String cityName;
+    private String city;
 
     @Column(nullable = false)
     private String address;

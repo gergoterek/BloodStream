@@ -24,7 +24,7 @@ public class Messages {
 
     @Column(updatable = false)
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private LocalDateTime sendAt;
 
     @JsonIgnore
     @ManyToOne
