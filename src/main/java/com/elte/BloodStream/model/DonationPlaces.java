@@ -15,6 +15,7 @@ public class DonationPlaces {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PLACE_ID")
     private Integer ID;                         //placeID
 
     @Column(nullable = false)

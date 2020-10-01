@@ -19,12 +19,12 @@ public class Messages {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer msgId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String message;
 
     @Column(updatable = false)
     @CreationTimestamp
-    private LocalDateTime sendAt;
+    private LocalDateTime posted;
 
     @JsonIgnore
     @ManyToOne

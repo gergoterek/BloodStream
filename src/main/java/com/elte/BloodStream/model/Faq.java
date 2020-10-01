@@ -10,12 +10,15 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GYIK {
+public class Faq {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer gyikId;
+    private Integer faqId;
 
-    @Column(nullable = false)
-    private String text;
+    @Column(nullable = false, length = 1000)
+    private String question;
+
+    @Column(nullable = false, length = 1000)
+    private String answer;
 }

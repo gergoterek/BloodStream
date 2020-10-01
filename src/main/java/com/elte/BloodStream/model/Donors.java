@@ -20,6 +20,7 @@ public class Donors {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DONOR_ID")
     private Integer ID;                 //donorID
 
     @Column(nullable = false)
@@ -60,5 +61,8 @@ public class Donors {
 
     @OneToMany(mappedBy = "donor")
     private List<AppliedUsers> appliedUsers;
+
+    @ManyToOne
+    private News news;
 
 }
