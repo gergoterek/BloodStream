@@ -13,22 +13,24 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AppliedUsers {
-
+public class Donation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer applyId;
+    private Integer donationId;
 
     @Column
     @CreationTimestamp
-    private LocalDateTime appliedAt;
+    private LocalDateTime donationTime;
 
-    @JsonIgnore
+    @Column(nullable = false)
+    private boolean isUsed;
+
+    //@JsonIgnore
     @ManyToOne
-    private DonationPlaces place;
-	
-	@JsonIgnore
+    private Donor donor;
+
+    //@JsonIgnore
     @ManyToOne
-    private Donors donor;
+    private DonationPlace place;
 }

@@ -21,7 +21,7 @@ public class NewsController {
             return newsRepository.findAll();
         }
 
-
+        //ADMIN
         @PostMapping("/create")
         public ResponseEntity<News> createNews(
                 @RequestBody News news
@@ -31,6 +31,7 @@ public class NewsController {
                 return ResponseEntity.ok(savedNews);
         }
 
+        //ADMIN
         @DeleteMapping("/delete/{id}")
         public ResponseEntity deleteNews(
                 @PathVariable Integer id
@@ -43,6 +44,7 @@ public class NewsController {
                 }
         }
 
+        //ADMIN
         @PatchMapping("/modify")
         public ResponseEntity<News> modifyNews(@RequestBody News news){
                 Optional<News> oldNews = newsRepository.findById(news.getNewsId());

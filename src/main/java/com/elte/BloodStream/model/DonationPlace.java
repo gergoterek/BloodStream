@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DonationPlaces {
+public class DonationPlace {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +31,9 @@ public class DonationPlaces {
     private boolean isActive;
 
     @OneToMany(mappedBy = "place")
-    private List<Donations> donations;
+    private List<Donation> donations;
 
     @OneToMany(mappedBy = "place")
-    private List<AppliedUsers> appliedUsers;
+    private List<Application> appliedUsers;
 
 }

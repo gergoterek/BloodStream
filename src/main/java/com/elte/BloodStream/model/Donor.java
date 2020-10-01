@@ -1,6 +1,7 @@
 package com.elte.BloodStream.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +17,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Donors {
+public class Donor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,16 +54,19 @@ public class Donors {
         ROLE_GUEST, ROLE_USER, ROLE_ADMIN
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "donor")
-    private List<Messages> messages;
+    private List<Message> messages;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "donor")
-    private List<Donations> donations;
+    private List<Donation> donations;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "donor")
-    private List<AppliedUsers> appliedUsers;
+    private List<Application> applications;
 
-    @ManyToOne
-    private News news;
+//    @ManyToOne
+//    private News news;
 
 }

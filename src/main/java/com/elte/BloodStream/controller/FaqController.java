@@ -20,6 +20,7 @@ public class FaqController {
         return faqRepository.findAll();
     }
 
+    //ADMIN
     @PostMapping("/create")
     public ResponseEntity<Faq> createGyik(
             @RequestBody Faq faq
@@ -28,6 +29,7 @@ public class FaqController {
         return ResponseEntity.ok(savedFaq);
     }
 
+    //ADMIN
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteNews(
             @PathVariable Integer id
@@ -40,6 +42,7 @@ public class FaqController {
         }
     }
 
+    //ADMIN
     @PatchMapping("/modify")
     public ResponseEntity<Faq> modifyNews(@RequestBody Faq faq) {
         Optional<Faq> oldFaq = faqRepository.findById(faq.getFaqId());

@@ -13,21 +13,22 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Messages {
+public class Application {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer msgId;
+    private Integer applyId;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String message;
-
-    @Column(updatable = false)
+    @Column
     @CreationTimestamp
-    private LocalDateTime posted;
+    private LocalDateTime appliedAt;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
-    private Donors donor;
-
+    private DonationPlace place;
+	
+	//@JsonIgnore
+    @ManyToOne
+    private Donor donor;
 }
