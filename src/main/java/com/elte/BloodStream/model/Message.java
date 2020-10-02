@@ -19,6 +19,9 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer msgId;
 
+    @Column(nullable = false)
+    private String title;
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String message;
 

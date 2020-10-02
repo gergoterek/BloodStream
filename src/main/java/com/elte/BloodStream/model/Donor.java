@@ -54,7 +54,7 @@ public class Donor {
         ROLE_GUEST, ROLE_USER, ROLE_ADMIN
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "donor")
     private List<Message> messages;
 
