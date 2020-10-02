@@ -1,7 +1,9 @@
 package com.elte.BloodStream.controller;
 
 import com.elte.BloodStream.model.Faq;
+import com.elte.BloodStream.model.Message;
 import com.elte.BloodStream.repository.FaqRepository;
+import com.elte.BloodStream.service.FaqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,45 +17,33 @@ public class FaqController {
     @Autowired
     FaqRepository faqRepository;
 
+    @Autowired
+    FaqService faqService;
+
+    //USER
     @GetMapping("")
     public Iterable<Faq> getFaq() {
-        return faqRepository.findAll();
+        return faqService.getFaq();
     }
 
     //ADMIN
     @PostMapping("/create")
-    public ResponseEntity<Faq> createGyik(
+    public ResponseEntity<Faq> createFaq(
             @RequestBody Faq faq
     ) {
-        Faq savedFaq = faqRepository.save(faq);
-        return ResponseEntity.ok(savedFaq);
+        return faqService.createFaq(faq);
     }
 
     //ADMIN
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteNews(
-            @PathVariable Integer id
-    ) {
-        try {
-            faqRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Faq> deleteFaq(@PathVariable Integer id) {
+        return faqService.deleteFaq(id);
     }
 
     //ADMIN
     @PatchMapping("/modify")
-    public ResponseEntity<Faq> modifyNews(@RequestBody Faq faq) {
-        Optional<Faq> oldFaq = faqRepository.findById(faq.getFaqId());
-        if (oldFaq.isPresent()) {
-            Faq createdFaq = oldFaq.get();
-            createdFaq.setQuestion(faq.getQuestion());
-            createdFaq.setAnswer(faq.getAnswer());
-            faqRepository.save(createdFaq);
-            return ResponseEntity.ok(createdFaq);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Faq> modifyFaq(@RequestBody Faq faq) {
+        return faqService.modifyFaq(faq);
     }
+
 }
