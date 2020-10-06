@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/messages")
+@RequestMapping("/message")
 public class MessageController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class MessageController {
     }
 
     //ADMIN
-    @PostMapping("/{id}/new")
+    @PostMapping("new/{id}")
     public ResponseEntity<Message> createMessage(@RequestBody Message msg, @PathVariable Integer id) {
         return messageService.createMessage(msg, id);
     }

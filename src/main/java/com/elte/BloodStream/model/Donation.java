@@ -27,10 +27,17 @@ public class Donation {
     private boolean isUsed;
 
     //@JsonIgnore
+    //@Column(name = "DONOR_ID")
     @ManyToOne
+    //@JoinColumn(referencedColumnName = "ID")
     private Donor donor;
 
     //@JsonIgnore
+    //@Column(name = "PLACE_ID")
     @ManyToOne
     private DonationPlace place;
+
+    //@Column(name = "MSG_ID")
+    @ManyToOne
+    private Message message;
 }

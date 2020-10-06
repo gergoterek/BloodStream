@@ -6,9 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
@@ -38,13 +41,23 @@ public class Donor {
     @Column(columnDefinition="tinyint(1) default 0")            //(name = "correct_q", columnDefinition="tinyint(1) default 0")
     private int totalDonations = 0;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Enumerated(EnumType.STRING)
     private BloodTypes bloodType;
 
     public enum BloodTypes {
         A_POZ, A_NEG, B_POZ, B_NEG, ZERO_POZ, ZERO_NEG, AB_POZ, AB_NEG
     }
+
+    @Column(nullable = false)
+    private int TAJ;
+
+    @Column(nullable = false)
+    private String idCard;
+
+    @Column(nullable = false)
+    @CreationTimestamp
+    private LocalDate birthDate;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -58,11 +71,11 @@ public class Donor {
     @OneToMany(mappedBy = "donor")
     private List<Message> messages;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "donor")
     private List<Donation> donations;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "donor")
     private List<Application> applications;
 

@@ -22,7 +22,7 @@ public class NewsService {
 
     //ADMIN
     public ResponseEntity<News> createNews(News news) {
-        news.setCreatedAt(LocalDateTime.now());
+        news.setPublishDate(LocalDateTime.now());
         News savedNews = newsRepository.save(news);
         return ResponseEntity.ok(savedNews);
     }

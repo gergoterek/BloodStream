@@ -24,7 +24,11 @@ public class Application {
     @CreationTimestamp
     private LocalDateTime appliedAt;
 
+    @Column
+    private boolean hasAppeared;
+
     //@JsonIgnore
+    //@Column(name = "PLACE_ID")
     @ManyToOne
     private DonationPlace place;
 	

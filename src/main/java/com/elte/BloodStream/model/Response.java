@@ -14,22 +14,24 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class News {
+public class Response {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer newsId;
+    private Integer resId;
 
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, length = 1000)
-    private String message;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String response;
 
     @Column(updatable = false)
     @CreationTimestamp
-    private LocalDateTime publishDate;
+    private LocalDateTime sendAt;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "news")
-//    private List<Donor> donorsRead;
+    //@JsonIgnore
+    @OneToOne//(mappedBy = "donationId")
+    @JoinColumn(referencedColumnName = "donationId", name = "donation_id")
+    private Donation donation;
 }

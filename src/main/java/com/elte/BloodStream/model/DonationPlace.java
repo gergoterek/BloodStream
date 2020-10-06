@@ -25,7 +25,7 @@ public class DonationPlace {
     private String address;
 
     @Column(nullable = false)
-    private String name;
+    private String place;
 
     @Column(nullable = false)
     private boolean isActive;
