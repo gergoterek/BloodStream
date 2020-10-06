@@ -34,7 +34,7 @@ public class DonorController {
     public ResponseEntity<Donor> changeDonorPassword(@RequestBody Donor donor) { return donorService.changeDonorPassword(donor); }
 
     //ADMIN
-    @PostMapping("/profile/change/")
+    @PostMapping("/profile/change")
     public ResponseEntity<Donor> changeDonorDataByAdmin(@RequestBody Donor donor) { return donorService.changeDonorDataByAdmin(donor); }
 
     //ADMIN

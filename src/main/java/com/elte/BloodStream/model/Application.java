@@ -1,5 +1,6 @@
 package com.elte.BloodStream.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,11 +29,16 @@ public class Application {
     private boolean hasAppeared;
 
     //@JsonIgnore
-    //@Column(name = "PLACE_ID")
+    //@JsonBackReference
     @ManyToOne
+    @JoinColumn(referencedColumnName = "PLACE_ID", name = "place_id")
     private DonationPlace place;
 	
+    //@JsonBackReference
 	//@JsonIgnore
     @ManyToOne
+    @JoinColumn(referencedColumnName = "DONOR_ID", name = "donor_id")
     private Donor donor;
+
+
 }

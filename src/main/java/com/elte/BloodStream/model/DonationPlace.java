@@ -1,5 +1,6 @@
 package com.elte.BloodStream.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,9 +31,11 @@ public class DonationPlace {
     @Column(nullable = false)
     private boolean isActive;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "place")
     private List<Donation> donations;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "place")
     private List<Application> appliedUsers;
 

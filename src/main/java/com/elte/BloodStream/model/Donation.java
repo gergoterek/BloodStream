@@ -29,15 +29,12 @@ public class Donation {
     //@JsonIgnore
     //@Column(name = "DONOR_ID")
     @ManyToOne
-    //@JoinColumn(referencedColumnName = "ID")
+    @JoinColumn(referencedColumnName = "DONOR_ID", name = "DONOR_ID")
     private Donor donor;
 
     //@JsonIgnore
-    //@Column(name = "PLACE_ID")
+    @JoinColumn(referencedColumnName = "PLACE_ID", name = "PLACE_ID")
     @ManyToOne
     private DonationPlace place;
 
-    //@Column(name = "MSG_ID")
-    @ManyToOne
-    private Message message;
 }

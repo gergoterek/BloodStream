@@ -24,7 +24,7 @@ public class Donor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "DONOR_ID")
+    @Column(name = "DONOR_ID", unique = true)
     private Integer ID;                 //donorID
 
     @Column(nullable = false)
@@ -67,15 +67,15 @@ public class Donor {
         ROLE_GUEST, ROLE_USER, ROLE_ADMIN
     }
 
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "donor")
     private List<Message> messages;
 
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "donor")
     private List<Donation> donations;
 
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "donor")
     private List<Application> applications;
 

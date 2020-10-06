@@ -31,14 +31,14 @@ public class Message {
     @CreationTimestamp
     private LocalDateTime posted;
 
-    @JsonIgnore
     //@JsonBackReference
-    //@Column(name = "donor_id")
-    @ManyToOne
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "DONOR_ID", name = "donor_id")
+    @JsonIgnore
     private Donor donor;
 
-    //@JsonIgnore
-    @OneToMany(mappedBy = "message")
-    private List<Donation> donation;
+//    //@JsonIgnore
+//    @OneToMany(mappedBy = "message")
+//    private List<Donation> donation;
 
 }
