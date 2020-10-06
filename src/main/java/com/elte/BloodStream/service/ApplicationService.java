@@ -38,7 +38,7 @@ public class ApplicationService {
         if (!foundDonor.isPresent() && !foundPlace.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
-        application.setDonor(donorRepository.findAllByID(application.getDonor().getID()));
+        application.setDonor(donorRepository.findByID(application.getDonor().getID()).get());
         application.setPlace(placeRepository.findAllByID(application.getPlace().getID()));
         application.setAppliedAt(LocalDateTime.now());
         application.setHasAppeared(false);

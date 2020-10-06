@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+
 
 
 @RestController
@@ -16,10 +16,10 @@ import java.util.Optional;
 public class DonorController {
 
     @Autowired
-    DonorRepository donorRepository;
-
-    @Autowired
     DonorService donorService;
+
+
+    //Osztaly fv-ek leellenőrizve 10.06.
 
     //GUEST
     @PostMapping("/registration")
@@ -27,25 +27,28 @@ public class DonorController {
 
     //USER
     @GetMapping("/profile/{id}")
-    public Optional<Donor> getDonorProfile(@RequestBody Integer id) { return donorService.getProfile(id); }
+    public Donor getDonorProfile(@PathVariable Integer id) {
+        return donorService.getDonorProfile(id);
+    }
+
 
     //USER
-    @PostMapping("/profile/changepw")
+    @PostMapping("/profile/change/pw")
     public ResponseEntity<Donor> changeDonorPassword(@RequestBody Donor donor) { return donorService.changeDonorPassword(donor); }
 
-    //ADMIN
-    @PostMapping("/profile/change")
+    //ADMIN (changeable: name, role, blood_type, TAJ, idCard )
+    @PostMapping("/profile/change/donordata")
     public ResponseEntity<Donor> changeDonorDataByAdmin(@RequestBody Donor donor) { return donorService.changeDonorDataByAdmin(donor); }
 
     //ADMIN
     @GetMapping("/donors")
     public Iterable<Donor> getAllDonors() {
-        return donorRepository.findAll();
+        return donorService.getAllDonors();
     }
 
     //ADMIN
     @GetMapping("/donors/{type}")
-    public Iterable<Donor> getDonorsByBloodType(@PathVariable String type) {
-        return donorRepository.findAllByBloodType(type);
+    public Iterable<Donor> getDonorsByBloodType(@PathVariable String type){
+        return donorService.getDonorsByBloodType(type);
     }
 }

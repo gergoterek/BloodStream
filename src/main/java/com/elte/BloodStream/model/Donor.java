@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 
@@ -14,8 +15,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -25,6 +26,7 @@ public class Donor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DONOR_ID", unique = true)
+    @JsonProperty(access = READ_ONLY)
     private Integer ID;                 //donorID
 
     @Column(nullable = false)
@@ -32,13 +34,12 @@ public class Donor {
     private String userName;
 
     @Column(nullable = false)
-    @JsonProperty(access = WRITE_ONLY)
     private String password;
 
     @Column(nullable = false)
     private String donorName;
 
-    @Column(columnDefinition="tinyint(1) default 0")            //(name = "correct_q", columnDefinition="tinyint(1) default 0")
+    @Column(columnDefinition="tinyint(1) default 0")
     private int totalDonations = 0;
 
     @Column(nullable = true)

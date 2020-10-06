@@ -21,8 +21,8 @@ public class DonorService {
     @Autowired
     DonorRepository donorRepository;
 
-//    @Autowired
-//    DonorController donorController;
+    @Autowired
+    DonorController donorController;
 
     //GUEST
     public ResponseEntity<Donor> register(Donor donor) {
@@ -41,35 +41,46 @@ public class DonorService {
 
     //USER (changeable: password)
     public ResponseEntity<Donor> changeDonorPassword(Donor donor){
-        Optional<Donor> foundDonor = donorRepository.findByUserName(donor.getUserName());
+        Optional<Donor> foundDonor = donorRepository.findByID(donor.getID());
         if (!foundDonor.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
-        Donor newDonorData = donorRepository.findAllByID(donor.getID());
+        Donor newDonorData = donorRepository.findByID(donor.getID()).get();
         newDonorData.setPassword(donor.getPassword());
         return ResponseEntity.ok(donorRepository.save(newDonorData));
     }
 
-    //ADMIN (changeable: name, role, blood_type)
+    //ADMIN (changeable: name, role, blood_type, TAJ, idCard )
     public ResponseEntity<Donor> changeDonorDataByAdmin(Donor donor){
-        Optional<Donor> foundDonor = donorRepository.findByUserName(donor.getUserName());
+        Optional<Donor> foundDonor = donorRepository.findByID(donor.getID());
         if (!foundDonor.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
-        Donor newDonorData = donorRepository.findAllByID(donor.getID());
+        Donor newDonorData = donorRepository.findByID(donor.getID()).get();
         newDonorData.setRole(donor.getRole());
         newDonorData.setBloodType(donor.getBloodType());
         newDonorData.setDonorName(donor.getDonorName());
+        newDonorData.setTAJ(donor.getTAJ());
+        newDonorData.setIdCard(donor.getIdCard());
         return ResponseEntity.ok(donorRepository.save(newDonorData));
     }
 
     //USER
-    public Optional<Donor> getProfile(@PathVariable Integer id) {
-        return donorRepository.findByID(id);
+    public Donor getDonorProfile( Integer id) {
+        Optional<Donor> foundDonor = donorRepository.findByID(id);
+        if (!foundDonor.isPresent()){
+
+        }
+        return foundDonor.get();
     }
 
     //ADMIN
-    public Iterable<Donor> getDonors() {
+    public Iterable<Donor> getAllDonors() {
         return donorRepository.findAll();
+    }
+
+    //ADMIN
+    public Iterable<Donor> getDonorsByBloodType( String type){
+        return donorRepository.findAllByBloodType(Donor.BloodTypes.valueOf(type));
     }
 }
