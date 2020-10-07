@@ -7,9 +7,9 @@ INSERT INTO donor (blood_type, donor_name, password, role, user_name, TAJ, id_ca
 INSERT INTO donation_place (address, city, is_active, place) VALUES ('Czuczor utca 8', 'Budapest', 1, 'Plazma');
 INSERT INTO donation_place (address, city, is_active, place) VALUES ('Czuczor utca 9', 'Debrecen', 1, 'OVSZ');
 
-INSERT INTO application (applied_at, has_appeared, donor_id, place_id) VALUES (CURRENT_DATE(), 1, 1, 2);
-INSERT INTO application (applied_at, has_appeared, donor_id, place_id) VALUES ('1997-12-12', 0, 2,1);
-INSERT INTO application (applied_at, has_appeared, donor_id, place_id) VALUES ('1997-12-12', 0, 1,1);
+INSERT INTO application (applied_time, has_appeared, donor_id, place_id) VALUES (CURRENT_DATE(), 1, 1, 2);
+INSERT INTO application (applied_time, has_appeared, donor_id, place_id) VALUES ('1997-12-12', 0, 2,1);
+INSERT INTO application (applied_time, has_appeared, donor_id, place_id) VALUES ('1997-12-12', 0, 1,1);
 
 
 INSERT INTO donation (donation_time, is_used, donor_id, place_id ) VALUES (CURRENT_DATE(), 0,1,2 );

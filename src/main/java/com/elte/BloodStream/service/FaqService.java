@@ -18,14 +18,13 @@ public class FaqService {
     FaqRepository faqRepository;
 
     //USER
-    public Iterable<Faq> getFaq() {
+    public Iterable<Faq> getAllFaq() {
         return faqRepository.findAll();
     }
 
     //ADMIN
     public ResponseEntity<Faq> createFaq(Faq faq) {
-        Faq savedFaq = faqRepository.save(faq);
-        return ResponseEntity.ok(savedFaq);
+        return ResponseEntity.ok(faqRepository.save(faq));
     }
 
     //ADMIN
@@ -40,6 +39,7 @@ public class FaqService {
 
     //ADMIN
     public ResponseEntity<Faq> modifyFaq(Faq faq) {
+
         Optional<Faq> oldFaq = faqRepository.findById(faq.getFaqId());
         if (oldFaq.isPresent()) {
             Faq createdFaq = oldFaq.get();

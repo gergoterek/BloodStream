@@ -14,22 +14,19 @@ import org.springframework.web.bind.annotation.*;
 public class MessageController {
 
     @Autowired
-    MessageRepository messageRepository;
-
-    @Autowired
     MessageService messageService;
 
 
     //USER - ADMIN
     @GetMapping("/{id}")
     public Iterable<Message> getDonorMessages(@PathVariable Integer id) {
-        return messageRepository.findAllByDonorID(id);
+        return messageService.getDonorMessages(id);
     }
 
     //ADMIN
     @GetMapping("/all")
     public Iterable<Message> getAllMessages() {
-        return messageRepository.findAll();
+        return messageService.getAllMessages();
     }
 
     //ADMIN

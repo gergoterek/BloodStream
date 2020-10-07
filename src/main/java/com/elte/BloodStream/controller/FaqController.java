@@ -15,15 +15,13 @@ import java.util.Optional;
 public class FaqController {
 
     @Autowired
-    FaqRepository faqRepository;
-
-    @Autowired
     FaqService faqService;
+
 
     //USER
     @GetMapping("")
-    public Iterable<Faq> getFaq() {
-        return faqService.getFaq();
+    public Iterable<Faq> getAllFaq() {
+        return faqService.getAllFaq();
     }
 
     //ADMIN

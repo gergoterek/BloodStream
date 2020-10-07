@@ -1,12 +1,15 @@
 package com.elte.BloodStream.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
 @Entity
 @Data
@@ -16,6 +19,7 @@ public class DonationPlace {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = READ_ONLY)
     @Column(name = "PLACE_ID")
     private Integer ID;                         //placeID
 

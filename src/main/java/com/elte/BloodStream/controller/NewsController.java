@@ -18,15 +18,13 @@ import java.util.Optional;
 public class NewsController {
 
         @Autowired
-        private NewsRepository newsRepository;
-
-        @Autowired
         NewsService newsService;
 
 
+        //USER - ADMIN
         @GetMapping("")
-        public Iterable<News> getNews() {
-                return newsRepository.findAll();
+        public Iterable<News> getAllNews() {
+                return newsService.getAllNews();
         }
 
         //ADMIN

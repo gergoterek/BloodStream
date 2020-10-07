@@ -16,15 +16,15 @@ public class NewsService {
     @Autowired
     NewsRepository newsRepository;
 
-    public Iterable<News> getNews() {
+    //USER - ADMIN
+    public Iterable<News> getAllNews() {
         return newsRepository.findAll();
     }
 
     //ADMIN
     public ResponseEntity<News> createNews(News news) {
-        news.setPublishDate(LocalDateTime.now());
-        News savedNews = newsRepository.save(news);
-        return ResponseEntity.ok(savedNews);
+        news.setPublishDate(news.getPublishDate());
+        return ResponseEntity.ok(newsRepository.save(news));
     }
 
     //ADMIN

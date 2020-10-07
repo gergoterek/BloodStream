@@ -2,6 +2,7 @@ package com.elte.BloodStream.controller;
 
 import com.elte.BloodStream.model.Donor;
 import com.elte.BloodStream.model.Faq;
+import com.elte.BloodStream.model.Response;
 import com.elte.BloodStream.repository.DonorRepository;
 import com.elte.BloodStream.service.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class DonorController {
     DonorService donorService;
 
 
-    //Osztaly fv-ek leellenőrizve 10.06.
+    //Osztaly fv-ek leellenőrizve 10.07.
 
     //GUEST
     @PostMapping("/registration")
@@ -27,7 +28,7 @@ public class DonorController {
 
     //USER
     @GetMapping("/profile/{id}")
-    public Donor getDonorProfile(@PathVariable Integer id) {
+    public ResponseEntity<Donor> getDonorProfile(@PathVariable Integer id) {
         return donorService.getDonorProfile(id);
     }
 
