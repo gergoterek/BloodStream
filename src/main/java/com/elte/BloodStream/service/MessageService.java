@@ -24,10 +24,10 @@ public class MessageService {
     DonorRepository donorRepository;
 
 
-    //ADMIN - /message/create/{id}
-    public ResponseEntity<Message> createMessage(Message msg, Integer id) {
+    //ADMIN - /message/create/{msgID}
+    public ResponseEntity<Message> createMessage(Message msg, Integer msgID) {
 
-        Optional<Donor> targetDonor = donorRepository.findByID(id);
+        Optional<Donor> targetDonor = donorRepository.findByID(msgID);
         if (targetDonor.isPresent()) {
             Donor donor = targetDonor.get();
 

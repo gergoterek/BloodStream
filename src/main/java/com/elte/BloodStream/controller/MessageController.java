@@ -16,6 +16,7 @@ public class MessageController {
     @Autowired
     MessageService messageService;
 
+    //Fv-ek leellenőrizve 10.14.
 
     //USER - ADMIN
     @GetMapping("/{id}")

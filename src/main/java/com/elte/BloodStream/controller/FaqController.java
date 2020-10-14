@@ -17,6 +17,7 @@ public class FaqController {
     @Autowired
     FaqService faqService;
 
+    //Fv-ek leellenőrizve 10.14.
 
     //GUEST
     @GetMapping("/all")
@@ -38,10 +39,10 @@ public class FaqController {
         return faqService.deleteFaq(id);
     }
 
-//    //ADMIN
-//    @PatchMapping("/modify")
-//    public ResponseEntity<Faq> modifyFaq(@RequestBody Faq faq) {
-//        return faqService.modifyFaq(faq);
-//    }
+    //ADMIN
+    @PatchMapping("/modify/{faqID}")
+    public ResponseEntity<Faq> modifyFaq(@RequestBody Faq faq, @PathVariable Integer faqID) {
+        return faqService.modifyFaq(faq, faqID);
+    }
 
 }

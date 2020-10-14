@@ -40,19 +40,19 @@ public class FaqService {
         }
     }
 
-//    //ADMIN - /faq/modify
-//    public ResponseEntity<Faq> modifyFaq(Faq faq) {
-//
-//        Optional<Faq> oldFaq = faqRepository.findById(faq.getFaqId());
-//
-//        if (oldFaq.isPresent()) {
-//            Faq createdFaq = oldFaq.get();
-//            createdFaq.setQuestion(faq.getQuestion());
-//            createdFaq.setAnswer(faq.getAnswer());
-//
-//            return ResponseEntity.ok(faqRepository.save(createdFaq));
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    //ADMIN - /faq/modify/{id}
+    public ResponseEntity<Faq> modifyFaq(Faq faq, Integer faqID) {
+
+        Optional<Faq> oldFaq = faqRepository.findById(faqID);
+
+        if (oldFaq.isPresent()) {
+            Faq createdFaq = oldFaq.get();
+            createdFaq.setQuestion(faq.getQuestion());
+            createdFaq.setAnswer(faq.getAnswer());
+
+            return ResponseEntity.ok(faqRepository.save(createdFaq));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

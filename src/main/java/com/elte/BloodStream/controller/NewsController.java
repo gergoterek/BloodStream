@@ -20,12 +20,14 @@ public class NewsController {
         @Autowired
         NewsService newsService;
 
+        //Fv-ek leellenőrizve 10.14.
 
         //USER - ADMIN
-        @GetMapping("")
+        @GetMapping("/all")
         public Iterable<News> getAllNews() {
                 return newsService.getAllNews();
         }
+
 
         //ADMIN
         @PostMapping("/create")
@@ -36,19 +38,19 @@ public class NewsController {
         }
 
         //ADMIN
-        @DeleteMapping("/delete/{id}")
+        @DeleteMapping("/delete/{newsID}")
         public ResponseEntity deleteNews(
-                @PathVariable Integer id
+                @PathVariable Integer newsID
         ) {
-                return newsService.deleteNews(id);
+                return newsService.deleteNews(newsID);
         }
 
 
         //ADMIN
-        @PatchMapping("/modify")
+        @PatchMapping("/modify/{newsID}")
         public ResponseEntity<News> modifyNews(
-                @RequestBody News news
+                @RequestBody News news, @PathVariable Integer newsID
         ){
-                return newsService.modifyNews(news);
+                return newsService.modifyNews(news, newsID);
         }
 }

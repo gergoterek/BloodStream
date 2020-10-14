@@ -16,36 +16,43 @@ public class NewsService {
     @Autowired
     NewsRepository newsRepository;
 
-    //USER - ADMIN
+
+    //USER - ADMIN - /news/all
     public Iterable<News> getAllNews() {
         return newsRepository.findAll();
     }
 
-    //ADMIN
+    //ADMIN - /news/create
     public ResponseEntity<News> createNews(News news) {
-        news.setPublishDate(news.getPublishDate());
+        News createNews = new News();
+        createNews.setTitle(news.getTitle());
+        createNews.setMessage(news.getMessage());
+        createNews.setPublishDate(news.getPublishDate());
+
         return ResponseEntity.ok(newsRepository.save(news));
     }
 
-    //ADMIN
-    public ResponseEntity deleteNews(Integer id) {
+    //ADMIN - news/delete/{id}
+    public ResponseEntity deleteNews(Integer newsID) {
         try {
-            newsRepository.deleteById(id);
+            newsRepository.deleteById(newsID);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    //ADMIN
-    public ResponseEntity<News> modifyNews(News news){
-        Optional<News> oldNews = newsRepository.findById(news.getNewsId());
+    //ADMIN - /news/modify
+    public ResponseEntity<News> modifyNews(News news, Integer newsID){
+
+        Optional<News> oldNews = newsRepository.findById(newsID);
         if (oldNews.isPresent()) {
             News createdNews = oldNews.get();
             createdNews.setTitle(news.getTitle());
             createdNews.setMessage(news.getMessage());
-            newsRepository.save(createdNews);
-            return ResponseEntity.ok(createdNews);
+            createdNews.setPublishDate(news.getPublishDate());
+
+            return ResponseEntity.ok(newsRepository.save(createdNews));
         } else {
             return ResponseEntity.notFound().build();
         }
