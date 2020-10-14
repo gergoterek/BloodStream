@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface DonationRepository extends CrudRepository<Donation, Integer> {
-//    @Query("SELECT donation_date FROM donation LIMIT 1")
-//    Donation findFirstDonation();
-    //Donation findFirstByDonorIDOrderByDonationDateDesc(Integer id);
-    Donation findByDonationId(Integer id);
+    @Query(value = "SELECT donation_date FROM donation LIMIT 1", nativeQuery = true)
+    Donation findFirstDonation();
+    //Donation findFirstByDonationIDOrderByDonationDateDesc(Integer id);
+    //Donation findByDonationId(Integer id);
     List<Donation> findAll();
 }

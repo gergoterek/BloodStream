@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -27,57 +28,61 @@ public class DonorService {
     DonationRepository donationRepository;
 
 
-    //GUEST
+    //GUEST - donor/registration
     public ResponseEntity<Donor> register(Donor donor) {
 
-        Optional<Donor> foundDonor = donorRepository.findByID(donor.getID());
+        Optional<Donor> foundDonor = donorRepository.findByUserName(donor.getUserName());
         if (foundDonor.isEmpty()) {
-            donor.setPassword(donor.getPassword());
-            donor.setRole(Donor.Role.ROLE_USER);
-            donor.setBloodType( donor.getBloodType() != null ? donor.getBloodType() : null );
-            donor.setUserName(donor.getUserName());
-            donor.setDonorName(donor.getDonorName());
+            Donor newDonor = new Donor();
+            newDonor.setPassword(donor.getPassword());
+            newDonor.setRole(Donor.Role.ROLE_USER);
+            newDonor.setBloodType( null );
+            newDonor.setUserName(donor.getUserName());
+            newDonor.setDonorName(donor.getDonorName());
+            newDonor.setNextDonationDate(LocalDateTime.now());
+            newDonor.setIdCard(donor.getIdCard());
+            newDonor.setTAJ(donor.getTAJ());
+            newDonor.setBirthDate(donor.getBirthDate());
 
-            return ResponseEntity.ok(donorRepository.save(donor));
+            return ResponseEntity.ok(donorRepository.save(newDonor));
         } else {
             return ResponseEntity.badRequest().build();
         }
     }
 
-    //USER (changeable: password)
+    //USER - /donor/profile/change/pw
+    // (changeable: password)
     public ResponseEntity<Donor> changeDonorPassword(Donor donor){
 
         Optional<Donor> foundDonor = donorRepository.findByID(donor.getID());
         if (foundDonor.isPresent()) {
-            Donor newDonorData = donorRepository.findByID(donor.getID()).get();
-            newDonorData.setPassword(donor.getPassword());
-            return ResponseEntity.ok(donorRepository.save(newDonorData));
+            foundDonor.get().setPassword(donor.getPassword());
+            return ResponseEntity.ok(donorRepository.save(foundDonor.get()));
         } else {
             return ResponseEntity.badRequest().build();
         }
     }
 
-    //ADMIN (changeable: name, role, blood_type, TAJ, idCard )
+    //ADMIN - /donor/profile/change/donordata
+    // (changeable: name, role, blood_type, TAJ, idCard )
     public ResponseEntity<Donor> changeDonorDataByAdmin(Donor donor){
 
         Optional<Donor> foundDonor = donorRepository.findByID(donor.getID());
         if (foundDonor.isPresent()) {
-            Donor newDonorData = foundDonor.get();
-            newDonorData.setRole(donor.getRole());
-            newDonorData.setBloodType(donor.getBloodType());
-            newDonorData.setDonorName(donor.getDonorName());
-            newDonorData.setTAJ(donor.getTAJ());
-            newDonorData.setIdCard(donor.getIdCard());
-            return ResponseEntity.ok(donorRepository.save(newDonorData));
-        }
-        else{
+            foundDonor.get().setRole(donor.getRole());
+            foundDonor.get().setBloodType(donor.getBloodType());
+            foundDonor.get().setDonorName(donor.getDonorName());
+            foundDonor.get().setTAJ(donor.getTAJ());
+            foundDonor.get().setIdCard(donor.getIdCard());
+
+            return ResponseEntity.ok(donorRepository.save(foundDonor.get()));
+        } else{
             return ResponseEntity.badRequest().build();
         }
     }
 
-    //USER
+    //USER - /donor/profile/{id}
     public ResponseEntity<Donor> getDonorProfile( Integer id) {
-
         Optional<Donor> foundDonor = donorRepository.findByID(id);
         if (foundDonor.isPresent()){
             return ResponseEntity.ok(foundDonor.get());
@@ -86,29 +91,31 @@ public class DonorService {
         }
     }
 
-    //USER
-    public Donation getDonorLastDonation(Integer id){
-        //return donationRepository.findFirstByDonorIDOrderByDonationDateDesc(id);
-        return donationRepository.findByDonationId(id);
-    }
 
-    //ADMIN
+    //ADMIN - /donor/all
     public Iterable<Donor> getAllDonors() {
         return donorRepository.findAll();
     }
 
-    //ADMIN
-    public Iterable<Donor> getAllDonorsOrderByName() {
-        return donorRepository.findAllByOrderByDonorName();
+    //ADMIN - donor/all/orderbynameasc
+    public Iterable<Donor> getAllDonorsOrderByNameAsc() {
+        return donorRepository.findAllByOrderByDonorNameAsc();
     }
 
-    //ADMIN
+    //ADMIN - /donor/all/orderbyage
     public Iterable<Donor> getAllDonorsOrderByAge() {
         return donorRepository.findAllByOrderByBirthDate();
     }
 
-    //ADMIN
+    //ADMIN - /donor/all/{type}
     public Iterable<Donor> getDonorsByBloodType( String type){
         return donorRepository.findAllByBloodType(Donor.BloodTypes.valueOf(type));
     }
+
+//    //USER
+//    public Donation getDonorLastDonation(Integer id){
+//        //return donationRepository.findFirstByDonationIDOrderByDonationDateDesc(id);
+//        return donationRepository.findFirstDonation();
+//    }
+
 }

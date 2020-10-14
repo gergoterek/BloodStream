@@ -24,7 +24,7 @@ public class ApplicationController {
     @Autowired
     ApplicationService applicationService;
 
-    //fv-ek leellenőrizve 10.07.
+    //fv-ek leellenőrizve 10.14.
 
     //USER - /application/new
     @PostMapping("/new")

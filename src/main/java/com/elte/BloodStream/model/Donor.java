@@ -30,7 +30,7 @@ public class Donor {
     private Integer ID;                 //donorID
 
     @Column(nullable = false)
-    @JsonProperty(access = WRITE_ONLY)
+    //@JsonProperty(access = WRITE_ONLY)
     private String userName;
 
     @Column(nullable = false)

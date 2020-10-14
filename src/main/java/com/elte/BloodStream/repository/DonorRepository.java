@@ -12,7 +12,7 @@ public interface DonorRepository extends CrudRepository<Donor, Integer> {
     Optional<Donor> findByUserName(String username);
     Optional<Donor> findByID(Integer id);
     List<Donor> findAll();
-    List<Donor> findAllByOrderByDonorName();
+    List<Donor> findAllByOrderByDonorNameAsc();
     List<Donor> findAllByOrderByBirthDate();
 
     List<Donor> findAllByBloodType(Donor.BloodTypes type);

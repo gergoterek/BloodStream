@@ -12,19 +12,20 @@ import java.util.Date;
 
 
 @RestController
-@RequestMapping("")
+@RequestMapping("donor")
 public class DonorController {
 
     @Autowired
     DonorService donorService;
 
 
-    //Osztaly fv-ek leellenőrizve 10.07.
+    //Fv-ek leellenőrizve 10.14.
 
     //GUEST
     @PostMapping("/registration")
     public ResponseEntity<Donor> register(@RequestBody Donor donor) { return donorService.register(donor); }
 
+    
     //USER
     @GetMapping("/profile/{id}")
     public ResponseEntity<Donor> getDonorProfile(@PathVariable Integer id) {
@@ -36,37 +37,40 @@ public class DonorController {
     @PostMapping("/profile/change/pw")
     public ResponseEntity<Donor> changeDonorPassword(@RequestBody Donor donor) { return donorService.changeDonorPassword(donor); }
 
+
     //ADMIN (changeable: name, role, blood_type, TAJ, idCard )
     @PostMapping("/profile/change/donordata")
     public ResponseEntity<Donor> changeDonorDataByAdmin(@RequestBody Donor donor) { return donorService.changeDonorDataByAdmin(donor); }
 
+
     //ADMIN
-    @GetMapping("/donors")
+    @GetMapping("/all")
     public Iterable<Donor> getAllDonors() {
         return donorService.getAllDonors();
     }
 
     //ADMIN
-    @GetMapping("/donors/orderbynameasc")
+    @GetMapping("/all/orderbynameasc")
     public Iterable<Donor> getAllDonorsOrderByName() {
-        return donorService.getAllDonorsOrderByName();
+        return donorService.getAllDonorsOrderByNameAsc();
     }
 
     //ADMIN
-    @GetMapping("/donors/orderbyage")
+    @GetMapping("/all/orderbyage")
     public Iterable<Donor> getAllDonorsOrderByAge() {
         return donorService.getAllDonorsOrderByAge();
     }
 
-    //USER
-    @GetMapping("/profile/lastdonationdate/{id}")
-    public LocalDateTime getDonorLastDonation(@PathVariable Integer id){
-        return donorService.getDonorLastDonation(id).getDonationDate();
-    }
 
     //ADMIN
-    @GetMapping("/donors/{type}")
+    @GetMapping("/all/{type}")
     public Iterable<Donor> getDonorsByBloodType(@PathVariable String type){
         return donorService.getDonorsByBloodType(type);
     }
+
+//    //USER
+//    @GetMapping("/profile/lastdonationdate/{id}")
+//    public LocalDateTime getDonorLastDonation(@PathVariable Integer id){
+//        return donorService.getDonorLastDonation(id).getDonationDate();
+//    }
 }

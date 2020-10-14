@@ -67,7 +67,8 @@ public class ApplicationService {
     public ResponseEntity<Application> setDonorAppeared(Integer applicationID) {
 
         Optional<Application> optionalApplication = applicationRepository.findById(applicationID);
-        if(optionalApplication.isPresent() && optionalApplication.get().getDonation() == null){
+        if(optionalApplication.isPresent() && optionalApplication.get().getDonation() == null
+                                    && optionalApplication.get().getDonor().getBloodType() != null){
             Application appearedApplication = optionalApplication.get();
             Donation tempDon = new Donation();
             tempDon.setDonationDate(LocalDateTime.now());
