@@ -1,15 +1,14 @@
 package com.elte.BloodStream.controller;
 
+import com.elte.BloodStream.model.Donation;
 import com.elte.BloodStream.model.Donor;
-import com.elte.BloodStream.model.Faq;
-import com.elte.BloodStream.model.Response;
-import com.elte.BloodStream.repository.DonorRepository;
 import com.elte.BloodStream.service.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.time.LocalDateTime;
+import java.util.Date;
 
 
 @RestController
@@ -45,6 +44,24 @@ public class DonorController {
     @GetMapping("/donors")
     public Iterable<Donor> getAllDonors() {
         return donorService.getAllDonors();
+    }
+
+    //ADMIN
+    @GetMapping("/donors/orderbynameasc")
+    public Iterable<Donor> getAllDonorsOrderByName() {
+        return donorService.getAllDonorsOrderByName();
+    }
+
+    //ADMIN
+    @GetMapping("/donors/orderbyage")
+    public Iterable<Donor> getAllDonorsOrderByAge() {
+        return donorService.getAllDonorsOrderByAge();
+    }
+
+    //USER
+    @GetMapping("/profile/lastdonationdate/{id}")
+    public LocalDateTime getDonorLastDonation(@PathVariable Integer id){
+        return donorService.getDonorLastDonation(id).getDonationDate();
     }
 
     //ADMIN

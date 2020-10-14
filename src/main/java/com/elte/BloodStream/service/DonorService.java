@@ -1,8 +1,10 @@
 package com.elte.BloodStream.service;
 
 import com.elte.BloodStream.controller.DonorController;
+import com.elte.BloodStream.model.Donation;
 import com.elte.BloodStream.model.Donor;
 import com.elte.BloodStream.model.Message;
+import com.elte.BloodStream.repository.DonationRepository;
 import com.elte.BloodStream.repository.DonorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,9 @@ public class DonorService {
 
     @Autowired
     DonorRepository donorRepository;
+
+    @Autowired
+    DonationRepository donationRepository;
 
 
     //GUEST
@@ -57,7 +62,7 @@ public class DonorService {
 
         Optional<Donor> foundDonor = donorRepository.findByID(donor.getID());
         if (foundDonor.isPresent()) {
-            Donor newDonorData = donorRepository.findByID(donor.getID()).get();
+            Donor newDonorData = foundDonor.get();
             newDonorData.setRole(donor.getRole());
             newDonorData.setBloodType(donor.getBloodType());
             newDonorData.setDonorName(donor.getDonorName());
@@ -81,9 +86,25 @@ public class DonorService {
         }
     }
 
+    //USER
+    public Donation getDonorLastDonation(Integer id){
+        //return donationRepository.findFirstByDonorIDOrderByDonationDateDesc(id);
+        return donationRepository.findByDonationId(id);
+    }
+
     //ADMIN
     public Iterable<Donor> getAllDonors() {
         return donorRepository.findAll();
+    }
+
+    //ADMIN
+    public Iterable<Donor> getAllDonorsOrderByName() {
+        return donorRepository.findAllByOrderByDonorName();
+    }
+
+    //ADMIN
+    public Iterable<Donor> getAllDonorsOrderByAge() {
+        return donorRepository.findAllByOrderByBirthDate();
     }
 
     //ADMIN

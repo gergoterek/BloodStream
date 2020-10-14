@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
@@ -37,10 +38,8 @@ public class Application {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     //"appliedTime": "2019-04-02 11:45",
-    private LocalDateTime appliedTime;
+    private LocalDateTime appliedDate;
 
-    @Column
-    private boolean hasAppeared;
 
     //@JsonIgnore
     //@JsonBackReference
@@ -56,4 +55,8 @@ public class Application {
     @JoinColumn(referencedColumnName = "DONOR_ID", name = "donor_id")
     private Donor donor;
 
+
+    @OneToOne
+    @JoinColumn(referencedColumnName = "donationId", name = "donation_id")
+    private Donation donation;
 }

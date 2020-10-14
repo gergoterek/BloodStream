@@ -11,9 +11,12 @@ import java.util.Optional;
 public interface DonorRepository extends CrudRepository<Donor, Integer> {
     Optional<Donor> findByUserName(String username);
     Optional<Donor> findByID(Integer id);
-    //Donor findByID(Integer id);
     List<Donor> findAll();
+    List<Donor> findAllByOrderByDonorName();
+    List<Donor> findAllByOrderByBirthDate();
+
     List<Donor> findAllByBloodType(Donor.BloodTypes type);
+    List<Donor> findAllByDonorNameIgnoreCase(String name);
 
     //List<Donors> findAllByFamilyId(Integer id);
     //List<Donors> findAllByBloodType(String type);

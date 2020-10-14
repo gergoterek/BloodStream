@@ -33,7 +33,4 @@ public class News {
     @CreationTimestamp
     private LocalDateTime publishDate;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "news")
-//    private List<Donor> donorsRead;
 }

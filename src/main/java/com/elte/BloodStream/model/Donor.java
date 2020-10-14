@@ -26,7 +26,7 @@ public class Donor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DONOR_ID", unique = true)
-    @JsonProperty(access = READ_ONLY)
+    //@JsonProperty(access = READ_ONLY)
     private Integer ID;                 //donorID
 
     @Column(nullable = false)
@@ -61,6 +61,12 @@ public class Donor {
     private LocalDate birthDate;
 
     @Column(nullable = false)
+    @CreationTimestamp
+    private LocalDateTime nextDonationDate;
+
+
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -72,15 +78,9 @@ public class Donor {
     @OneToMany(mappedBy = "donor")
     private List<Message> messages;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "donor")
-    private List<Donation> donations;
 
     @JsonIgnore
     @OneToMany(mappedBy = "donor")
     private List<Application> applications;
-
-//    @ManyToOne
-//    private News news;
 
 }

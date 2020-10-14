@@ -1,6 +1,7 @@
 package com.elte.BloodStream.controller;
 
 import com.elte.BloodStream.model.Application;
+import com.elte.BloodStream.model.Donation;
 import com.elte.BloodStream.model.Donor;
 import com.elte.BloodStream.model.Faq;
 import com.elte.BloodStream.repository.ApplicationRepository;
@@ -23,19 +24,32 @@ public class ApplicationController {
     @Autowired
     ApplicationService applicationService;
 
-    //Osztaly fv-ek leellenőrizve 10.07.
+    //fv-ek leellenőrizve 10.07.
 
-    //USER
+    //USER - /application/new
     @PostMapping("/new")
-    public ResponseEntity<Application> newApplication(@RequestBody Application application){ return applicationService.newApplication(application); }
+    public ResponseEntity<Application> newApplication(@RequestBody Application application){
+        return applicationService.newApplication(application); }
 
-    //USER
+
+    //USER - /application/delete/{id}
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Application> deleteApplication(@PathVariable Integer id) {
-        return applicationService.deleteApplication(id);
+        return applicationService.deleteDonorApplication(id);
     }
 
-    //ADMIN
+
+    //ADMIN - /application/set/appeared/{id}
+    @PostMapping("/set/appeared/{id}")
+    public ResponseEntity<Application> setDonorAppeared(@PathVariable Integer id){ return applicationService.setDonorAppeared(id); }
+
+
+    //ADMIN /application/set/used/{id}
+    @PostMapping("/set/used/{id}")
+    public ResponseEntity<Donation> setDonationUsed(@PathVariable Integer id) { return applicationService.setDonationUsed(id); }
+
+
+    //ADMIN - /application/all
     @GetMapping("/all")
     public List<Application> getAllApplications() { return applicationService.getAllApplications(); }
 

@@ -33,7 +33,10 @@ public class Message {
 
     @Column(updatable = false)
     @CreationTimestamp
-    private LocalDateTime posted;
+    private LocalDateTime sendDate;
+
+    @Column
+    private Boolean seen;
 
     //@JsonBackReference
     @ManyToOne()
@@ -41,8 +44,10 @@ public class Message {
     @JsonIgnore
     private Donor donor;
 
-//    //@JsonIgnore
-//    @OneToMany(mappedBy = "message")
-//    private List<Donation> donation;
 
+//    @JsonIgnore
+
+    @OneToOne
+    @JoinColumn(referencedColumnName = "applyId", name = "apply_id")
+    private Application application;
 }

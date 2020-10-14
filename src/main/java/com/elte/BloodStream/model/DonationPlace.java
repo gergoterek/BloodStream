@@ -19,7 +19,7 @@ public class DonationPlace {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = READ_ONLY)
+    //@JsonProperty(access = READ_ONLY)
     @Column(name = "PLACE_ID")
     private Integer ID;                         //placeID
 
@@ -30,14 +30,14 @@ public class DonationPlace {
     private String address;
 
     @Column(nullable = false)
-    private String place;
+    private String name;
 
     @Column(nullable = false)
     private boolean isActive;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "place")
-    private List<Donation> donations;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "place")
+//    private List<Donation> donations;
 
     @JsonIgnore
     @OneToMany(mappedBy = "place")

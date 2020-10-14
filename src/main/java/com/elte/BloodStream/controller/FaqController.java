@@ -18,7 +18,7 @@ public class FaqController {
     FaqService faqService;
 
 
-    //USER
+    //GUEST
     @GetMapping("")
     public Iterable<Faq> getAllFaq() {
         return faqService.getAllFaq();
