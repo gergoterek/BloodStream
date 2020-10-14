@@ -25,7 +25,7 @@ public class DonorController {
     @PostMapping("/registration")
     public ResponseEntity<Donor> register(@RequestBody Donor donor) { return donorService.register(donor); }
 
-    
+
     //USER
     @GetMapping("/profile/{id}")
     public ResponseEntity<Donor> getDonorProfile(@PathVariable Integer id) {

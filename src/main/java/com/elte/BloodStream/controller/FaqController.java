@@ -19,7 +19,7 @@ public class FaqController {
 
 
     //GUEST
-    @GetMapping("")
+    @GetMapping("/all")
     public Iterable<Faq> getAllFaq() {
         return faqService.getAllFaq();
     }
@@ -38,10 +38,10 @@ public class FaqController {
         return faqService.deleteFaq(id);
     }
 
-    //ADMIN
-    @PatchMapping("/modify")
-    public ResponseEntity<Faq> modifyFaq(@RequestBody Faq faq) {
-        return faqService.modifyFaq(faq);
-    }
+//    //ADMIN
+//    @PatchMapping("/modify")
+//    public ResponseEntity<Faq> modifyFaq(@RequestBody Faq faq) {
+//        return faqService.modifyFaq(faq);
+//    }
 
 }

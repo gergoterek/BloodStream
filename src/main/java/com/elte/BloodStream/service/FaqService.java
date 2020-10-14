@@ -17,17 +17,20 @@ public class FaqService {
     @Autowired
     FaqRepository faqRepository;
 
-    //USER
+    //USER - /faq/all
     public Iterable<Faq> getAllFaq() {
         return faqRepository.findAll();
     }
 
-    //ADMIN
+    //ADMIN - /faq/create
     public ResponseEntity<Faq> createFaq(Faq faq) {
-        return ResponseEntity.ok(faqRepository.save(faq));
+        Faq newFaq = new Faq();
+        newFaq.setQuestion(faq.getQuestion());
+        newFaq.setAnswer(faq.getAnswer());
+        return ResponseEntity.ok(faqRepository.save(newFaq));
     }
 
-    //ADMIN
+    //ADMIN - faq/delete/{id}
     public ResponseEntity<Faq> deleteFaq(Integer id) {
         try {
             faqRepository.deleteById(id);
@@ -37,18 +40,19 @@ public class FaqService {
         }
     }
 
-    //ADMIN
-    public ResponseEntity<Faq> modifyFaq(Faq faq) {
-
-        Optional<Faq> oldFaq = faqRepository.findById(faq.getFaqId());
-        if (oldFaq.isPresent()) {
-            Faq createdFaq = oldFaq.get();
-            createdFaq.setQuestion(faq.getQuestion());
-            createdFaq.setAnswer(faq.getAnswer());
-            faqRepository.save(createdFaq);
-            return ResponseEntity.ok(createdFaq);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    //ADMIN - /faq/modify
+//    public ResponseEntity<Faq> modifyFaq(Faq faq) {
+//
+//        Optional<Faq> oldFaq = faqRepository.findById(faq.getFaqId());
+//
+//        if (oldFaq.isPresent()) {
+//            Faq createdFaq = oldFaq.get();
+//            createdFaq.setQuestion(faq.getQuestion());
+//            createdFaq.setAnswer(faq.getAnswer());
+//
+//            return ResponseEntity.ok(faqRepository.save(createdFaq));
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 }

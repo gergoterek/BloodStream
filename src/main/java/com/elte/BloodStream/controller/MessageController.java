@@ -30,7 +30,7 @@ public class MessageController {
     }
 
     //ADMIN
-    @PostMapping("new/{id}")
+    @PostMapping("create/{id}")
     public ResponseEntity<Message> createMessage(@RequestBody Message msg, @PathVariable Integer id) {
         return messageService.createMessage(msg, id);
     }
