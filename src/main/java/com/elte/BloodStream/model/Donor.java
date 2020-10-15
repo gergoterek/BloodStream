@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
@@ -64,7 +65,7 @@ public class Donor {
     private LocalDate birthDate;
 
     @Column(nullable = false)
-    @CreationTimestamp
+    @UpdateTimestamp
     private LocalDateTime nextDonationDate;
 
     @Column(nullable = false)
@@ -72,7 +73,7 @@ public class Donor {
     private Role role;
 
     public enum Role {
-        ROLE_GUEST, ROLE_USER, ROLE_ADMIN
+        ROLE_GUEST, ROLE_USER, ROLE_NURSE, ROLE_ADMIN
     }
 
     @JsonIgnore

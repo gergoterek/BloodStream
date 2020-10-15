@@ -64,7 +64,7 @@ public class DonorService {
         }
     }
 
-    //ADMIN - /donor/profile/change/donordata
+    //NURSE - /donor/profile/change/donordata
     // (changeable: name, role, blood_type, TAJ, idCard )
     public ResponseEntity<Donor> changeDonorDataByAdmin(Donor donor){
 
@@ -93,22 +93,22 @@ public class DonorService {
     }
 
 
-    //ADMIN - /donor/all
+    //NURSE - /donor/all
     public Iterable<Donor> getAllDonors() {
         return donorRepository.findAll();
     }
 
-    //ADMIN - donor/all/orderbynameasc
+    //NURSE - donor/all/orderbynameasc
     public Iterable<Donor> getAllDonorsOrderByNameAsc() {
         return donorRepository.findAllByOrderByDonorNameAsc();
     }
 
-    //ADMIN - /donor/all/orderbyage
+    //NURSE - /donor/all/orderbyage
     public Iterable<Donor> getAllDonorsOrderByAge() {
         return donorRepository.findAllByOrderByBirthDate();
     }
 
-    //ADMIN - /donor/all/{type}
+    //NURSE - /donor/all/{type}
     public Iterable<Donor> getDonorsByBloodType( String type){
         return donorRepository.findAllByBloodType(Donor.BloodTypes.valueOf(type));
     }

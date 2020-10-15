@@ -63,7 +63,7 @@ public class ApplicationService {
     }
 
 
-    //ADMIN - /application/set/appeared/{id}
+    //NURSE - /application/set/appeared/{id}
     public ResponseEntity<Application> setDonation(Integer applicationID) {
 
         Optional<Application> optionalApplication = applicationRepository.findById(applicationID);
@@ -85,7 +85,7 @@ public class ApplicationService {
     }
 
 
-    //ADMIN /application/set/used
+    //NURSE /application/set/used
     public ResponseEntity<Donation> setDonationTransport(Integer donationID) {
 
         Optional<Donation> optionalDonation = donationRepository.findById(donationID);

@@ -22,7 +22,7 @@ public class FaqService {
         return faqRepository.findAll();
     }
 
-    //ADMIN - /faq/create
+    //NURSE - /faq/create
     public ResponseEntity<Faq> createFaq(Faq faq) {
         Faq newFaq = new Faq();
         newFaq.setQuestion(faq.getQuestion());
@@ -30,7 +30,7 @@ public class FaqService {
         return ResponseEntity.ok(faqRepository.save(newFaq));
     }
 
-    //ADMIN - faq/delete/{id}
+    //NURSE - faq/delete/{id}
     public ResponseEntity<Faq> deleteFaq(Integer id) {
         try {
             faqRepository.deleteById(id);
@@ -40,7 +40,7 @@ public class FaqService {
         }
     }
 
-    //ADMIN - /faq/modify/{id}
+    //NURSE - /faq/modify/{id}
     public ResponseEntity<Faq> modifyFaq(Faq faq, Integer faqID) {
 
         Optional<Faq> oldFaq = faqRepository.findById(faqID);

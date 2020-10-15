@@ -22,7 +22,7 @@ public class NewsService {
         return newsRepository.findAll();
     }
 
-    //ADMIN - /news/create
+    //NURSE - /news/create
     public ResponseEntity<News> createNews(News news) {
         News createNews = new News();
         createNews.setTitle(news.getTitle());
@@ -32,7 +32,7 @@ public class NewsService {
         return ResponseEntity.ok(newsRepository.save(news));
     }
 
-    //ADMIN - news/delete/{id}
+    //NURSE - news/delete/{id}
     public ResponseEntity deleteNews(Integer newsID) {
         try {
             newsRepository.deleteById(newsID);
@@ -42,7 +42,7 @@ public class NewsService {
         }
     }
 
-    //ADMIN - /news/modify
+    //NURSE - /news/modify
     public ResponseEntity<News> modifyNews(News news, Integer newsID){
 
         Optional<News> oldNews = newsRepository.findById(newsID);

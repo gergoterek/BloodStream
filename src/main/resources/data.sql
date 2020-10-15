@@ -7,7 +7,7 @@ INSERT INTO donor (blood_type, donor_name, password, role, user_name, TAJ, id_ca
 INSERT INTO donor (blood_type, donor_name, password, role, user_name, TAJ, id_card, birth_date, next_donation_date, male) VALUES
         ('B_NEG', 'Kathi Bela', 'almafa', 'ROLE_USER', 'kkaati', 423431123, '1D899R', '2010-03-23', CURRENT_TIMESTAMP(), 1);
 INSERT INTO donor (blood_type, donor_name, password, role, user_name, TAJ, id_card, birth_date, next_donation_date, male) VALUES
-        ('A_NEG', 'Godeny Gyorrgy', 'almafa', 'ROLE_USER', 'donor', 423423113, '1D899R', '2009-03-23', CURRENT_TIMESTAMP(), 0);
+        ('A_NEG', 'Godeny Gyorrgy', 'almafa', 'ROLE_NURSE', 'donor', 423423113, '1D899R', '2009-03-23', CURRENT_TIMESTAMP(), 0);
 
 INSERT INTO place (address, city, is_active, name) VALUES ('Czuczor utca 8', 'Budapest', 1, 'Plazma');
 INSERT INTO place (address, city, is_active, name) VALUES ('Czuczor utca 9', 'Debrecen', 1, 'OVSZ');
