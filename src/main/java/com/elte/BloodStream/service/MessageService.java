@@ -1,5 +1,6 @@
 package com.elte.BloodStream.service;
 
+import com.elte.BloodStream.model.Application;
 import com.elte.BloodStream.model.Donor;
 import com.elte.BloodStream.model.Message;
 import com.elte.BloodStream.repository.DonorRepository;
@@ -47,11 +48,26 @@ public class MessageService {
         }
     }
 
-    //USER - ADMIN - /message/{id}
-    public Iterable<Message> getDonorMessages( Integer id) { return messageRepository.findAllByDonorID(id); }
+
+
+    //USER - ADMIN - /message/{donorID}
+    public Iterable<Message> getDonorMessages( Integer donorID) { return messageRepository.findAllByDonorID(donorID); }
 
     //ADMIN - /message/all
     public Iterable<Message> getAllMessages() {
         return messageRepository.findAll();
+    }
+
+
+    protected void transportNewMsg(Application application){
+        Message msg = new Message();
+        msg.setTitle("Visszajelzes a veradasarol");
+        msg.setMessage("Köszönjük, hogy véradàsàval hozzàjàrult egy beteg gyògyulàsàhoz! Az Ön àltal adott vért a mai napon ("
+                + application.getDonation().getTransportDate() + ") szàllìtottàk ki a kòrhàzba! Szép napot! OVSZ");
+        msg.setSendDate(LocalDateTime.now());
+        msg.setApplication(application);
+        msg.setDonor(application.getDonor());
+        application.getDonor().getMessages().add(msg);
+        messageRepository.save(msg);
     }
 }

@@ -3,6 +3,7 @@ package com.elte.BloodStream.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,8 +36,9 @@ public class Message {
     @CreationTimestamp
     private LocalDateTime sendDate;
 
+    @NotNull
     @Column
-    private Boolean seen;
+    private Boolean seen = false;
 
     //@JsonBackReference
     @ManyToOne()
@@ -46,7 +48,6 @@ public class Message {
 
 
 //    @JsonIgnore
-
     @OneToOne
     @JoinColumn(referencedColumnName = "applyId", name = "apply_id")
     private Application application;

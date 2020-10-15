@@ -1,8 +1,6 @@
 package com.elte.BloodStream.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,8 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
@@ -46,7 +42,7 @@ public class Application {
     @NotNull
     @ManyToOne
     @JoinColumn(referencedColumnName = "PLACE_ID", name = "place_id")
-    private DonationPlace place;
+    private Place place;
 	
     //@JsonBackReference
 	//@JsonIgnore

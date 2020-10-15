@@ -34,9 +34,9 @@ public class FaqController {
     }
 
     //ADMIN
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Faq> deleteFaq(@PathVariable Integer id) {
-        return faqService.deleteFaq(id);
+    @DeleteMapping("/delete/{faqID}")
+    public ResponseEntity<Faq> deleteFaq(@PathVariable Integer faqID) {
+        return faqService.deleteFaq(faqID);
     }
 
     //ADMIN

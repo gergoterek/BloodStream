@@ -19,9 +19,9 @@ public class MessageController {
     //Fv-ek leellenőrizve 10.14.
 
     //USER - ADMIN
-    @GetMapping("/{id}")
-    public Iterable<Message> getDonorMessages(@PathVariable Integer id) {
-        return messageService.getDonorMessages(id);
+    @GetMapping("/{donorID}")
+    public Iterable<Message> getDonorMessages(@PathVariable Integer donorID) {
+        return messageService.getDonorMessages(donorID);
     }
 
     //ADMIN
@@ -31,8 +31,8 @@ public class MessageController {
     }
 
     //ADMIN
-    @PostMapping("create/{id}")
-    public ResponseEntity<Message> createMessage(@RequestBody Message msg, @PathVariable Integer id) {
-        return messageService.createMessage(msg, id);
+    @PostMapping("create/{donorID}")
+    public ResponseEntity<Message> createMessage(@RequestBody Message msg, @PathVariable Integer donorID) {
+        return messageService.createMessage(msg, donorID);
     }
 }

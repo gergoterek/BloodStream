@@ -33,20 +33,20 @@ public class ApplicationController {
 
 
     //USER - /application/delete/{id}
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Application> deleteApplication(@PathVariable Integer id) {
-        return applicationService.deleteDonorApplication(id);
+    @DeleteMapping("/delete/{applicationID}")
+    public ResponseEntity<Application> deleteApplication(@PathVariable Integer applicationID) {
+        return applicationService.deleteDonorApplication(applicationID);
     }
 
 
     //ADMIN - /application/set/appeared/{id}
-    @PostMapping("/set/appeared/{id}")
-    public ResponseEntity<Application> setDonorAppeared(@PathVariable Integer id){ return applicationService.setDonorAppeared(id); }
+    @PostMapping("/set/donation/{applicationID}")
+    public ResponseEntity<Application> setDonation(@PathVariable Integer applicationID){ return applicationService.setDonation(applicationID); }
 
 
     //ADMIN /application/set/used/{id}
-    @PostMapping("/set/used/{id}")
-    public ResponseEntity<Donation> setDonationUsed(@PathVariable Integer id) { return applicationService.setDonationUsed(id); }
+    @PostMapping("/set/used/{donationID}")
+    public ResponseEntity<Donation> setDonationTransport(@PathVariable Integer donationID) { return applicationService.setDonationTransport(donationID); }
 
 
     //ADMIN - /application/all

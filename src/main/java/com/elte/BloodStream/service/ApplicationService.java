@@ -1,10 +1,7 @@
 package com.elte.BloodStream.service;
 
 import com.elte.BloodStream.model.*;
-import com.elte.BloodStream.repository.ApplicationRepository;
-import com.elte.BloodStream.repository.DonationPlaceRepository;
-import com.elte.BloodStream.repository.DonationRepository;
-import com.elte.BloodStream.repository.DonorRepository;
+import com.elte.BloodStream.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,14 +23,17 @@ public class ApplicationService {
     DonationRepository donationRepository;
 
     @Autowired
-    DonationPlaceRepository placeRepository;
+    PlaceRepository placeRepository;
+
+    @Autowired
+    MessageService messageService;
 
 
     //USER - /application/new
     public ResponseEntity<Application> newApplication(Application application){
 
         Optional<Donor> foundDonor = donorRepository.findByID(application.getDonor().getID());
-        Optional<DonationPlace> foundPlace = placeRepository.findByID(application.getPlace().getID());
+        Optional<Place> foundPlace = placeRepository.findByID(application.getPlace().getID());
 
         if (foundDonor.isPresent() && foundPlace.isPresent() && application.getAppliedDate() != null
                             && application.getDonor().getNextDonationDate().compareTo(LocalDateTime.now())<0) {
@@ -64,19 +64,21 @@ public class ApplicationService {
 
 
     //ADMIN - /application/set/appeared/{id}
-    public ResponseEntity<Application> setDonorAppeared(Integer applicationID) {
+    public ResponseEntity<Application> setDonation(Integer applicationID) {
 
         Optional<Application> optionalApplication = applicationRepository.findById(applicationID);
         if(optionalApplication.isPresent() && optionalApplication.get().getDonation() == null
                                     && optionalApplication.get().getDonor().getBloodType() != null){
-            Application appearedApplication = optionalApplication.get();
-            Donation tempDon = new Donation();
-            tempDon.setDonationDate(LocalDateTime.now());
-            tempDon.setUsed(false);
-            appearedApplication.setDonation(tempDon);
-            appearedApplication.getDonor().setNextDonationDate(LocalDateTime.now().plusDays(56));
 
-            return ResponseEntity.ok(applicationRepository.save(appearedApplication));
+            Donation donation = new Donation();
+            donation.setDonationDate(LocalDateTime.now());
+            donation.setTransportDate(null);
+            optionalApplication.get().setDonation(donation);
+            optionalApplication.get().getDonor().setNextDonationDate(LocalDateTime.now().plusDays(56));
+
+            donationRepository.save(donation);
+            optionalApplication.get().getDonor().getApplications().add(optionalApplication.get());
+            return ResponseEntity.ok(applicationRepository.save(optionalApplication.get()));
         } else{
             return ResponseEntity.notFound().build();
         }
@@ -84,17 +86,20 @@ public class ApplicationService {
 
 
     //ADMIN /application/set/used
-    public ResponseEntity<Donation> setDonationUsed(Integer donationID) {
+    public ResponseEntity<Donation> setDonationTransport(Integer donationID) {
 
         Optional<Donation> optionalDonation = donationRepository.findById(donationID);
-        if(optionalDonation.isPresent()){
-            optionalDonation.get().setUsed(true);
+        Optional<Application> optionalApplication = applicationRepository.findByDonationID(donationID);
+        if(optionalDonation.isPresent() && optionalApplication.isPresent()){
+            optionalDonation.get().setTransportDate(LocalDateTime.now());
 
+            messageService.transportNewMsg(optionalApplication.get());
             return ResponseEntity.ok(donationRepository.save(optionalDonation.get()));
         } else{
             return ResponseEntity.notFound().build();
         }
     }
+
 
     //ADMIN - /application/all
     public List<Application> getAllApplications() { return applicationRepository.findAll(); }

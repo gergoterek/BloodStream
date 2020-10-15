@@ -20,6 +20,7 @@ public class Donation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true)
     //@JsonProperty(access = READ_ONLY)
     private Integer donationId;
 
@@ -27,22 +28,7 @@ public class Donation {
     @CreationTimestamp
     private LocalDateTime donationDate;
 
-    @Column(nullable = false)
-    private boolean isUsed;
-
-
-    //    @JsonIgnore
-
-
-    //@JsonIgnore
-    //@Column(name = "DONOR_ID")
-//    @ManyToOne
-//    @JoinColumn(referencedColumnName = "DONOR_ID", name = "DONOR_ID")
-//    private Donor donor;
-
-    //@JsonIgnore
-//    @JoinColumn(referencedColumnName = "PLACE_ID", name = "PLACE_ID")
-//    @ManyToOne
-//    private DonationPlace place;
-
+    @Column
+    @CreationTimestamp
+    private LocalDateTime transportDate;
 }

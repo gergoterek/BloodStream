@@ -1,14 +1,13 @@
 package com.elte.BloodStream.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
 @Entity
 @Data
@@ -20,10 +19,13 @@ public class OpeningTime {
     @Id
     private int timeId;
 
-    @MapsId
-    @OneToOne
+
+    @OneToOne//(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(referencedColumnName = "PLACE_ID", name = "place_id")
-    private DonationPlace donationPlace;
+    @MapsId
+    private Place place;
+
 
     @NotNull
     @Column

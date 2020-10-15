@@ -43,6 +43,7 @@ public class DonorService {
             newDonor.setIdCard(donor.getIdCard());
             newDonor.setTAJ(donor.getTAJ());
             newDonor.setBirthDate(donor.getBirthDate());
+            newDonor.setMale(donor.isMale());
 
             return ResponseEntity.ok(donorRepository.save(newDonor));
         } else {

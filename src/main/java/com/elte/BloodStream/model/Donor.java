@@ -39,6 +39,9 @@ public class Donor {
     @Column(nullable = false)
     private String donorName;
 
+    @Column(nullable = false)
+    private boolean male;    //0: female, 1: male
+
     @Column(columnDefinition="tinyint(1) default 0")
     private int totalDonations = 0;
 
@@ -63,8 +66,6 @@ public class Donor {
     @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime nextDonationDate;
-
-
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

@@ -27,9 +27,9 @@ public class DonorController {
 
 
     //USER
-    @GetMapping("/profile/{id}")
-    public ResponseEntity<Donor> getDonorProfile(@PathVariable Integer id) {
-        return donorService.getDonorProfile(id);
+    @GetMapping("/profile/{donorID}")
+    public ResponseEntity<Donor> getDonorProfile(@PathVariable Integer donorID) {
+        return donorService.getDonorProfile(donorID);
     }
 
 
