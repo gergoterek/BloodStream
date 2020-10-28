@@ -26,14 +26,14 @@ public class DonorController {
     public ResponseEntity<Donor> register(@RequestBody Donor donor) { return donorService.register(donor); }
 
 
-    //USER
+    //ROLE_DONOR
     @GetMapping("/profile/{donorID}")
     public ResponseEntity<Donor> getDonorProfile(@PathVariable Integer donorID) {
         return donorService.getDonorProfile(donorID);
     }
 
 
-    //USER
+    //ROLE_DONOR
     @PostMapping("/profile/change/pw")
     public ResponseEntity<Donor> changeDonorPassword(@RequestBody Donor donor) { return donorService.changeDonorPassword(donor); }
 

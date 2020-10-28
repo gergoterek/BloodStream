@@ -73,7 +73,7 @@ public class Donor {
     private Role role;
 
     public enum Role {
-        ROLE_GUEST, ROLE_USER, ROLE_NURSE, ROLE_ADMIN
+        ROLE_GUEST, ROLE_DONOR, ROLE_NURSE, ROLE_ADMIN
     }
 
     @JsonIgnore

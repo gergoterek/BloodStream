@@ -1,11 +1,11 @@
 INSERT INTO donor (blood_type, donor_name, password, role, user_name, TAJ, id_card, birth_date, next_donation_date, male) VALUES
-        ('A_POZ', 'Terek Gergo', 'almafa', 'ROLE_USER', 'rizsutt', 234231123, '1D899R', '2000-03-23', CURRENT_TIMESTAMP(), 1);
+        ('A_POZ', 'Terek Gergo', 'almafa', 'ROLE_DONOR', 'rizsutt', 234231123, '1D899R', '2000-03-23', CURRENT_TIMESTAMP(), 1);
 INSERT INTO donor (blood_type, donor_name, password, role, user_name, TAJ, id_card, birth_date, next_donation_date, male) VALUES
         ('ZERO_POZ', 'Pinter Dorottya', 'almafa', 'ROLE_ADMIN', 'pdorka97', 423431123, '1D899R', '1993-03-23', CURRENT_TIMESTAMP(), 0);
 INSERT INTO donor (blood_type, donor_name, password, role, user_name, TAJ, id_card, birth_date, next_donation_date, male) VALUES
         ('ZERO_NEG', 'Kiss Jeno', 'almafa', 'ROLE_ADMIN', 'jeno72', 423423123, '1D899R', '2001-03-23', CURRENT_TIMESTAMP(), 1);
 INSERT INTO donor (blood_type, donor_name, password, role, user_name, TAJ, id_card, birth_date, next_donation_date, male) VALUES
-        ('B_NEG', 'Kathi Bela', 'almafa', 'ROLE_USER', 'kkaati', 423431123, '1D899R', '2010-03-23', CURRENT_TIMESTAMP(), 1);
+        ('B_NEG', 'Kathi Bela', 'almafa', 'ROLE_DONOR', 'kkaati', 423431123, '1D899R', '2010-03-23', CURRENT_TIMESTAMP(), 1);
 INSERT INTO donor (blood_type, donor_name, password, role, user_name, TAJ, id_card, birth_date, next_donation_date, male) VALUES
         ('A_NEG', 'Godeny Gyorrgy', 'almafa', 'ROLE_NURSE', 'donor', 423423113, '1D899R', '2009-03-23', CURRENT_TIMESTAMP(), 0);
 

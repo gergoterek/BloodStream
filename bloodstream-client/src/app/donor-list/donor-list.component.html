@@ -1,0 +1,39 @@
+<div>
+    <h1>Donor list</h1>
+
+    <div>
+        <app-bloodtype-filter></app-bloodtype-filter>
+    </div>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Név</th>
+                <th>DonorID</th>
+                <th>Adások száma</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container
+                *ngIf="donorService.filteredDonors.length > 0"
+            >
+                <tr 
+                    *ngFor="let donor of donorService.filteredDonors"
+                >
+                    <td>{{donor.name}}</td>
+                    <td>{{donor.id}}</td>
+                    <td>{{donor.totalDonations}}</td>
+                </tr>
+            </ng-container>
+            <tr
+                *ngIf="donorService.filteredDonors.length === 0"
+            >
+                <td
+                    colspan="3"
+                >   No Donor!!
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

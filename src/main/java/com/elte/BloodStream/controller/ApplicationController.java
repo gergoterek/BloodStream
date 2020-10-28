@@ -26,13 +26,13 @@ public class ApplicationController {
 
     //fv-ek leellenőrizve 10.14.
 
-    //USER - /application/new
+    //ROLE_DONOR - /application/new
     @PostMapping("/new")
     public ResponseEntity<Application> newApplication(@RequestBody Application application){
         return applicationService.newApplication(application); }
 
 
-    //USER - /application/delete/{id}
+    //ROLE_DONOR - /application/delete/{id}
     @DeleteMapping("/delete/{applicationID}")
     public ResponseEntity<Application> deleteApplication(@PathVariable Integer applicationID) {
         return applicationService.deleteDonorApplication(applicationID);

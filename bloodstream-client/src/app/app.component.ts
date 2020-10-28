@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'bloodstream-client';
+  // currentPage: 'list' | 'landing' | 'form' = 'landing';
+
+  // changePage(newPage: string) {
+  //   this.currentPage = newPage as any;
+  // }
 }

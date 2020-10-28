@@ -22,7 +22,7 @@ public class NewsController {
 
         //Fv-ek leellenőrizve 10.14.
 
-        //USER - ADMIN
+        //ROLE_DONOR - ADMIN
         @GetMapping("/all")
         public Iterable<News> getAllNews() {
                 return newsService.getAllNews();

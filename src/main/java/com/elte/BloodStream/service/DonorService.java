@@ -35,7 +35,7 @@ public class DonorService {
         if (foundDonor.isEmpty()) {
             Donor newDonor = new Donor();
             newDonor.setPassword(donor.getPassword());
-            newDonor.setRole(Donor.Role.ROLE_USER);
+            newDonor.setRole(Donor.Role.ROLE_DONOR);
             newDonor.setBloodType( null );
             newDonor.setUserName(donor.getUserName());
             newDonor.setDonorName(donor.getDonorName());

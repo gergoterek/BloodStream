@@ -18,7 +18,7 @@ public class MessageController {
 
     //Fv-ek leellenőrizve 10.14.
 
-    //USER - ADMIN
+    //ROLE_DONOR - ADMIN
     @GetMapping("/{donorID}")
     public Iterable<Message> getDonorMessages(@PathVariable Integer donorID) {
         return messageService.getDonorMessages(donorID);
