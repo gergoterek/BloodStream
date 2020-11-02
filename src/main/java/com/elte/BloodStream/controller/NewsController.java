@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/news")
 public class NewsController {

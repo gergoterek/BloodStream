@@ -6,10 +6,12 @@ import com.elte.BloodStream.model.Place;
 import com.elte.BloodStream.repository.OpeningTimeRepository;
 import com.elte.BloodStream.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/place")
 public class PlaceController {

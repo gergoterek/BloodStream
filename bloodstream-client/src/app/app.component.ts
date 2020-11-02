@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'bloodstream-client';
-  // currentPage: 'list' | 'landing' | 'form' = 'landing';
 
-  // changePage(newPage: string) {
-  //   this.currentPage = newPage as any;
-  // }
+  constructor (
+    public authService: AuthService,
+    private router: Router
+  ) {}
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
 }

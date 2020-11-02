@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-
+@CrossOrigin
 @RestController
-@RequestMapping("donor")
+@RequestMapping("/donor")
 public class DonorController {
 
     @Autowired
@@ -20,6 +20,13 @@ public class DonorController {
 
 
     //Fv-ek leellenőrizve 10.14.
+
+    //GUEST
+    @PostMapping("login")
+    public ResponseEntity<Donor> login() {
+        return donorService.login();
+    }
+
 
     //GUEST
     @PostMapping("/registration")
@@ -68,9 +75,4 @@ public class DonorController {
         return donorService.getDonorsByBloodType(type);
     }
 
-//    //USER
-//    @GetMapping("/profile/lastdonationdate/{id}")
-//    public LocalDateTime getDonorLastDonation(@PathVariable Integer id){
-//        return donorService.getDonorLastDonation(id).getDonationDate();
-//    }
 }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { RoutingModule } from './routing/routing.module';
 import { AppComponent } from './app.component';
 import { FaqListComponent } from './faq-list/faq-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,16 +10,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-//import {MatInputModule} from '@angular/material/input';
+import {MatInputModule} from '@angular/material/input';
 import { DonorListComponent } from './donor-list/donor-list.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material/list';
 import { BloodtypeFilterComponent } from './bloodtype-filter/bloodtype-filter.component';
-//import {MatSelectModule} from '@angular/material/select';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
+import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -27,22 +30,28 @@ import {MatSelectModule} from '@angular/material/select';
     FaqListComponent,
     DonorListComponent,
     MainNavComponent,
-    BloodtypeFilterComponent
+    BloodtypeFilterComponent,
+    LoginComponent
   ],
   imports: [
-    AppRoutingModule,
+    RoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    LayoutModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonToggleModule,
     MatSidenavModule,
     MatListModule,
-    MatButtonToggleModule,
-    MatSelectModule,
+    LayoutModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  //schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent]
 })

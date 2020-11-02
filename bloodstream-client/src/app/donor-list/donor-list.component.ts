@@ -11,11 +11,15 @@ import { DonorService } from '../donor.service';
 })
 export class DonorListComponent implements OnInit {
 
+  donors: Donor[] = [];
   constructor(
     public donorService: DonorService
   ) { }
 
-  ngOnInit() {
+
+  async ngOnInit() {
+    this.donors = await this.donorService.getDonors();
+    //this.filterIssues();
   }
 
   

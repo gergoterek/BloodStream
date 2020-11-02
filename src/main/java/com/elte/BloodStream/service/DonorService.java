@@ -6,9 +6,11 @@ import com.elte.BloodStream.model.Donor;
 import com.elte.BloodStream.model.Message;
 import com.elte.BloodStream.repository.DonationRepository;
 import com.elte.BloodStream.repository.DonorRepository;
+import com.elte.BloodStream.security.AuthenticatedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,17 +29,27 @@ public class DonorService {
     @Autowired
     DonationRepository donationRepository;
 
+    @Autowired
+    AuthenticatedUser authenticatedUser;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    //GUEST - /donor/login
+    public ResponseEntity<Donor> login() {
+        return ResponseEntity.ok(authenticatedUser.getDonor());
+    }
 
     //GUEST - donor/registration
     public ResponseEntity<Donor> register(Donor donor) {
 
-        Optional<Donor> foundDonor = donorRepository.findByUserName(donor.getUserName());
+        Optional<Donor> foundDonor = donorRepository.findByUsername(donor.getUsername());
         if (foundDonor.isEmpty()) {
             Donor newDonor = new Donor();
-            newDonor.setPassword(donor.getPassword());
+            newDonor.setPassword(passwordEncoder.encode(donor.getPassword()));
             newDonor.setRole(Donor.Role.ROLE_DONOR);
             newDonor.setBloodType( null );
-            newDonor.setUserName(donor.getUserName());
+            newDonor.setUsername(donor.getUsername());
             newDonor.setDonorName(donor.getDonorName());
             newDonor.setNextDonationDate(LocalDateTime.now());
             newDonor.setIdCard(donor.getIdCard());
@@ -51,13 +63,14 @@ public class DonorService {
         }
     }
 
+
     //USER - /donor/profile/change/pw
     // (changeable: password)
     public ResponseEntity<Donor> changeDonorPassword(Donor donor){
 
         Optional<Donor> foundDonor = donorRepository.findByID(donor.getID());
         if (foundDonor.isPresent()) {
-            foundDonor.get().setPassword(donor.getPassword());
+            foundDonor.get().setPassword(passwordEncoder.encode(donor.getPassword()));
             return ResponseEntity.ok(donorRepository.save(foundDonor.get()));
         } else {
             return ResponseEntity.badRequest().build();

@@ -1,0 +1,29 @@
+
+<form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <h1>Sign in please!</h1>
+    <div *ngIf="message">
+      {{ message }}
+    </div>
+   
+    
+    <mat-form-field>
+      <input matInput formControlName="username" required>
+      <mat-placeholder class='placeholder'> Username </mat-placeholder>
+      <mat-error *ngIf="username.invalid">Username is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="password" required [type]="hidePassword ? 'password' : 'text'">
+      <mat-placeholder class='placeholder'> Password </mat-placeholder>
+      <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error *ngIf="password.invalid">Password is required</mat-error>
+    </mat-form-field>
+
+
+    <div>
+      <button mat-flat-button type="submit" color="accent" [disabled]="form.invalid">Login</button>
+    </div>
+  </form>
+
+  

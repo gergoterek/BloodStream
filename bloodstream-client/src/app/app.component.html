@@ -10,14 +10,32 @@
       <mat-icon>home</mat-icon>
       Faqs
   </button>
-  <button
+  <!-- <button
       mat-button
-      routerLink="/donor"
+      routerLink="/donor/login"
   >
       My donors
-  </button>
+  </button> -->
+
+  <div *ngIf="authService.isLoggedIn">
+    <button mat-button routerLink="/faq">My faq</button>
+    <button mat-button routerLink="/faq">New faq</button>
+    <button mat-button (click)="logout()">Logout</button>
+  </div>
+  <div *ngIf="!authService.isLoggedIn">
+    <button mat-button routerLink="/login">Login</button>
+  </div>
 </mat-toolbar>
 
+<div *ngIf="authService.isLoggedIn">
+  <span>
+    <h1>Kellemes napot kívánunk {{ authService.user.donorName}}!</h1>
+  </span>
+    <span>{{ authService.user.id }}!</span>
+    <span>{{ authService.user.bloodType}}!</span>
+    <span>{{ authService.user.birthDate }}!</span>
+    <span>{{ authService.user.idCard }}!</span>
+</div>
 
 <router-outlet></router-outlet>
 

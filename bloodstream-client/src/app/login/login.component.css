@@ -1,0 +1,51 @@
+/* form {
+    padding: 12px;
+} */
+mat-form-field {
+    width: 100%;
+    color: black;
+}
+
+.example-form {
+    width: 100%; 
+    background-color: rgb(183, 183, 183);
+    padding: 0px;
+    /* margin: 10px; */
+  }
+   /* ::placeholder {
+    color: rgb(0, 0, 0);
+    opacity: 1;
+  }
+
+  ::ng-deep .mat-form-field-placeholder{
+
+    color:red;
+  }  */
+  /* When the input is not focused */
+/* md-input-container label {
+    color: red;
+  } */
+  
+  /* When the input is focused */
+  /* md-input-container.md-input-focused label {
+    color: blue;
+  } */
+
+  /* .mat-focused .placeholder {
+    color: #00D318;
+}
+  
+input:disabled {
+    color: black;
+  }
+  
+  select:disabled {
+    color: black;
+  }
+  
+   
+  .mat-select-disabled .mat-select-value {
+    color: black;
+  } 
+
+  */

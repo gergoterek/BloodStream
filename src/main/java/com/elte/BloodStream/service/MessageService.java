@@ -59,7 +59,7 @@ public class MessageService {
     }
 
 
-    protected void transportNewMsg(Application application){
+    void transportNewMsg(Application application){
         Message msg = new Message();
         msg.setTitle("Visszajelzes a veradasarol");
         msg.setMessage("Köszönjük, hogy véradàsàval hozzàjàrult egy beteg gyògyulàsàhoz! Az Ön àltal adott vért a mai napon ("

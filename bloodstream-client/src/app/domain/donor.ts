@@ -6,13 +6,13 @@ export interface Donor{
     taj: number;
     birthDate: string;
     bloodType: BloodType;
-    name: string;
+    donorName: string;
     idCard: string;
     male: boolean;
     nextDonationDate: string;
-    password: string;
     role: Role;
     totalDonations: number;
-    userName: string;
+    username: string;
+    password: string;
 
 }

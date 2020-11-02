@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface DonorRepository extends CrudRepository<Donor, Integer> {
-    Optional<Donor> findByUserName(String username);
+    Optional<Donor> findByUsername(String username);
     Optional<Donor> findByID(Integer id);
     List<Donor> findAll();
     List<Donor> findAllByOrderByDonorNameAsc();
