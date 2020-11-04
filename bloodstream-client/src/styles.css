@@ -7,4 +7,10 @@ body {
     font-family: 'Roboto', "Helvetica Neue", sans-serif;
     text-align: center;
     padding: .5rem 1rem;
+    color: black;
 }
+
+/* .mat-toolbar.mat-primary {
+    background: #007bff;
+    color: #fff;
+  } */

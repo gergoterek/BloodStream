@@ -1,6 +1,6 @@
 <mat-button-toggle-group
-    [value]="bloodtypeFilter"
-    (valueChange)="change($event);"
+    [value]="selectedBloodType"
+    (change)="onFilterChange($event)"
 >
 <mat-button-toggle value="">
     All
@@ -37,3 +37,4 @@
     AB_NEG
 </mat-button-toggle>
 </mat-button-toggle-group>
+<!-- {{ selectedBloodType}} -->

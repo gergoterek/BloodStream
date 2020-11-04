@@ -28,7 +28,7 @@ public class MessageService {
     //NURSE - /message/create/{msgID}
     public ResponseEntity<Message> createMessage(Message msg, Integer msgID) {
 
-        Optional<Donor> targetDonor = donorRepository.findByID(msgID);
+        Optional<Donor> targetDonor = donorRepository.findById(msgID);
         if (targetDonor.isPresent()) {
             Donor donor = targetDonor.get();
 
@@ -51,7 +51,7 @@ public class MessageService {
 
 
     //USER - NURSE - /message/{donorID}
-    public Iterable<Message> getDonorMessages( Integer donorID) { return messageRepository.findAllByDonorID(donorID); }
+    public Iterable<Message> getDonorMessages( Integer donorId) { return messageRepository.findAllByDonorId(donorId); }
 
     //NURSE - /message/all
     public Iterable<Message> getAllMessages() {

@@ -28,7 +28,7 @@ public class Donor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DONOR_ID", unique = true)
     //@JsonProperty(access = READ_ONLY)
-    private Integer ID;                 //donorID
+    private Integer id;                 //donorID
 
     @Column(nullable = false)
     //@JsonProperty(access = WRITE_ONLY)

@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DonorDetailComponent } from './donor-detail/donor-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     DonorListComponent,
     MainNavComponent,
     BloodtypeFilterComponent,
-    LoginComponent
+    LoginComponent,
+    DonorDetailComponent
   ],
   imports: [
     RoutingModule,

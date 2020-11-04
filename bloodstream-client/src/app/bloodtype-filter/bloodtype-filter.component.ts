@@ -9,21 +9,17 @@ import { DonorService } from '../donor.service';
 })
 export class BloodtypeFilterComponent implements OnInit {
 
-  @Input() bloodtypeFilter: string = '';
 
-  @Output() filterChange: EventEmitter<any> = new EventEmitter();
+  @Input('bloodType') selectedBloodType = ''
+  @Output() change = new EventEmitter<string>();
 
-  constructor(
-    private donorService: DonorService
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.change(this.bloodtypeFilter);
+  ngOnInit() {
   }
 
-  change(e: string) {
-    this.donorService.filterChange(e);
-    this.filterChange.emit(e);
+  onFilterChange(data) {
+    this.selectedBloodType = data.value;
+    this.change.emit(this.selectedBloodType);
   }
-
 }

@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { FaqListComponent } from '../faq-list/faq-list.component';
 import { DonorListComponent } from '../donor-list/donor-list.component';
 import { LoginComponent } from '../login/login.component';
+import { DonorDetailComponent } from '../donor-detail/donor-detail.component';
+import { AuthGuard } from '../auth.guard';
 
 
 
@@ -13,11 +15,18 @@ const routes: Routes = [
   },
   {
     path: 'donor',
-    component: DonorListComponent
+    component: DonorListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'donor/profile/:id',
+    component: DonorDetailComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'faq',
-    component: FaqListComponent
+    component: FaqListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

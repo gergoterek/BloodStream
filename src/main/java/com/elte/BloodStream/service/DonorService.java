@@ -68,7 +68,7 @@ public class DonorService {
     // (changeable: password)
     public ResponseEntity<Donor> changeDonorPassword(Donor donor){
 
-        Optional<Donor> foundDonor = donorRepository.findByID(donor.getID());
+        Optional<Donor> foundDonor = donorRepository.findById(donor.getId());
         if (foundDonor.isPresent()) {
             foundDonor.get().setPassword(passwordEncoder.encode(donor.getPassword()));
             return ResponseEntity.ok(donorRepository.save(foundDonor.get()));
@@ -81,7 +81,7 @@ public class DonorService {
     // (changeable: name, role, blood_type, TAJ, idCard )
     public ResponseEntity<Donor> changeDonorDataByAdmin(Donor donor){
 
-        Optional<Donor> foundDonor = donorRepository.findByID(donor.getID());
+        Optional<Donor> foundDonor = donorRepository.findById(donor.getId());
         if (foundDonor.isPresent()) {
             foundDonor.get().setRole(donor.getRole());
             foundDonor.get().setBloodType(donor.getBloodType());
@@ -97,7 +97,7 @@ public class DonorService {
 
     //USER - /donor/profile/{id}
     public ResponseEntity<Donor> getDonorProfile( Integer id) {
-        Optional<Donor> foundDonor = donorRepository.findByID(id);
+        Optional<Donor> foundDonor = donorRepository.findById(id);
         if (foundDonor.isPresent()){
             return ResponseEntity.ok(foundDonor.get());
         } else{

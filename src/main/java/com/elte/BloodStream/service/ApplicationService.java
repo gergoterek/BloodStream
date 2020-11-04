@@ -32,12 +32,12 @@ public class ApplicationService {
     //USER - /application/new
     public ResponseEntity<Application> newApplication(Application application){
 
-        Optional<Donor> foundDonor = donorRepository.findByID(application.getDonor().getID());
+        Optional<Donor> foundDonor = donorRepository.findById(application.getDonor().getId());
         Optional<Place> foundPlace = placeRepository.findByID(application.getPlace().getID());
 
         if (foundDonor.isPresent() && foundPlace.isPresent() && application.getAppliedDate() != null
                             && application.getDonor().getNextDonationDate().compareTo(LocalDateTime.now())<0) {
-            application.setDonor(donorRepository.findByID(application.getDonor().getID()).get());
+            application.setDonor(donorRepository.findById(application.getDonor().getId()).get());
             application.setPlace(placeRepository.findAllByID(application.getPlace().getID()));
             application.setAppliedDate(application.getAppliedDate());
             application.setDonation(null);

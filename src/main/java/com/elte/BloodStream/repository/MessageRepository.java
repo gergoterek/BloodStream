@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends CrudRepository<Message, Integer> {
     List<Message> findAll();
-    List<Message> findAllByDonorID(Integer id);
+    List<Message> findAllByDonorId(Integer id);
 }

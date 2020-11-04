@@ -12,6 +12,10 @@ import { DonorService } from '../donor.service';
 export class DonorListComponent implements OnInit {
 
   donors: Donor[] = [];
+  filteredDonors = [];
+  selectedBloodType = '';
+  selectedDonors = null;
+
   constructor(
     public donorService: DonorService
   ) { }
@@ -19,7 +23,18 @@ export class DonorListComponent implements OnInit {
 
   async ngOnInit() {
     this.donors = await this.donorService.getDonors();
-    //this.filterIssues();
+    this.filterDonors();
+  }
+
+  filterDonors(){
+    this.filteredDonors = this.selectedBloodType === ''
+      ? this.donors
+      : this.donors.filter(donor => donor.bloodType === this.selectedBloodType)
+  }
+
+  onFilterChange(data){
+    this.selectedBloodType = data;
+    this.filterDonors();
   }
 
   

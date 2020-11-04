@@ -1,0 +1,41 @@
+<h1>Donor Details</h1>
+
+<dl *ngIf="donor">
+  <dt>DonorID</dt>
+  <dd>{{donor.id}}</dd>
+
+  <dt>TAJ</dt>
+  <dd>{{donor.taj}}</dd>
+
+  <dt>Birth Date</dt>
+  <dd>{{donor.birthDate}}</dd>
+
+  <dt>BloodType</dt>
+  <dd>{{donor.donorName}}</dd>
+
+  <dt>idCard</dt>
+  <dd>{{donor.idCard}}</dd>
+
+  <dt>Male</dt>
+  <dd>{{donor.male}}</dd>
+
+  <dt>Next Possible Donation Date</dt>
+  <dd>{{donor.nextDonationDate}}</dd>
+
+  <dt>role</dt>
+  <dd>{{donor.role}}</dd>
+
+  <dt>Total Donation Number</dt>
+  <dd>{{donor.totalDonation}}</dd>
+
+  <dt>username</dt>
+  <dd>{{donor.username}}</dd>
+
+  <dt>password</dt>
+  <dd>{{donor.password}}</dd>
+  
+</dl>
+
+<p>
+<a mat-flat-button color="primary" [routerLink]="['/donor', donor.id, 'edit']">Edit</a>
+</p>
