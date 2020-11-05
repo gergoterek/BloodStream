@@ -1,7 +1,7 @@
 .example-form {
     background-color: rgb(251, 122, 122);
     padding: 0px;
-    margin: 10px;
+    /* margin: 10px; */
     width: 100%;
     align-content: center;
     text-align: center;

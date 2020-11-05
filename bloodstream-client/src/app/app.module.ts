@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DonorDetailComponent } from './donor-detail/donor-detail.component';
 import { FaqEditComponent } from './faq-edit/faq-edit.component';
+import { FaqFormComponent } from './faq-form/faq-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FaqEditComponent } from './faq-edit/faq-edit.component';
     BloodtypeFilterComponent,
     LoginComponent,
     DonorDetailComponent,
-    FaqEditComponent
+    FaqEditComponent,
+    FaqFormComponent
   ],
   imports: [
     RoutingModule,

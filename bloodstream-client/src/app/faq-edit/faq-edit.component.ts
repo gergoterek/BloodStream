@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { Faq } from '../domain/faq';
 import { DonorService } from '../donor.service';
 import { FaqService } from '../faq.service';
@@ -11,6 +12,7 @@ import { FaqService } from '../faq.service';
 })
 export class FaqEditComponent implements OnInit {
 
+  
 
   faqId: number;
   faq: Faq;
@@ -18,6 +20,7 @@ export class FaqEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private faqService: FaqService,
+    public authService: AuthService,
   ) { }
 
   async ngOnInit() {

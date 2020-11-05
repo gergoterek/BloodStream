@@ -1,54 +1,41 @@
-<!-- <div> -->
-<h1>Faq list</h1>
+<h1>Frequently Asked Questions</h1>
 
-<mat-list class="mnl">
-    <div class="example-form">
-        <a *ngFor="let faq of faqs" mat-list-item
+<mat-list class="mnl" *ngIf="authService.isLoggedIn">
+    <div  *ngIf="(authService.isAdmin() || authService.isNurse())">
+        <a 
+            class="example-form" 
+            *ngFor="let faq of faqs" 
+            mat-list-item
+
             (click)="selectedFaq = faq"
             [class.selected]="faq === selectedFaq"
             [routerLink]="['/faq', faq.faqId]"
         >
             <h3 matLine>{{ faq.question }}</h3>
-            <!-- <small matLine> -->
             <small matLine>
                 {{ faq.answer}}
             </small>
-
-            <!-- <p matLine>{{ faq.faqId }}</p> -->
         </a>
     </div>
+    <div *ngIf="authService.isDonor()">
+        <a class="example-form" *ngFor="let faq of faqs" mat-list-item
+        >
+            <h3 matLine>{{ faq.question }}</h3>
+            <p matLine>
+                {{ faq.answer}}
+            </p>
+        </a>
+    </div>
+
 </mat-list>
 
-<!-- <div>
-    <h1>FAQ list</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Question</th>
-                <th>Answer</th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container
-                *ngIf="faqService.faqs.length > 0"
-            >
-                <tr 
-                    *ngFor="let faq of faqService.faqs"
-                >
-                    <td>{{faq.question}}</td>
-                    <td>{{faq.answer}}</td>
-                </tr>
-            </ng-container>
-            <tr
-                *ngIf="faqService.faqs.length === 0"
-            >
-                <td
-                    colspan="3"
-                >   No FAQs
-                </td>
-            </tr>
-            
-        </tbody>
-    </table>
-</div>
- -->
+<mat-list class="mnl" *ngIf="!authService.isLoggedIn"> 
+        <a class="example-form" *ngFor="let faq of faqs" mat-list-item
+        >
+            <h3 matLine>{{ faq.question }}</h3>
+            <p matLine>
+                {{ faq.answer}}
+            </p>
+        </a>
+</mat-list>
+

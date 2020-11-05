@@ -2,7 +2,7 @@
   
 </app-main-nav> -->
 
-<mat-toolbar color="wipe">
+<mat-toolbar color="wipe"  id="parent">
   <button
       mat-button
       routerLink="/"
@@ -10,28 +10,31 @@
       <mat-icon>home</mat-icon>
       Faqs
   </button>
-  <!-- <button
-      mat-button
-      routerLink="/donor/login"
-  >
-      My donors
-  </button> -->
+  
 
   <div *ngIf="authService.isLoggedIn">
-    <button mat-button routerLink="/faq">My faq</button>
+    <button mat-button routerLink="/faq">FAQ</button>
     <button mat-button routerLink="/donor">Donors</button>
-    <button mat-button (click)="logout()">Logout</button>
-  </div>
+  </div> 
+  
   <div *ngIf="!authService.isLoggedIn">
-    <button mat-button routerLink="/login">Login</button>
+    <button mat-button routerLink="/login">Login</button>      
   </div>
-</mat-toolbar>
 
-<div *ngIf="authService.isLoggedIn">
-  <span>
-    <h1>Kellemes napot kívánunk {{ authService.user.donorName}}!</h1>
-  </span>
-</div>
+  <span class="flexExpand"></span>
+    
+  
+  <div *ngIf="authService.isLoggedIn">
+    <small>{{ authService.user.donorName }}</small>
+    <button mat-button class="ert" (click)="logout()">Logout</button>      
+  </div>
+
+  <div *ngIf="!authService.isLoggedIn">
+    <button mat-button class="ert" routerLink="/faq">FAQ</button>      
+  </div>
+   
+    
+</mat-toolbar>
 
 <router-outlet></router-outlet>
 

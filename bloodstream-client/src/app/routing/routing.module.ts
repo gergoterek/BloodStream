@@ -27,7 +27,6 @@ const routes: Routes = [
   {
     path: 'faq',
     component: FaqListComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'faq/:faqId',

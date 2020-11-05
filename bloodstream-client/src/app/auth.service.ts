@@ -49,6 +49,18 @@ export class AuthService {
     }
   }
 
+  isAdmin() {
+    return this.user.role === 'ROLE_ADMIN';
+  }
+  isNurse() {
+    return this.user.role === 'ROLE_NURSE';
+  }
+  isDonor() {
+    return this.user.role === 'ROLE_DONOR';
+  }
+  isGuest() {
+    return this.user.role === 'ROLE_GUEST';
+  }
   logout() {
     this.isLoggedIn = false;
     this.user = null;

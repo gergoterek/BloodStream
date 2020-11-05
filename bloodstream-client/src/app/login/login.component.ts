@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   ) {
     if (this.authService.isLoggedIn){
         this.authService.logout();
-    } 
+    }
    }
 
   ngOnInit(): void {
