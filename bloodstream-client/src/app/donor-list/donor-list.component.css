@@ -2,11 +2,17 @@
     background-color: rgb(251, 122, 122);
     padding: 0px;
     margin: 10px;
-    width: 70%;
+    width: 100%;
     align-content: center;
     text-align: center;
   }
 
+  :host /deep/ .mat-list-item-content {
+    padding: 0!important;
+    border: solid 0.1px #000;
+    align-content: center;
+    text-align: center;
+  }
 /* 
   .mat {
     padding: 10px;

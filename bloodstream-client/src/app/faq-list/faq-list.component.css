@@ -1,0 +1,38 @@
+.example-form {
+    background-color: rgb(121, 115, 250);
+    padding: 0px;
+    margin: 10px;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+    justify-content: flex-end;
+  }
+
+  .mnl {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  :host /deep/ .mat-list-item-content {
+    padding: 0!important;
+    border: solid 0.1px #000;
+    align-content: center;
+    text-align: center;
+    justify-content: flex-end;
+  }
+
+  :host /deep/ .mat-list{
+    padding: 0!important;
+    align-content: center;
+    justify-content: flex-end;
+  }
+  
+  :host ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
+    justify-content: right;
+  }
+/* RIGHT align */
+/* .mat-list .mat-list-item.right .mat-list-item-content{
+  justify-content: flex-end;
+} */
+
+  

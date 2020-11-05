@@ -1,4 +1,25 @@
-<div>
+<!-- <div> -->
+<h1>Faq list</h1>
+
+<mat-list class="mnl">
+    <div class="example-form">
+        <a *ngFor="let faq of faqs" mat-list-item
+            (click)="selectedFaq = faq"
+            [class.selected]="faq === selectedFaq"
+            [routerLink]="['/faq', faq.faqId]"
+        >
+            <h3 matLine>{{ faq.question }}</h3>
+            <!-- <small matLine> -->
+            <small matLine>
+                {{ faq.answer}}
+            </small>
+
+            <!-- <p matLine>{{ faq.faqId }}</p> -->
+        </a>
+    </div>
+</mat-list>
+
+<!-- <div>
     <h1>FAQ list</h1>
     <table>
         <thead>
@@ -30,3 +51,4 @@
         </tbody>
     </table>
 </div>
+ -->

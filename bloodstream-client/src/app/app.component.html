@@ -19,7 +19,7 @@
 
   <div *ngIf="authService.isLoggedIn">
     <button mat-button routerLink="/faq">My faq</button>
-    <button mat-button routerLink="/faq">New faq</button>
+    <button mat-button routerLink="/donor">Donors</button>
     <button mat-button (click)="logout()">Logout</button>
   </div>
   <div *ngIf="!authService.isLoggedIn">

@@ -1,21 +1,20 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FaqListComponent } from './faq-list.component';
+import { FaqEditComponent } from './faq-edit.component';
 
-describe('FaqListComponent', () => {
-  let component: FaqListComponent;
-  let fixture: ComponentFixture<FaqListComponent>;
+describe('FaqEditComponent', () => {
+  let component: FaqEditComponent;
+  let fixture: ComponentFixture<FaqEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FaqListComponent ],
+      declarations: [ FaqEditComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FaqListComponent);
+    fixture = TestBed.createComponent(FaqEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

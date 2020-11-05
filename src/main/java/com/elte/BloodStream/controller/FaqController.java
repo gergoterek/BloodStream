@@ -1,5 +1,6 @@
 package com.elte.BloodStream.controller;
 
+import com.elte.BloodStream.model.Donor;
 import com.elte.BloodStream.model.Faq;
 import com.elte.BloodStream.model.Message;
 import com.elte.BloodStream.repository.FaqRepository;
@@ -25,6 +26,13 @@ public class FaqController {
     public Iterable<Faq> getAllFaq() {
         return faqService.getAllFaq();
     }
+
+    //NURSE
+    @GetMapping("/{faqId}")
+    public ResponseEntity<Faq> getFaq(@PathVariable Integer faqId) {
+        return faqService.getFaq(faqId);
+    }
+
 
     //ADMIN
     @PostMapping("/create")

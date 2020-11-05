@@ -1,0 +1,14 @@
+<h1>Edit FAQ</h1>
+
+<dl *ngIf="faq">
+  <dt>Question</dt>
+  <dd>{{faq.question}}</dd>
+
+  <dt>Answer</dt>
+  <dd>{{ faq.answer }}</dd>  
+</dl>
+
+<p>
+<a mat-flat-button color="primary">Edit faq</a>
+    <!-- [routerLink]="['/faq', 'modify', faq.faqId]">Edit</a> -->
+</p>

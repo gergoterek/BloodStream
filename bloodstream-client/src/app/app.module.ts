@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DonorDetailComponent } from './donor-detail/donor-detail.component';
+import { FaqEditComponent } from './faq-edit/faq-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DonorDetailComponent } from './donor-detail/donor-detail.component';
     MainNavComponent,
     BloodtypeFilterComponent,
     LoginComponent,
-    DonorDetailComponent
+    DonorDetailComponent,
+    FaqEditComponent
   ],
   imports: [
     RoutingModule,

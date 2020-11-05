@@ -5,6 +5,7 @@ import { DonorListComponent } from '../donor-list/donor-list.component';
 import { LoginComponent } from '../login/login.component';
 import { DonorDetailComponent } from '../donor-detail/donor-detail.component';
 import { AuthGuard } from '../auth.guard';
+import { FaqEditComponent } from '../faq-edit/faq-edit.component';
 
 
 
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: 'faq',
     component: FaqListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'faq/:faqId',
+    component: FaqEditComponent,
     canActivate: [AuthGuard]
   },
   {

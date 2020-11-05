@@ -1,5 +1,6 @@
 package com.elte.BloodStream.service;
 
+import com.elte.BloodStream.model.Donor;
 import com.elte.BloodStream.model.Faq;
 import com.elte.BloodStream.repository.FaqRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,16 @@ public class FaqService {
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    //NURSE - faq/{id}
+    public ResponseEntity<Faq> getFaq(Integer id) {
+        Optional<Faq> foundFaq = faqRepository.findByFaqId(id);
+        if (foundFaq.isPresent()){
+            return ResponseEntity.ok(foundFaq.get());
+        } else{
+            return ResponseEntity.badRequest().build();
         }
     }
 

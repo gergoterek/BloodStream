@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Faq } from '../domain/faq';
 
 import { FaqService } from '../faq.service'
 
@@ -12,11 +13,11 @@ export class FaqListComponent implements OnInit {
   constructor(
     public faqService: FaqService
   ) { }
+  faqs: Faq[] = [];
+  selectedFaq = null;
 
-  
-
-
-  ngOnInit(): void {
-  }
+  async ngOnInit() {
+    this.faqs = await this.faqService.getFaqs();
+  } 
 
 }
