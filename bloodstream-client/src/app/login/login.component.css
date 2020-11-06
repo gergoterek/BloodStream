@@ -1,23 +1,32 @@
 /* form {
     padding: 12px;
 } */
+
+form {
+  padding: 12px;
+  background-color: rgb(104, 188, 127);
+}
 mat-form-field {
+  width: 100%;
+}
+/* mat-form-field {
     width: 100%;
     color: black;
     margin-top: 10px;
-    /* padding-left: 40px; */
-    /* padding-right: 40px; */
-}
+  }
+  /* padding-left: 40px; */
+  /* padding-right: 40px; */
 
-.example-form {
+/* .example-form {
     width: 100%; 
     background-color: rgb(183, 183, 183);
     padding-bottom: 10px;
     padding-top: 10px;
-    /* padding-right: 20px; */
-    /* margin-right: 30px; */
-    /* margin: 10px; */
-  }
+  }  */
+  /* padding-right: 20px; */
+  /* margin-right: 30px; */
+  /* margin: 10px; */
+
 
 
    /* ::placeholder {

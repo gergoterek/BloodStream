@@ -6,6 +6,7 @@ import { LoginComponent } from '../login/login.component';
 import { DonorDetailComponent } from '../donor-detail/donor-detail.component';
 import { AuthGuard } from '../auth.guard';
 import { FaqEditComponent } from '../faq-edit/faq-edit.component';
+import { FaqFormComponent } from '../faq-form/faq-form.component';
 
 
 
@@ -29,8 +30,26 @@ const routes: Routes = [
     component: FaqListComponent,
   },
   {
+    path: 'faq/add',
+    component: FaqEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'faq/:faqId',
     component: FaqEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'faq/:faqId/del',
+    component: FaqListComponent,
+    canActivate: [AuthGuard],
+    // data: {
+    //   roles: ['ROLE_ADMIN']
+    // }
+  },
+  {
+    path: 'faq/:faqId/edit',
+    component: FaqFormComponent,
     canActivate: [AuthGuard]
   },
   {

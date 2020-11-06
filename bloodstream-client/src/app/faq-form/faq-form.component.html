@@ -1,1 +1,45 @@
-<p>faq-form works!</p>
+<form [formGroup]="faqForm" (ngSubmit)="onSubmit()">
+   <div>    
+       <h1>{{title}}</h1>
+    </div>
+
+        <mat-form-field>
+            <input 
+                    matInput 
+                    placeholder="Question"
+                    formControlName="question"
+                    required
+            >
+            <mat-error *ngIf="question.invalid && (question.dirty || question.touched) && question.errors.required">
+                Question is required!
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <textarea
+                    matInput 
+                    placeholder="Answer"
+                    formControlName="answer"
+            > </textarea>
+            <mat-error *ngIf="answer.invalid && (answer.dirty || answer.touched) && answer.errors.required">
+                Answer is required!
+            </mat-error>
+        </mat-form-field>
+    
+
+        <button 
+            *ngIf="wantToEdit"
+            mat-flat-button color="wipe"
+            type="button"
+            (click)="delButton()"
+            [routerLink]="['/faq', faq.faqId, 'del']"
+        >Delete FAQ</button>
+
+        <button 
+            mat-flat-button
+            color="primary"      
+            type=submit      
+            [disabled]="faqForm.invalid"
+        >Save</button>
+  
+  </form>

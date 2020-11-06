@@ -33,10 +33,12 @@ public class FaqService {
 
     //NURSE - faq/delete/{id}
     public ResponseEntity<Faq> deleteFaq(Integer id) {
-        try {
+
+        Optional<Faq> foundFaq = faqRepository.findByFaqId(id);
+        if (foundFaq.isPresent()){
             faqRepository.deleteById(id);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
+        } else{
             return ResponseEntity.notFound().build();
         }
     }
@@ -52,7 +54,7 @@ public class FaqService {
     }
 
     //NURSE - /faq/modify/{id}
-    public ResponseEntity<Faq> modifyFaq(Faq faq, Integer faqID) {
+    public ResponseEntity<Faq> modifyFaq(Integer faqID, Faq faq) {
 
         Optional<Faq> oldFaq = faqRepository.findById(faqID);
 

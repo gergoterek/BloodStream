@@ -23,9 +23,9 @@
 
   <span class="flexExpand"></span>
     
-  
   <div *ngIf="authService.isLoggedIn">
     <small>{{ authService.user.donorName }}</small>
+    <span class="flexExpand"></span>
     <button mat-button class="ert" (click)="logout()">Logout</button>      
   </div>
 
@@ -39,45 +39,6 @@
 <router-outlet></router-outlet>
 
 
-<!--
-  <!DOCTYPE html>
-<html>
-    <head>
-      <link rel="stylesheet" href="app.component.css">
-      
-      <title>Responsive Navbar</title>
-    </head>
-    <body>
-      <nav class="navbar">
-        <div class="brand-title">BloodStream</div>
-        <a href="#" class="toggle-button">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-          
-        </a>
-        <div class="navbar-links">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-
-            <button
-              mat-button
-              routerLink="/donor/all"
-            >
-                Donors
-            </button>
-          </ul>
-          
-        </div>
-        
-      </nav>
-      <app-faq-list></app-faq-list>
-      <app-donor-list></app-donor-list>
-    </body>
-</html>
-  -->
 
   
 

@@ -33,25 +33,25 @@ public class FaqController {
         return faqService.getFaq(faqId);
     }
 
+    //NURSE
+    @PutMapping("/{faqID}")
+    public ResponseEntity<Faq> modifyFaq(@PathVariable Integer faqID, @RequestBody Faq faq) {
+        return faqService.modifyFaq(faqID, faq);
+    }
 
-    //ADMIN
-    @PostMapping("/create")
+    //NURSE
+    @PostMapping("")
     public ResponseEntity<Faq> createFaq(
             @RequestBody Faq faq
     ) {
         return faqService.createFaq(faq);
     }
 
-    //ADMIN
+    //NURSE
     @DeleteMapping("/delete/{faqID}")
     public ResponseEntity<Faq> deleteFaq(@PathVariable Integer faqID) {
         return faqService.deleteFaq(faqID);
     }
 
-    //ADMIN
-    @PatchMapping("/modify/{faqID}")
-    public ResponseEntity<Faq> modifyFaq(@RequestBody Faq faq, @PathVariable Integer faqID) {
-        return faqService.modifyFaq(faq, faqID);
-    }
 
 }

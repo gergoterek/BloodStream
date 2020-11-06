@@ -1,3 +1,11 @@
+<app-faq-form
+    [title]="title"
+    [faq]="faq"
+    (save)="onFormSave($event)"
+    [wantToEdit]="wantToEdit"
+></app-faq-form>
+
+<!-- 
 <h1>Edit FAQ</h1>
 
 <dl *ngIf="faq">
@@ -8,7 +16,12 @@
   <dd>{{ faq.answer }}</dd>  
 </dl>
 
-<p>
-    <a mat-flat-button color="primary">Edit faq</a>
-    <!-- [routerLink]="['/faq', 'modify', faq.faqId]">Edit</a> -->
-</p>
+<p *ngIf="faq">
+    <a 
+        mat-flat-button 
+        color="primary" 
+        [routerLink]="['/faq', faq.faqId, '/edit']"
+    >
+        Edit faq
+    </a>
+</p> -->
