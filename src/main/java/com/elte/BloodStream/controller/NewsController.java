@@ -1,6 +1,7 @@
 package com.elte.BloodStream.controller;
 
 import com.elte.BloodStream.model.Donor;
+import com.elte.BloodStream.model.Faq;
 import com.elte.BloodStream.model.Message;
 import com.elte.BloodStream.model.News;
 import com.elte.BloodStream.repository.NewsRepository;
@@ -23,35 +24,34 @@ public class NewsController {
 
         //Fv-ek leellenőrizve 10.14.
 
-        //ROLE_DONOR - ADMIN
+        //DONOR
         @GetMapping("/all")
         public Iterable<News> getAllNews() {
                 return newsService.getAllNews();
         }
 
+        //NURSE
+        @GetMapping("/{newsID}")
+        public ResponseEntity<News> getNews(@PathVariable Integer newsID) {
+                return newsService.getNews(newsID);
+        }
 
-        //ADMIN
-        @PostMapping("/create")
+        //NURSE
+        @PostMapping("")
         public ResponseEntity<News> createNews(
                 @RequestBody News news
         ) {
                 return newsService.createNews(news);
         }
 
-        //ADMIN
+        //NURSE
         @DeleteMapping("/delete/{newsID}")
-        public ResponseEntity deleteNews(
-                @PathVariable Integer newsID
-        ) {
-                return newsService.deleteNews(newsID);
-        }
+        public ResponseEntity deleteNews (@PathVariable Integer newsID) { return newsService.deleteNews(newsID); }
 
 
-        //ADMIN
-        @PatchMapping("/modify/{newsID}")
-        public ResponseEntity<News> modifyNews(
-                @RequestBody News news, @PathVariable Integer newsID
-        ){
+        //NURSE
+        @PutMapping("/{newsID}")
+        public ResponseEntity<News> modifyNews (@PathVariable Integer newsID, @RequestBody News news) {
                 return newsService.modifyNews(news, newsID);
         }
 }

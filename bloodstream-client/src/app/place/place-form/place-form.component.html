@@ -1,0 +1,43 @@
+<form [formGroup]="placeForm" (ngSubmit)="onFormSave()">
+    <h1>New Place</h1> 
+               
+    <mat-form-field>
+        <input matInput formControlName="name" required>
+        <mat-placeholder class='placeholder'> Name </mat-placeholder>
+        <mat-error *ngIf="name.invalid  && (name.dirty || name.touched) && name.errors.required"
+            >Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="city" required>
+        <mat-placeholder class='placeholder'> City </mat-placeholder>
+        <mat-error *ngIf="city.invalid  && (city.dirty || city.touched) && city.errors.required"
+            >City is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea matInput formControlName="address" required></textarea>
+        <mat-placeholder class='placeholder'> Address </mat-placeholder>
+        <mat-error *ngIf="address.invalid  && (address.dirty || address.touched) && address.errors.required"
+            >Address is required</mat-error>
+    </mat-form-field>
+    
+
+    <button
+        mat-flat-button color="wipe"
+        type="button"
+        [routerLink]="['/place']"
+    >Discard</button>
+
+    <button 
+        mat-flat-button
+        color="primary"      
+        type="button"    
+        (click)=onFormSave()   
+        [disabled]="placeForm.invalid"
+        [routerLink]="['/place']"
+    >Send</button>
+        
+</form>
+
+
+{{placeForm.value | json}}

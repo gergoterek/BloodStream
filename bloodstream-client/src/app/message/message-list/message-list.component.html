@@ -1,0 +1,24 @@
+<h1>Message list</h1>
+
+<mat-nav-list >
+    <div class="example-form">
+        <a *ngFor="let message of messages" mat-list-item
+          (click)="selectedMessage = message"
+          [class.selected]="message === selectedMessage"
+        >        
+            <mat-icon *ngIf="message.seen === false && isDonor" matListIcon style="color: orange">fiber_new</mat-icon>
+            <h3 matLine> {{ message.title }}</h3>
+            <!-- <small matLine> -->
+            <small>
+                <mat-icon >access_time</mat-icon>  {{ message.sendDate | date: 'y/MM/d hh:mm'}}
+            </small>
+            <p matLine>{{ message.message}}</p>
+        </a>        
+    </div>
+    <button 
+        *ngIf="!isDonor"
+        mat-flat-button color="primary"
+        [routerLink]="['/message', 'new']"
+    >Send message</button>
+    
+</mat-nav-list>

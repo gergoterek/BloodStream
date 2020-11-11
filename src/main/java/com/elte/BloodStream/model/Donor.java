@@ -1,6 +1,7 @@
 package com.elte.BloodStream.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
@@ -61,8 +63,9 @@ public class Donor {
     private String idCard;
 
     @Column(nullable = false)
-    @CreationTimestamp
-    private LocalDate birthDate;
+    //@JsonFormat(pattern="yyyy-MM-dd")
+    //@CreationTimestamp
+    private Date birthDate;
 
     @Column(nullable = false)
     @UpdateTimestamp

@@ -1,5 +1,6 @@
 package com.elte.BloodStream.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
@@ -30,7 +32,8 @@ public class News {
     private String message;
 
     @Column(updatable = false)
-    @CreationTimestamp
-    private LocalDateTime publishDate;
+//    @JsonFormat( pattern = "yyyy-MM-dd HH:mm a z")
+    //@CreationTimestamp
+    private Date publishDate;
 
 }

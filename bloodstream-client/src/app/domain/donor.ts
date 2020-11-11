@@ -1,7 +1,7 @@
 import { Role } from '../domain/role';
 import { BloodType } from '../domain/bloodtype';
 
-export interface Donor{
+export class Donor{
     id: number;
     taj: number;
     birthDate: string;
@@ -14,5 +14,4 @@ export interface Donor{
     totalDonations: number;
     username: string;
     password: string;
-
 }

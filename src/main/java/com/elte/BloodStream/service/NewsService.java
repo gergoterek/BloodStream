@@ -1,5 +1,6 @@
 package com.elte.BloodStream.service;
 
+import com.elte.BloodStream.model.Faq;
 import com.elte.BloodStream.model.News;
 import com.elte.BloodStream.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,16 @@ public class NewsService {
             return ResponseEntity.ok(newsRepository.save(createdNews));
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    //NURSE - faq/{id}
+    public ResponseEntity<News> getNews(Integer id) {
+        Optional<News> foundNews = newsRepository.findByNewsId(id);
+        if (foundNews.isPresent()){
+            return ResponseEntity.ok(foundNews.get());
+        } else{
+            return ResponseEntity.badRequest().build();
         }
     }
 }

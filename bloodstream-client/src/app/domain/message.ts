@@ -1,5 +1,5 @@
 export interface Message {
-    id: number;
+    msgId: number;
     message: string;
     seen: boolean;
     sendDate: string;

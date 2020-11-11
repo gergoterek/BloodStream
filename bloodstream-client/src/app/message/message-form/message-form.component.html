@@ -1,0 +1,44 @@
+<form [formGroup]="msgForm" (ngSubmit)="onFormSave()">
+    <h1>New Message</h1> 
+               
+    <mat-form-field>
+        <input matInput formControlName="donorID" required>
+        <mat-placeholder class='placeholder'> Recipient ID</mat-placeholder>
+        <mat-error *ngIf="donorID.invalid  && (donorID.dirty || donorID.touched) && donorID.errors.required"
+            >Recipient is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="title" required>
+        <mat-placeholder class='placeholder'> Title </mat-placeholder>
+        <mat-error *ngIf="title.invalid  && (title.dirty || title.touched) && title.errors.required"
+            >Title is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea matInput formControlName="message" required></textarea>
+        <mat-placeholder class='placeholder'> message </mat-placeholder>
+        <mat-error *ngIf="message.invalid  && (message.dirty || message.touched) && message.errors.required"
+            >Message is required</mat-error>
+    </mat-form-field>
+    
+
+    <button
+        mat-flat-button color="wipe"
+        type="button"
+        [routerLink]="['/message']"
+    >Discard</button>
+
+    <button 
+        mat-flat-button
+        color="primary"      
+        type="button"    
+        (click)=onFormSave()   
+        [disabled]="msgForm.invalid"
+        [routerLink]="['/message']"
+    >Send</button>
+        
+</form>
+
+
+{{msgForm.value | json}}
+

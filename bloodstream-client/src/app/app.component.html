@@ -8,17 +8,21 @@
       routerLink="/"
   >
       <mat-icon>home</mat-icon>
-      Faqs
+      Home
   </button>
   
 
   <div *ngIf="authService.isLoggedIn">
     <button mat-button routerLink="/faq">FAQ</button>
     <button mat-button routerLink="/donor">Donors</button>
+    <button mat-button routerLink="/place">Places</button>
+    <button mat-button routerLink="/news">News</button>
+    <button mat-button routerLink="/message">Messages</button>
   </div> 
   
   <div *ngIf="!authService.isLoggedIn">
     <button mat-button routerLink="/login">Login</button>      
+    <button mat-button routerLink="/registration">Registration</button>      
   </div>
 
   <span class="flexExpand"></span>

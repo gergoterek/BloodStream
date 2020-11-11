@@ -32,7 +32,7 @@ public class MessageController {
     }
 
     //ADMIN
-    @PostMapping("create/{donorID}")
+    @PostMapping("send/{donorID}")
     public ResponseEntity<Message> createMessage(@RequestBody Message msg, @PathVariable Integer donorID) {
         return messageService.createMessage(msg, donorID);
     }

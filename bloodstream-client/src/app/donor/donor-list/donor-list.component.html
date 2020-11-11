@@ -1,0 +1,66 @@
+<!-- <div> -->
+    <h1>Donor list</h1>
+
+    <div>
+        <app-bloodtype-filter 
+            [bloodType]="selectedBloodType"
+            (change)="onFilterChange($event)"
+        ></app-bloodtype-filter>
+    </div>
+
+<mat-nav-list >
+    <div class="example-form">
+        <a *ngFor="let donor of filteredDonors" mat-list-item
+          (click)="selectedDonor = donor"
+          [class.selected]="donor === selectedDonor"
+          [routerLink]="['/donor', 'profile', donor.id]"
+        >
+            <mat-icon *ngIf="donor.totalDonations === 0"   matListIcon style="color: red">fiber_new</mat-icon>
+            <mat-icon *ngIf="donor.bloodType === 'A_NEG'" matListIcon style="color: orange">check_circle</mat-icon>
+            <mat-icon *ngIf="donor.bloodType === null"  matListIcon style="color: green">access_time</mat-icon>
+            <h3 matLine>{{ donor.donorName }}</h3>
+            <!-- <small matLine> -->
+            <small>
+                <mat-icon>verified_user</mat-icon> {{ donor.username }}
+                <mat-icon>access_time</mat-icon> {{ donor.birthDate | date: 'y/MM/dd'}}
+            </small>
+
+            <p matLine>{{ donor.bloodType }}</p>
+        </a>
+
+        
+    </div>
+</mat-nav-list>
+
+
+    <!-- <table>
+        <thead>
+            <tr>
+                <th>Név</th>
+                <th>DonorID</th>
+                <th>Adások száma</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container
+                *ngIf="donorService.filteredDonors.length > 0"
+            >
+                <tr 
+                    *ngFor="let donor of donorService.filteredDonors"
+                >
+                    <td>{{donor.donorName}}</td>
+                    <td>{{donor.id}}</td>
+                    <td>{{donor.totalDonations}}</td>
+                </tr>
+            </ng-container>
+            <tr
+                *ngIf="donorService.filteredDonors.length === 0"
+            >
+                <td
+                    colspan="3"
+                >   No Donor!!
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->

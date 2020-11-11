@@ -1,0 +1,11 @@
+form {
+    padding: 12px;
+    background-color: rgb(121, 115, 250);
+}
+mat-form-field {
+    width: 100%;
+}
+button {
+    margin-left: 12px;
+    margin-right: 12px;
+}

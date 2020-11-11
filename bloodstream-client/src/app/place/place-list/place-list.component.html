@@ -1,0 +1,24 @@
+
+<h1>Donation places</h1>
+
+<mat-nav-list >
+    <div class="example-form">
+        <a *ngFor="let place of places" mat-list-item
+          (click)="selectedPlace = place"
+          [class.selected]="place === selectedPlace"
+        >
+        
+            <mat-icon *ngIf="place.isActive === true" matListIcon style="color: orange">check_circle</mat-icon>
+            <h3 matLine>{{ place.name }}</h3>
+            <!-- <small matLine> -->
+            <small>
+                <mat-icon>verified_user</mat-icon> {{ place.address}}
+                <mat-icon>access_time</mat-icon> {{ place.city }}
+            </small>
+
+            <p matLine>{{ place.openingTime.openingTime}}</p>
+        </a>
+
+        
+    </div>
+</mat-nav-list>

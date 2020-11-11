@@ -1,0 +1,86 @@
+<form [formGroup]="donorForm" (ngSubmit)="onFormSave()">
+    <div>    
+        <h1>Registration</h1>
+     </div>   
+         
+    <mat-form-field>
+        <input matInput formControlName="donorName" required>
+        <mat-placeholder class='placeholder'> Name </mat-placeholder>
+        <mat-error *ngIf="donorName.invalid && (donorName.dirty || donorName.touched) && donorName.errors.required">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="username" required>
+        <mat-placeholder class='placeholder'> Username </mat-placeholder>
+        <mat-error *ngIf="username.invalid && (username.dirty || username.touched) && username.errors.required">Username is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="password" required [type]="hidePassword ? 'password' : 'text'">
+        <mat-placeholder class='placeholder'> Password </mat-placeholder>
+        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">Password is required</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+        <input matInput formControlName="taj" required>
+        <mat-placeholder class='placeholder'> TAJ </mat-placeholder>
+        <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && taj.errors.required">TAJ is required</mat-error>
+    </mat-form-field>
+    <!-- <mat-form-field>
+        <input matInput formControlName="birthDate" required>
+        <mat-placeholder class='placeholder'> Date of birth </mat-placeholder>
+        <mat-error *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched) && birthDate.errors.required">Date of birth is required</mat-error>
+    </mat-form-field> -->
+
+
+    <!-- <mat-form-field>
+        <mat-label>Choose a birthDate</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field> -->
+
+    <mat-form-field>
+        <mat-label>Choose a birthDate</mat-label>
+        <input matInput [matDatepicker]="picker" 
+        formControlName="birthDate" [min]="minDate" [max]="maxDate" required
+        >
+        <!-- [value]="donorForm.get('birthDate').value | date: 'YYYY-MM-DD'"             -->
+        <!-- [value]="donorForm.get('birthDate').value | date: 'YYYY-MM-DD'"  -->
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+    </mat-form-field>
+
+    <!-- <form [formGroup]="myForm">   <input      [value]="donorForm.get('birthDate').value | date: 'YYYY-MM-DD'"     formControlName="birthDate"> </form> -->
+
+
+    <mat-form-field>
+        <input matInput formControlName="idCard" required>
+        <mat-placeholder class='placeholder'> ID Card </mat-placeholder>
+        <mat-error *ngIf="idCard.invalid && (idCard.dirty || idCard.touched) && idCard.errors.required">ID Card is required</mat-error>
+    </mat-form-field>
+    <!-- <mat-form-field>
+        <input matInput formControlName="male" required>
+        <mat-placeholder class='placeholder'> Sex </mat-placeholder>
+        <mat-error *ngIf="male.invalid">Sex is required</mat-error>
+    </mat-form-field> -->
+    <mat-form-field>
+        <mat-select placeholder="Gender" formControlName="male" required>
+          <mat-option value="true">Male</mat-option>
+          <mat-option value="false">Female</mat-option>
+        </mat-select>
+        <mat-error *ngIf="male.invalid && (male.dirty || male.touched) && male.errors.required">
+          Gender is required!
+        </mat-error>
+    </mat-form-field>
+ 
+    <button 
+        mat-flat-button
+        color="primary"    
+        type="button"    
+        (click)=onFormSave()
+        [disabled]="donorForm.invalid"
+        [routerLink]="['/login']"
+    >Registrate now</button>
+    <!-- (click)=onFormSave() -->
+</form>
+{{donorForm.value | json}}

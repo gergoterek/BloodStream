@@ -1,0 +1,19 @@
+.example-form {
+    background-color: rgb(87, 175, 185);
+    padding: 0px;
+    /* margin: 10px; */
+    width: 100%;
+    align-content: center;
+    text-align: center;
+  }
+
+  :host /deep/ .mat-list-item-content {
+    padding: 0!important;
+    border: solid 0.1px #000;
+    align-content: center;
+    text-align: center;
+  }
+
+  button {
+    margin-top: 10px;
+  }

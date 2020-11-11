@@ -1,0 +1,49 @@
+<h1>News</h1>
+
+<mat-nav-list class="example-form">
+    <div *ngIf="authService.isDonor()">
+        <ng-container *ngFor="let new of news">
+            <a  *ngIf="isPublished(new.publishDate)" mat-list-item
+                (click)="selectedNews = new"
+                [class.selected]="new === selectedNews"
+                [routerLink]="['/news', news.newsId]"
+            >
+            <!-- ng-if="(Date | date:'dd/MM/yyyy') == 
+                (question.DateTimeEnd | date:'dd/MM/yyyy')" -->
+                <!-- <div *ngIf="(todaysdate | date:'yMMdd' == duedate | date:'yMMdd')">
+                    List
+                </div> -->
+                
+                <h3 matLine>{{ new.title }}</h3>
+                <!-- <small matLine> -->
+                <small>
+                    <mat-icon>access_time</mat-icon> {{ new.publishDate | date: 'y/MM/dd hh:mm'}}
+                </small>
+
+                <p matLine>{{ new.message}}</p>
+            </a>
+        </ng-container>
+    </div>
+
+    <div  *ngIf="!authService.isDonor()">
+        <a *ngFor="let new of news" mat-list-item
+          (click)="selectedNews = new"
+          [class.selected]="new === selectedNews"
+        >        
+            <mat-icon *ngIf="!isPublished(new.publishDate)" matListIcon style="color: grey">unpublished</mat-icon>
+            <mat-icon *ngIf="isPublished(new.publishDate)" matListIcon style="color: green">check</mat-icon>
+            <h3 matLine>{{ new.title }}</h3>
+            <!-- <small matLine> -->
+            <small>
+                <mat-icon>access_time</mat-icon> {{ new.publishDate | date: 'y/MM/dd hh:mm'}}
+            </small>
+
+            <p matLine>{{ new.message}}</p>
+        </a>
+    </div>
+    <button 
+        *ngIf="!authService.isDonor()"
+        mat-flat-button color="primary"
+        [routerLink]="['/news', 'add']"
+    >Add news</button>
+</mat-nav-list>

@@ -1,31 +1,42 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-
-import { RoutingModule } from './routing/routing.module';
 import { AppComponent } from './app.component';
-import { FaqListComponent } from './faq-list/faq-list.component';
+import {  NgModule } from '@angular/core';
+
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { RoutingModule } from './routing/routing.module';
 
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSelectModule} from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatNativeDateModule } from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
-import { DonorListComponent } from './donor-list/donor-list.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { MainNavComponent } from './main-nav/main-nav.component';
+
+import { DonorListComponent } from './donor/donor-list/donor-list.component';
+import { MainNavComponent } from '../assets/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatListModule } from '@angular/material/list';
-import { BloodtypeFilterComponent } from './bloodtype-filter/bloodtype-filter.component';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatSelectModule} from '@angular/material/select';
-import { LoginComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { DonorDetailComponent } from './donor-detail/donor-detail.component';
-import { FaqEditComponent } from './faq-edit/faq-edit.component';
-import { FaqFormComponent } from './faq-form/faq-form.component';
+import { BloodtypeFilterComponent } from './donor/bloodtype-filter/bloodtype-filter.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { DonorDetailComponent } from './donor/donor-detail/donor-detail.component';
+import { FaqEditComponent } from './faq/faq-edit/faq-edit.component';
+import { FaqFormComponent } from './faq/faq-form/faq-form.component';
+import { RegistrationComponent } from './authentication/registration/registration.component';
+import { PlaceListComponent } from './place/place-list/place-list.component';
+import { NewsListComponent } from './news/news-list/news-list.component';
+import { MessageListComponent } from './message/message-list/message-list.component';
+import { MessageFormComponent } from './message/message-form/message-form.component';
+import { PlaceFormComponent } from './place/place-form/place-form.component';
+import { NewsFormComponent } from './news/news-form/news-form.component';
+import { FaqListComponent } from './faq/faq-list/faq-list.component';
+import { NewsEditComponent } from './news/news-edit/news-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +48,15 @@ import { FaqFormComponent } from './faq-form/faq-form.component';
     LoginComponent,
     DonorDetailComponent,
     FaqEditComponent,
-    FaqFormComponent
+    FaqFormComponent,
+    RegistrationComponent,
+    PlaceListComponent,
+    NewsListComponent,
+    MessageListComponent,
+    MessageFormComponent,
+    PlaceFormComponent,
+    NewsFormComponent,
+    NewsEditComponent
   ],
   imports: [
     RoutingModule,
@@ -55,9 +74,10 @@ import { FaqFormComponent } from './faq-form/faq-form.component';
     LayoutModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
 
   ],
-  //schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent]
 })

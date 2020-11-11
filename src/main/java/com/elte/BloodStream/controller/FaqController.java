@@ -53,5 +53,4 @@ public class FaqController {
         return faqService.deleteFaq(faqID);
     }
 
-
 }
