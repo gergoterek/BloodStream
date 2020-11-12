@@ -4,9 +4,6 @@
     <div *ngIf="authService.isDonor()">
         <ng-container *ngFor="let new of news">
             <a  *ngIf="isPublished(new.publishDate)" mat-list-item
-                (click)="selectedNews = new"
-                [class.selected]="new === selectedNews"
-                [routerLink]="['/news', news.newsId]"
             >
             <!-- ng-if="(Date | date:'dd/MM/yyyy') == 
                 (question.DateTimeEnd | date:'dd/MM/yyyy')" -->
@@ -26,9 +23,10 @@
     </div>
 
     <div  *ngIf="!authService.isDonor()">
-        <a *ngFor="let new of news" mat-list-item
-          (click)="selectedNews = new"
-          [class.selected]="new === selectedNews"
+        <a *ngFor="let new of news" mat-list-item          
+            (click)="selectedNews = new"
+            [class.selected]="new === selectedNews"
+            [routerLink]="['/news', new.newsId]"
         >        
             <mat-icon *ngIf="!isPublished(new.publishDate)" matListIcon style="color: grey">unpublished</mat-icon>
             <mat-icon *ngIf="isPublished(new.publishDate)" matListIcon style="color: green">check</mat-icon>
@@ -41,9 +39,11 @@
             <p matLine>{{ new.message}}</p>
         </a>
     </div>
-    <button 
-        *ngIf="!authService.isDonor()"
-        mat-flat-button color="primary"
-        [routerLink]="['/news', 'add']"
-    >Add news</button>
+    
 </mat-nav-list>
+
+<button 
+    *ngIf="!authService.isDonor()"
+    mat-flat-button color="primary"
+    [routerLink]="['/news', 'add']"
+>Add news</button>

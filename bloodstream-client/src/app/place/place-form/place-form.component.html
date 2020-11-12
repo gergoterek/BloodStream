@@ -1,5 +1,9 @@
-<form [formGroup]="placeForm" (ngSubmit)="onFormSave()">
-    <h1>New Place</h1> 
+<form [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+    <div>    
+        <h1>{{titleOfPage}}</h1>
+     </div>
+
+     
                
     <mat-form-field>
         <input matInput formControlName="name" required>
@@ -21,21 +25,41 @@
             >Address is required</mat-error>
     </mat-form-field>
     
+    <!-- <button mat-flat-button class="back">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button> -->
 
     <button
+        *ngIf="!wantToEdit"
         mat-flat-button color="wipe"
         type="button"
         [routerLink]="['/place']"
-    >Discard</button>
+    > Cancel </button>
+
+    <button
+        *ngIf="wantToEdit"
+        mat-flat-button
+        type="button"
+        (click)="delButton()"
+        [routerLink]="['/place', place.id, 'del']"
+    > Delete Place</button>
 
     <button 
         mat-flat-button
         color="primary"      
-        type="button"    
-        (click)=onFormSave()   
+        type="submit"  
         [disabled]="placeForm.invalid"
-        [routerLink]="['/place']"
-    >Send</button>
+    > Save </button>
+
+    <!-- <button mat-button color="accent">
+        Save
+        <mat-icon  matListIcon style="color: green" >check</mat-icon>
+    </button> -->
+
+    <!-- <button mat-button>
+        <mat-icon>mic</mat-icon>
+        Start Recording
+    </button> -->
         
 </form>
 

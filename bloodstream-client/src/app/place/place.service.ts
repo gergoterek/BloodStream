@@ -8,8 +8,9 @@ import { httpOptions } from '../authentication/auth.service';
 })
 export class PlaceService {
 
-  private allPlacesUrl = 'http://localhost:8080/place/all';
-  private addPlaceUrl = 'http://localhost:8080/place/add';
+  private allUrl = 'http://localhost:8080/place/all';
+  private url = 'http://localhost:8080/place';
+  private delUrl = 'http://localhost:8080/place/delete';
 
   constructor(
     private http: HttpClient
@@ -17,15 +18,38 @@ export class PlaceService {
 
   getPlaces(): Promise<Place[]> {
     return this.http.get<Place[]>(
-      this.allPlacesUrl,
+      this.allUrl,
+      httpOptions
+    ).toPromise();
+  }
+
+  getPlace(id: number): Promise<Place> {
+    return this.http.get<Place>(
+      `${this.url}/${id}`,
+      httpOptions
+    ).toPromise();
+  }
+
+  modifyPlace(id: number, place: Place): Promise<Place> {
+    console.log(id);
+    return this.http.put<Place>(
+      `${this.url}/${id}`,
+      place,
       httpOptions
     ).toPromise();
   }
 
   addPlace(place: Place): Promise<Place> {
     return this.http.post<Place>(
-      this.addPlaceUrl,
+      this.url,
       place,
+      httpOptions
+    ).toPromise();
+  }
+
+  deletePlace(id: number): Promise<Place> {
+    return this.http.delete<Place>(
+      `${this.delUrl}/${id}`,
       httpOptions
     ).toPromise();
   }

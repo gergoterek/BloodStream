@@ -25,12 +25,20 @@
     </mat-form-field>
 
     <button
+        *ngIf="!wantToEdit"
+        mat-flat-button color="wipe"
+        type="button"
+        [routerLink]="['/news']"
+    >Discard</button>
+
+    <button
         *ngIf="wantToEdit"
         mat-flat-button color="wipe"
         type="button"
         (click)="delButton()"
-        [routerLink]="['/news']"
+        [routerLink]="['/news', news.newsId, 'del']"
     >Delete News</button>
+
 
     <button 
         mat-flat-button
@@ -42,3 +50,15 @@
 </form>
 
 {{newsForm.value | json}}
+
+
+ <!-- <mat-form-field>
+		<mat-placeholder>Start DateTime</mat-placeholder>
+		<input matInput formControlName="time" [matDatetimepicker]="dts" required autocomplete="false">
+		<mat-datetimepicker-toggle [for]="dts" matSuffix></mat-datetimepicker-toggle>
+		<mat-datetimepicker #dts type="datetime" openOnFocus="true" timeInterval="5"></mat-datetimepicker>
+	</mat-form-field> -->
+    <!-- <mat-form-field appearance="fill">
+        <mat-label>TIMEPICKER</mat-label>
+        <input matTimepicker formControlName="time">
+      </mat-form-field> -->

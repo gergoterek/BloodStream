@@ -13,7 +13,7 @@ import { Location } from '@angular/common';
 export class NewsFormComponent implements OnInit, OnChanges {
 
 
-  minDate = Date.now()
+  minDate = new Date(Date.now());
   maxDate = new Date(2021, 1,1);
 
   constructor(
@@ -30,6 +30,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
     message: ['', [Validators.required]],
     publishDate: ['', [Validators.required]],
   });
+  //time: ['', [Validators.required]],
   
   @Input() news: News;
   @Input() titleOfPage: string;
@@ -39,6 +40,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
   get title() { return this.newsForm.get('title'); }
   get message() { return this.newsForm.get('message'); }
   get publishDate() { return this.newsForm.get('publishDate'); }
+  // get time() { return this.newsForm.get('time'); }
   
   // async onFormSave() {
   //   const news = this.newsForm.value as News;
@@ -56,6 +58,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
     this.save.emit(
       Object.assign(new News(), this.newsForm.value)
     );
+    console.log(JSON.stringify(this.newsForm.value));
   }
 
   delButton(): void {

@@ -35,11 +35,12 @@ export class NewsEditComponent implements OnInit {
       this.wantToEdit = true;
     }
   }
+ 
   
 
   async onFormSave(news: News) {
     if (this.newsId) {
-      await this.newsService.modifyNews(this.newsId, news)
+      await this.newsService.modifyNews(this.newsId, news);      
       this.location.back();
     } else {
       await this.newsService.addNews(news);

@@ -33,12 +33,12 @@ public class ApplicationService {
     public ResponseEntity<Application> newApplication(Application application){
 
         Optional<Donor> foundDonor = donorRepository.findById(application.getDonor().getId());
-        Optional<Place> foundPlace = placeRepository.findByID(application.getPlace().getID());
+        Optional<Place> foundPlace = placeRepository.findById(application.getPlace().getId());
 
         if (foundDonor.isPresent() && foundPlace.isPresent() && application.getAppliedDate() != null
                             && application.getDonor().getNextDonationDate().compareTo(LocalDateTime.now())<0) {
             application.setDonor(donorRepository.findById(application.getDonor().getId()).get());
-            application.setPlace(placeRepository.findAllByID(application.getPlace().getID()));
+            application.setPlace(placeRepository.findAllById(application.getPlace().getId()));
             application.setAppliedDate(application.getAppliedDate());
             application.setDonation(null);
             return ResponseEntity.ok(applicationRepository.save(application));

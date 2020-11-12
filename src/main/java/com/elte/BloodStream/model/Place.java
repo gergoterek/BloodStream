@@ -24,7 +24,7 @@ public class Place {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //@JsonProperty(access = READ_ONLY)
     @Column(name = "PLACE_ID")
-    private Integer ID;
+    private Integer id;
 
     @Column(nullable = false)
     private String city;

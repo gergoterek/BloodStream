@@ -1,24 +1,63 @@
 
 <h1>Donation places</h1>
 
-<mat-nav-list >
-    <div class="example-form">
+<mat-nav-list class="example-form">
+    <div *ngIf="authService.isDonor()">
+        <ng-container *ngFor="let place of places">
+            <a  *ngIf="place.isActive" mat-list-item>               
+                <h3 matLine>{{ place.name}}</h3>
+                <!-- <small matLine> -->
+                <small>
+                    <mat-icon>access_time</mat-icon> {{ place.city }}
+                </small>
+
+                <p matLine>{{ place.address}}</p>
+            </a>
+        </ng-container>
+    </div>
+
+    <div *ngIf="!authService.isDonor()">
+        <a *ngFor="let place of places" mat-list-item
+            (click)="selectedPlace = place"
+            [class.selected]="place === selectedPlace"
+            [routerLink]="['/place', place.id]"
+        >         
+            <mat-icon *ngIf="!place.isActive" matListIcon style="color: grey">toggle_off</mat-icon>
+            <mat-icon *ngIf="place.isActive" matListIcon style="color: green">toggle_on</mat-icon>
+              
+            <h3 matLine>{{ place.name}}</h3>
+            <!-- <small matLine> -->
+            <small>
+                <mat-icon>access_time</mat-icon> {{ place.city }}
+            </small>
+
+            <p matLine>{{ place.address}}</p>
+        </a>
+    </div>
+
+
+
+
+    <!-- <small matLine> -->
+    <!-- <div>
         <a *ngFor="let place of places" mat-list-item
           (click)="selectedPlace = place"
           [class.selected]="place === selectedPlace"
-        >
-        
+        >        
             <mat-icon *ngIf="place.isActive === true" matListIcon style="color: orange">check_circle</mat-icon>
             <h3 matLine>{{ place.name }}</h3>
-            <!-- <small matLine> -->
             <small>
                 <mat-icon>verified_user</mat-icon> {{ place.address}}
                 <mat-icon>access_time</mat-icon> {{ place.city }}
             </small>
 
             <p matLine>{{ place.openingTime.openingTime}}</p>
-        </a>
-
-        
-    </div>
+        </a>        
+    </div> -->
 </mat-nav-list>
+
+<button 
+    *ngIf="!authService.isDonor()"
+    mat-flat-button color="primary"
+    [routerLink]="['/place', 'add']"
+>Add place</button>

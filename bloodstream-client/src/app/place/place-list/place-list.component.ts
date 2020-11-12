@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/authentication/auth.service';
 import { Place } from '../../domain/place';
 import { PlaceService } from '../place.service';
 
@@ -17,18 +19,22 @@ export class PlaceListComponent implements OnInit {
 
   constructor(
     public placeService: PlaceService,
+    public authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
 
   async ngOnInit() {
     this.places = await this.placeService.getPlaces();
+
+    let del = this.route.snapshot.url;
+    console.log(del);
+    if (del.length === 3){
+      if(String(del).split(",")[2] === "del"){
+        this.router.navigate(['/place'])
+      }
+    }
   }
-
-  // onFilterChange(data){
-  //   this.selectedBloodType = data;
-  //   this.filterDonors();
-  // }
-
-
 
 }

@@ -13,6 +13,9 @@ import { NewsListComponent } from '../news/news-list/news-list.component';
 import { MessageListComponent } from '../message/message-list/message-list.component';
 import { MessageFormComponent } from '../message/message-form/message-form.component';
 import { NewsFormComponent } from '../news/news-form/news-form.component';
+import { NewsEditComponent } from '../news/news-edit/news-edit.component';
+import { PlaceFormComponent } from '../place/place-form/place-form.component';
+import { PlaceEditComponent } from '../place/place-edit/place-edit.component';
 
 
 
@@ -64,6 +67,29 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'place/add',
+    component: PlaceEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'place/:id',
+    component: PlaceEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'place/:id/del',
+    component: PlaceListComponent,
+    canActivate: [AuthGuard],
+    // data: {
+    //   roles: ['ROLE_ADMIN']
+    // }
+  },
+  {
+    path: 'place/:id/edit',
+    component: PlaceFormComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'message',
     component: MessageListComponent,
     canActivate: [AuthGuard]
@@ -79,18 +105,23 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'news/:faqId',
-    component: FaqEditComponent,
+    path: 'news/add',
+    component: NewsEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'news/:newsId',
+    component: NewsEditComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'news/:newsId/del',
-    component: FaqListComponent,
+    component: NewsListComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'news/:newsId/edit',
-    component: FaqFormComponent,
+    component: NewsFormComponent,
     canActivate: [AuthGuard]
   },
   {

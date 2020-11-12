@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+// import { MatDatetimepickerModule, MatNativeDatetimeModule } from "@mat-datetimepicker/core";
 
 import { DonorListComponent } from './donor/donor-list/donor-list.component';
 import { MainNavComponent } from '../assets/main-nav/main-nav.component';
@@ -36,6 +37,7 @@ import { PlaceFormComponent } from './place/place-form/place-form.component';
 import { NewsFormComponent } from './news/news-form/news-form.component';
 import { FaqListComponent } from './faq/faq-list/faq-list.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
+import { PlaceEditComponent } from './place/place-edit/place-edit.component';
 
 
 @NgModule({
@@ -56,7 +58,10 @@ import { NewsEditComponent } from './news/news-edit/news-edit.component';
     MessageFormComponent,
     PlaceFormComponent,
     NewsFormComponent,
-    NewsEditComponent
+    NewsEditComponent,
+    PlaceEditComponent,
+    // MatDatetimepickerModule,
+    // MatNativeDatetimeModule,
   ],
   imports: [
     RoutingModule,

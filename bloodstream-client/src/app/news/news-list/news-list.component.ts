@@ -1,4 +1,6 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { News } from '../../domain/news';
 import { NewsService } from '../news.service';
@@ -13,17 +15,27 @@ export class NewsListComponent implements OnInit {
   news: News[] = [];
   // filteredDonors = [];
   // selectedBloodType = '';
-   selectedNews = null;
-   now = new Date();
+  selectedNews = null;
+  now = new Date();
 
   constructor(
     public newsService: NewsService,
     public authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
 
   async ngOnInit() {
     this.news = await this.newsService.getAllNews();
+
+    let del = this.route.snapshot.url;
+    console.log(del);
+    if (del.length === 3){
+      if(String(del).split(",")[2] === "del"){
+        this.router.navigate(['/news'])
+      }
+    }
   }
 
   isPublished(date: Date): boolean{

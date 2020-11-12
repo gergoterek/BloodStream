@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,9 +32,10 @@ public class News {
     @Column(nullable = false, length = 1000)
     private String message;
 
-    @Column(updatable = false)
+    @Column(nullable = false)
 //    @JsonFormat( pattern = "yyyy-MM-dd HH:mm a z")
     //@CreationTimestamp
+    //@UpdateTimestamp
     private Date publishDate;
 
 }
