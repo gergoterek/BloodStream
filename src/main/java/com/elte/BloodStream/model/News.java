@@ -24,6 +24,7 @@ public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty(access = READ_ONLY)
+    @Column(updatable = false)
     private Integer newsId;
 
     @Column(nullable = false)

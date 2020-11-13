@@ -20,7 +20,7 @@ public class Donation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+    @Column(updatable = false)
     //@JsonProperty(access = READ_ONLY)
     private Integer donationId;
 

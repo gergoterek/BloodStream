@@ -1,8 +1,7 @@
-<form [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="placeForm">
     <div>    
         <h1>{{titleOfPage}}</h1>
      </div>
-
      
                
     <mat-form-field>
@@ -19,16 +18,41 @@
     </mat-form-field>
 
     <mat-form-field>
-        <textarea matInput formControlName="address" required></textarea>
+        <input matInput formControlName="address" required>
         <mat-placeholder class='placeholder'> Address </mat-placeholder>
         <mat-error *ngIf="address.invalid  && (address.dirty || address.touched) && address.errors.required"
             >Address is required</mat-error>
+        
     </mat-form-field>
-    
-    <!-- <button mat-flat-button class="back">
-        <mat-icon>keyboard_arrow_left</mat-icon>
-    </button> -->
 
+    <div>
+        <mat-slide-toggle color="primary" formControlName="active" >Set Active</mat-slide-toggle>        
+    </div>
+    
+</form>  
+
+<form [formGroup]="openingForm" (ngSubmit)="onSubmit()">
+    <section class="example-section">
+        <mat-checkbox formControlName="monday">Monday</mat-checkbox>
+        <mat-checkbox formControlName="tuesday" >Tuesday</mat-checkbox>
+        <mat-checkbox formControlName="wednesday" >WednesDay</mat-checkbox>
+        <mat-checkbox formControlName="thursday">Thursday</mat-checkbox>
+        <mat-checkbox formControlName="friday" >Friday</mat-checkbox>
+        <mat-checkbox formControlName="saturday" >Saturday</mat-checkbox>
+        <mat-checkbox formControlName="sunday">Sunday</mat-checkbox>
+    </section>
+    <section class="example-section">
+        <span>
+            Opening Time:
+            <input type="time"  formControlName="startTime" >
+        </span>
+        <span>
+            Closing Time: 
+            <input type="time"  formControlName="closingTime" >
+        </span>
+        
+    </section>
+    
     <button
         *ngIf="!wantToEdit"
         mat-flat-button color="wipe"
@@ -44,24 +68,26 @@
         [routerLink]="['/place', place.id, 'del']"
     > Delete Place</button>
 
-    <button 
+     <button 
         mat-flat-button
         color="primary"      
         type="submit"  
         [disabled]="placeForm.invalid"
     > Save </button>
 
-    <!-- <button mat-button color="accent">
-        Save
-        <mat-icon  matListIcon style="color: green" >check</mat-icon>
+
+
+
+    <!-- <button mat-flat-button>
+        <mat-icon style="color: red">clear</mat-icon>
+    </button>
+
+     <button mat-flat-button>
+        <mat-icon style="color: green">checked</mat-icon>
     </button> -->
 
-    <!-- <button mat-button>
-        <mat-icon>mic</mat-icon>
-        Start Recording
-    </button> -->
-        
 </form>
-
+    
 
 {{placeForm.value | json}}
+{{openingForm.value | json}}

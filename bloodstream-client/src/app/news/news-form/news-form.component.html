@@ -18,10 +18,10 @@
 
     <mat-form-field>
         <mat-label>Choose a publish date</mat-label>
-        <input matInput [matDatepicker]="picker" 
+        <input matInput [matDatepicker]="picker"
         formControlName="publishDate" [min]="minDate" [max]="maxDate" required
         ><mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker ></mat-datepicker>
+        <mat-datepicker touchUi="true" #picker></mat-datepicker>
     </mat-form-field>
 
     <button
@@ -29,7 +29,7 @@
         mat-flat-button color="wipe"
         type="button"
         [routerLink]="['/news']"
-    >Discard</button>
+    >Cancel</button>
 
     <button
         *ngIf="wantToEdit"

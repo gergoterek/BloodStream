@@ -23,7 +23,7 @@ public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //@JsonProperty(access = READ_ONLY)
-    @Column(name = "PLACE_ID")
+    @Column(name = "PLACE_ID", updatable = false)
     private Integer id;
 
     @Column(nullable = false)
@@ -36,7 +36,7 @@ public class Place {
     private String name;
 
     @Column(nullable = false)
-    private boolean isActive;
+    private boolean active;
 
     @JsonIgnore
     @OneToMany(mappedBy = "place")
@@ -44,7 +44,7 @@ public class Place {
 
 
     @JsonManagedReference
-    @OneToOne(mappedBy = "place")//, cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "place", cascade=CascadeType.ALL)//, cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private OpeningTime openingTime;
 
 

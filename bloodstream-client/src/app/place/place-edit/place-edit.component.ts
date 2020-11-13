@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/authentication/auth.service';
 import { Place } from 'src/app/domain/place';
 import { PlaceService } from '../place.service';
 import { Location } from '@angular/common';
+import { OpeningTime } from 'src/app/domain/openingTime';
+import { PlaceFormComponent } from '../place-form/place-form.component';
 
 @Component({
   selector: 'app-place-edit',
@@ -14,6 +16,7 @@ export class PlaceEditComponent implements OnInit {
 
   id: number = null;
   place: Place = new Place();
+  //openingTime: OpeningTime = new OpeningTime();
   titleOfPage = 'New place';
   wantToEdit = false;
 
@@ -22,7 +25,7 @@ export class PlaceEditComponent implements OnInit {
     private placeService: PlaceService,
     private location: Location,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   async ngOnInit() {
@@ -30,8 +33,14 @@ export class PlaceEditComponent implements OnInit {
     if (id) {
       this.id = +id;
       this.place = await this.placeService.getPlace(this.id);
-      this.titleOfPage = 'Modify news';
+      this.titleOfPage = 'Modify place';
       this.wantToEdit = true;
+      //this.openingTime = this.place.openingTime;
+
+      //console.log(JSON.stringify(this.place));
+      //this.placeForm.check();
+      //console.log(JSON.stringify(this.place.active));
+    } else {
     }
   }
  

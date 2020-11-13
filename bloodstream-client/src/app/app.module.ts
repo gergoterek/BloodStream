@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 // import { MatDatetimepickerModule, MatNativeDatetimeModule } from "@mat-datetimepicker/core";
 
 import { DonorListComponent } from './donor/donor-list/donor-list.component';
@@ -38,6 +39,7 @@ import { NewsFormComponent } from './news/news-form/news-form.component';
 import { FaqListComponent } from './faq/faq-list/faq-list.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { PlaceEditComponent } from './place/place-edit/place-edit.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -81,7 +83,8 @@ import { PlaceEditComponent } from './place/place-edit/place-edit.component';
     ReactiveFormsModule,
     MatNativeDateModule,
     MatDatepickerModule,
-
+    MatCheckboxModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

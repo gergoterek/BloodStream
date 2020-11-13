@@ -18,6 +18,7 @@ public class Faq {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty(access = READ_ONLY)
+    @Column(updatable = false)
     private Integer faqId;
 
     @Column(nullable = false, length = 1000)

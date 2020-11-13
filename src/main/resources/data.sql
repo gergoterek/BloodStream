@@ -14,8 +14,8 @@ INSERT INTO donor (blood_type, donor_name, password, role, username, TAJ, id_car
         ('A_NEG', 'Godeny Gyorrgy', '$2a$04$YDiv9c./ytEGZQopFfExoOgGlJL6/o0er0K.hiGb5TGKHUL8Ebn..',
          'ROLE_NURSE', 'donor', 423423113, '1D899R', '2009-03-23', CURRENT_TIMESTAMP(), 0);
 
-INSERT INTO place (address, city, is_active, name) VALUES ('Czuczor utca 8', 'Budapest', 1, 'Plazma');
-INSERT INTO place (address, city, is_active, name) VALUES ('Czuczor utca 9', 'Debrecen', 1, 'OVSZ');
+INSERT INTO place (address, city, active, name) VALUES ('Czuczor utca 8', 'Budapest', 1, 'Plazma');
+INSERT INTO place (address, city, active, name) VALUES ('Czuczor utca 9', 'Debrecen', 1, 'OVSZ');
 
 INSERT INTO donation (donation_date, transport_date) VALUES (CURRENT_DATE(),  CURRENT_TIMESTAMP());
 INSERT INTO donation (donation_date, transport_date) VALUES (CURRENT_DATE(), null);
@@ -36,9 +36,9 @@ INSERT INTO news (title, message, publish_date) VALUES ('Nyitvatartásunk','Hoss
 INSERT INTO news (title, message, publish_date) VALUES ('Unnepi nyitvatartasunk', 'Unnepi nyitvatartasunk a kovetkezo:', CURRENT_TIMESTAMP());
 
 
-INSERT INTO opening_time (place_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday, opening_time, closing_time) VALUES
+INSERT INTO opening_time (place_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday, start_time, closing_time) VALUES
         (1, 1, 1, 1, 1, 1, 1, 1, 60, 170);
-INSERT INTO opening_time (place_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday, opening_time, closing_time) VALUES
+INSERT INTO opening_time (place_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday, start_time, closing_time) VALUES
         (2, 1, 1, 1, 1, 1, 1, 1, 60, 800);
 
 

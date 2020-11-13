@@ -29,7 +29,6 @@ export class PlaceListComponent implements OnInit {
     this.places = await this.placeService.getPlaces();
 
     let del = this.route.snapshot.url;
-    console.log(del);
     if (del.length === 3){
       if(String(del).split(",")[2] === "del"){
         this.router.navigate(['/place'])

@@ -31,7 +31,6 @@ export class PlaceService {
   }
 
   modifyPlace(id: number, place: Place): Promise<Place> {
-    console.log(id);
     return this.http.put<Place>(
       `${this.url}/${id}`,
       place,

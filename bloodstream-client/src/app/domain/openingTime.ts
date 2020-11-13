@@ -1,8 +1,8 @@
-export interface OpeningTime {
+export class OpeningTime {
 
     id: number;
-    openingTime: string;
-    closingTime: string;
+    startTime: number;
+    closingTime: number;
 
     monday: boolean;
     tuesday: boolean;

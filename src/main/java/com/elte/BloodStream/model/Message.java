@@ -24,6 +24,7 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty(access = READ_ONLY)
+    @Column(updatable = false)
     private Integer msgId;
 
     @Column(nullable = false)

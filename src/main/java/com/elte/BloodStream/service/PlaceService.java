@@ -19,6 +19,8 @@ public class PlaceService {
     @Autowired
     PlaceRepository placeRepository;
 
+
+
     @Autowired
     OpeningTimeRepository openingTimeRepository;
 
@@ -31,17 +33,20 @@ public class PlaceService {
 
 
     //NURSE - /news/create
-    public ResponseEntity<Place> createNews(Place place) {
+    public ResponseEntity<Place> createPlace(Place place) {
         Place createdPlace = new Place();
         createdPlace.setName(place.getName());
         createdPlace.setCity(place.getCity());
         createdPlace.setAddress(place.getAddress());
+        //System.out.println(place.getOpeningTime().getClosingTime());
+        createdPlace.setOpeningTime(place.getOpeningTime());
+        //openingTimeRepository.save(place.getOpeningTime());
 
         return ResponseEntity.ok(placeRepository.save(place));
     }
 
     //NURSE - news/delete/{id}
-    public ResponseEntity deleteNews(Integer id) {
+    public ResponseEntity deletePlace(Integer id) {
         try {
             placeRepository.deleteById(id);
             return ResponseEntity.ok().build();
@@ -51,13 +56,31 @@ public class PlaceService {
     }
 
     //NURSE - /news/modify
-    public ResponseEntity<Place> modifyNews(Place place, Integer id){
+    public ResponseEntity<Place> modifyPlace(Place place, Integer id){
         Optional<Place> oldPlace = placeRepository.findById(id);
-        if (oldPlace.isPresent()) {
+        Optional<OpeningTime> oldOpening = openingTimeRepository.findById(id);
+        if (oldPlace.isPresent() && oldOpening.isPresent()) {
             Place createdPlace = oldPlace.get();
             createdPlace.setName(place.getName());
             createdPlace.setCity(place.getCity());
             createdPlace.setAddress(place.getAddress());
+            createdPlace.setActive(place.isActive());
+
+            OpeningTime ot = oldOpening.get();
+            ot.setStartTime(place.getOpeningTime().getStartTime());
+            ot.setClosingTime(place.getOpeningTime().getClosingTime());
+            ot.setMonday(place.getOpeningTime().isMonday());
+            ot.setTuesday(place.getOpeningTime().isTuesday());
+            ot.setWednesday(place.getOpeningTime().isWednesday());
+            ot.setThursday(place.getOpeningTime().isThursday());
+            ot.setFriday(place.getOpeningTime().isFriday());
+            ot.setSaturday(place.getOpeningTime().isSaturday());
+            ot.setSunday(place.getOpeningTime().isSunday());
+
+            createdPlace.setOpeningTime(ot);
+            //System.out.println(place.getOpeningTime().getClosingTime());
+            //openingTimeRepository.save(place.getOpeningTime());
+
             return ResponseEntity.ok(placeRepository.save(createdPlace));
         } else {
             return ResponseEntity.notFound().build();

@@ -38,18 +38,18 @@ public class PlaceController {
     public ResponseEntity<Place> createPlace(
             @RequestBody Place place
     ) {
-        return placeService.createNews(place);
+        return placeService.createPlace(place);
     }
 
     //NURSE
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deletePlace (@PathVariable Integer id) { return placeService.deleteNews(id); }
+    public ResponseEntity deletePlace (@PathVariable Integer id) { return placeService.deletePlace(id); }
 
 
     //NURSE
     @PutMapping("/{id}")
     public ResponseEntity<Place> modifyPlace (@PathVariable Integer id, @RequestBody Place place) {
-        return placeService.modifyNews(place, id);
+        return placeService.modifyPlace(place, id);
     }
 
 

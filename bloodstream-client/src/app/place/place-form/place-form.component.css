@@ -6,10 +6,29 @@ mat-form-field {
     width: 100%;
 }
 button {
-    margin-left: 12px;
-    margin-right: 12px;
+    margin-top: 30px;
+    margin-inline-end: 20px;
+}
+.example-section {
+    margin: 12px 0;
 }
 
-.back {
-    align-items: left;
+mat-checkbox {
+    margin: 10px;
 }
+
+
+/* mat-checkbox {
+    flex-flow: row;
+    display: flex;
+    align-items: left;
+    flex-wrap: wrap;
+}
+
+.mat-checkbox-inner-container {
+    margin: 2px 8px auto 0 !important;
+    display: inline-block
+  } */
+/* span {
+    display: inline-block
+} */

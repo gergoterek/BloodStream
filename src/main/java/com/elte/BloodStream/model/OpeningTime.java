@@ -17,7 +17,8 @@ public class OpeningTime {
 
     //@JsonProperty(access = READ_ONLY)
     @Id
-    private int timeId;
+    @Column(updatable = false)
+    private int id;
 
 
     @OneToOne//(fetch = FetchType.LAZY)
@@ -57,7 +58,7 @@ public class OpeningTime {
 
     @NotNull
     @Column
-    private int openingTime;
+    private int startTime;
 
     @NotNull
     @Column
