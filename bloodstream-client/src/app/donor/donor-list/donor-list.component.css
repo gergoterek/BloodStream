@@ -13,6 +13,11 @@
     align-content: center;
     text-align: center;
   }
+
+  h1 {
+    margin:15px;
+}
+
 /* 
   .mat {
     padding: 10px;

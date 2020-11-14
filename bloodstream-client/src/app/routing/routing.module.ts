@@ -16,6 +16,10 @@ import { NewsFormComponent } from '../news/news-form/news-form.component';
 import { NewsEditComponent } from '../news/news-edit/news-edit.component';
 import { PlaceFormComponent } from '../place/place-form/place-form.component';
 import { PlaceEditComponent } from '../place/place-edit/place-edit.component';
+import { DonorEditComponent } from '../donor/donor-edit/donor-edit.component';
+import { LandingPageComponent } from '../donor/landing-page/landing-page.component';
+import { ApplicationListComponent } from '../application/application-list/application-list.component';
+import { ApplicationFormComponent } from '../application/application-form/application-form.component';
 
 
 
@@ -27,12 +31,26 @@ const routes: Routes = [
   {
     path: 'donor',
     component: DonorListComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'donor/profile/:id',
     component: DonorDetailComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
+  },
+  {
+    path: 'donor/:id/edit',
+    component: DonorEditComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'faq',
@@ -41,25 +59,34 @@ const routes: Routes = [
   {
     path: 'faq/add',
     component: FaqEditComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'faq/:faqId',
     component: FaqEditComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'faq/:faqId/del',
     component: FaqListComponent,
     canActivate: [AuthGuard],
-    // data: {
-    //   roles: ['ROLE_ADMIN']
-    // }
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'faq/:faqId/edit',
     component: FaqFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'place',
@@ -69,7 +96,10 @@ const routes: Routes = [
   {
     path: 'place/add',
     component: PlaceEditComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'place/:id',
@@ -80,14 +110,17 @@ const routes: Routes = [
     path: 'place/:id/del',
     component: PlaceListComponent,
     canActivate: [AuthGuard],
-    // data: {
-    //   roles: ['ROLE_ADMIN']
-    // }
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'place/:id/edit',
     component: PlaceFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'message',
@@ -97,7 +130,10 @@ const routes: Routes = [
   {
     path: 'message/new',
     component: MessageFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'news',
@@ -107,21 +143,52 @@ const routes: Routes = [
   {
     path: 'news/add',
     component: NewsEditComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'news/:newsId',
     component: NewsEditComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'news/:newsId/del',
     component: NewsListComponent,
     canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
   },
   {
     path: 'news/:newsId/edit',
     component: NewsFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
+  },
+  {
+    path: 'application/:applyId',
+    component: ApplicationFormComponent,
+    canActivate: [AuthGuard],
+    // data: {
+    //   roles: ['ROLE_DONOR']
+    // }
+  },
+  {
+    path: 'application/all',
+    component: ApplicationListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_NURSE', 'ROLE_ADMIN']
+    }
+  },
+
+  {
+    path: 'profile',
+    component: LandingPageComponent,
     canActivate: [AuthGuard]
   },
   {

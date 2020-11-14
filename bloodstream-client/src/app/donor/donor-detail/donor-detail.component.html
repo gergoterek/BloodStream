@@ -1,42 +1,86 @@
 <h1>Donor Details</h1>
 
-<dl *ngIf="donor">
+<table id="customers" *ngIf="donor">
+  <tr>
+    <th>Data</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td class="td">DonorID</td>
+    <td>{{donor.id}}</td>
+  </tr>
+  <tr>
+    <td class="td">Username</td>
+    <td>{{donor.username}}</td>
+  </tr>
+  <tr>
+    <td class="td">Donor name</td>
+    <td>{{donor.donorName}}</td>
+  </tr>
+  <tr>
+    <td class="td">Birth Date</td>
+    <td>{{donor.birthDate  | date: 'y/MM/dd'}}</td>
+  </tr>
+  <tr>
+    <td class="td">TAJ</td>
+    <td>{{donor.taj}}</td>
+  </tr>
+  <tr>
+    <td class="td">Male</td>
+    <td>{{donor.male}}</td>
+  </tr>
+  <tr>
+    <td class="td">Next Possible Donation Date</td>
+    <td>{{donor.nextDonationDate | date: 'y/MM/dd' }}</td>
+  </tr>
+  <tr>
+    <td class="td">Role</td>
+    <td>{{donor.role}}</td>
+  </tr>
+  <tr>
+    <td class="td">Total Donation Number</td>
+    <td>{{donor.totalDonations}}</td>
+  </tr>
+
+</table>
+
+
+<p>
+  <button mat-flat-button color="wipe" [routerLink]="['/donor', id, 'edit']">Edit</button>
+    <!-- [routerLink]="['/donor', donor.id, 'edit']">Edit</a> -->
+</p>
+
+<!-- <dl *ngIf="donor">
   <dt>DonorID</dt>
   <dd>{{donor.id}}</dd>
+  
+  <dt>Username</dt>
+  <dd>{{donor.username}}</dd>
 
-  <dt>TAJ</dt>
-  <dd>{{donor.taj}}</dd>
-
-  <dt>Birth Date</dt>
-  <dd>{{donor.birthDate}}</dd>
-
-  <dt>BloodType</dt>
+  <dt>Donor name</dt>
   <dd>{{donor.donorName}}</dd>
 
-  <dt>idCard</dt>
+  
+  <dt>Birth Date</dt>
+  <dd>{{donor.birthDate  | date: 'y/MM/dd'}}</dd>
+  
+  <dt>TAJ</dt>
+  <dd>{{donor.taj}}</dd>
+ 
+
+  <dt>IDcard</dt>
   <dd>{{donor.idCard}}</dd>
 
   <dt>Male</dt>
   <dd>{{donor.male}}</dd>
 
   <dt>Next Possible Donation Date</dt>
-  <dd>{{donor.nextDonationDate}}</dd>
+  <dd>{{donor.nextDonationDate | date: 'y/MM/dd' }}</dd>
 
-  <dt>role</dt>
+  <dt>Role</dt>
   <dd>{{donor.role}}</dd>
 
   <dt>Total Donation Number</dt>
-  <dd>{{donor.totalDonation}}</dd>
+  <dd>{{donor.totalDonations}}</dd>  
+</dl> -->
 
-  <dt>username</dt>
-  <dd>{{donor.username}}</dd>
-
-  <dt>password</dt>
-  <dd>{{donor.password}}</dd>
-  
-</dl>
-
-<p>
-<a mat-flat-button color="primary">Edit</a>
-  <!-- [routerLink]="['/donor', donor.id, 'edit']">Edit</a> -->
-</p>

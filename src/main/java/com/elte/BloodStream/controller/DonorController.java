@@ -46,8 +46,10 @@ public class DonorController {
 
 
     //ADMIN (changeable: name, role, blood_type, TAJ, idCard )
-    @PostMapping("/profile/change/donordata")
-    public ResponseEntity<Donor> changeDonorDataByAdmin(@RequestBody Donor donor) { return donorService.changeDonorDataByAdmin(donor); }
+    @PatchMapping("/profile/edit/{id}")
+    public ResponseEntity<Donor> changeDonorDataByAdmin(@PathVariable Integer id, @RequestBody Donor donor) {
+        return donorService.changeDonorDataByAdmin(id, donor);
+    }
 
 
     //ADMIN

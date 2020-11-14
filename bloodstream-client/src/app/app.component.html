@@ -2,22 +2,32 @@
   
 </app-main-nav> -->
 
-<mat-toolbar color="wipe"  id="parent">
-  <button
-      mat-button
-      routerLink="/"
-  >
+<mat-toolbar color="wipe" id="parent">
+  <button mat-button *ngIf="!authService.isLoggedIn" routerLink="/login">
       <mat-icon>home</mat-icon>
       Home
   </button>
+
+  <button mat-button *ngIf="authService.isLoggedIn" routerLink="/profile">
+    <mat-icon>account_circle</mat-icon>
+    Profile
+</button>
   
 
-  <div *ngIf="authService.isLoggedIn">
+  <div *ngIf="authService.isLoggedIn && authService.isDonor()">
+    <button mat-button routerLink="/faq">FAQ</button>
+    <button mat-button routerLink="/news">News</button>
+    <button mat-button routerLink="/message">Messages</button>
+    <button mat-button routerLink="/place">Donation</button>
+  </div> 
+
+  <div *ngIf="authService.isLoggedIn && !authService.isDonor()">
     <button mat-button routerLink="/faq">FAQ</button>
     <button mat-button routerLink="/donor">Donors</button>
     <button mat-button routerLink="/place">Places</button>
     <button mat-button routerLink="/news">News</button>
     <button mat-button routerLink="/message">Messages</button>
+    <button mat-button routerLink="/application/all">Applications</button>
   </div> 
   
   <div *ngIf="!authService.isLoggedIn">

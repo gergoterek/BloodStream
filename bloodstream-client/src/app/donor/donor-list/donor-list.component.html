@@ -1,12 +1,11 @@
-<!-- <div> -->
-    <h1>Donor list</h1>
+<h1>Donor list</h1>
 
-    <div>
-        <app-bloodtype-filter 
-            [bloodType]="selectedBloodType"
-            (change)="onFilterChange($event)"
-        ></app-bloodtype-filter>
-    </div>
+<div>
+    <app-bloodtype-filter 
+        [bloodType]="selectedBloodType"
+        (change)="onFilterChange($event)"
+    ></app-bloodtype-filter>
+</div>
 
 <mat-nav-list >
     <div class="example-form">
@@ -18,7 +17,7 @@
             <mat-icon *ngIf="donor.totalDonations === 0"   matListIcon style="color: red">fiber_new</mat-icon>
             <mat-icon *ngIf="donor.bloodType === 'A_NEG'" matListIcon style="color: orange">check_circle</mat-icon>
             <mat-icon *ngIf="donor.bloodType === null"  matListIcon style="color: green">access_time</mat-icon>
-            <h3 matLine>{{ donor.donorName }}</h3>
+            <h1 matLine>{{ donor.donorName }}</h1>
             <!-- <small matLine> -->
             <small>
                 <mat-icon>verified_user</mat-icon> {{ donor.username }}
@@ -27,6 +26,7 @@
 
             <p matLine>{{ donor.bloodType }}</p>
         </a>
+        <h3 *ngIf="filteredDonors.length === 0"> No donor for this bloodtype</h3>
 
         
     </div>

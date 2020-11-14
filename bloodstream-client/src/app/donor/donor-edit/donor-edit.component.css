@@ -1,0 +1,14 @@
+form {
+    padding: 12px;
+    background-color: rgb(182, 197, 99);
+  }
+mat-form-field {
+    width: 100%;
+}
+button {
+    margin-top: 30px;
+    margin-inline-end: 20px;
+}
+.example-section {
+    margin: 12px 0;
+}

@@ -29,6 +29,9 @@ public class ApplicationService {
     MessageService messageService;
 
 
+    //ADMIN - /application/all
+    public List<Application> getAllApplications() { return applicationRepository.findAll(); }
+
     //USER - /application/new
     public ResponseEntity<Application> newApplication(Application application){
 
@@ -101,6 +104,5 @@ public class ApplicationService {
     }
 
 
-    //ADMIN - /application/all
-    public List<Application> getAllApplications() { return applicationRepository.findAll(); }
+
 }

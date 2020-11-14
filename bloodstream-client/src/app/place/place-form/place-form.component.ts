@@ -44,7 +44,7 @@ export class PlaceFormComponent implements OnInit, OnChanges {
           saturday: this.place.openingTime.saturday,
           sunday: this.place.openingTime.sunday,
       });  
-      console.log(JSON.stringify(this.place.openingTime));
+      //console.log(JSON.stringify(this.place.openingTime));
       //console.log("change"); 
     }
   }
@@ -70,8 +70,8 @@ export class PlaceFormComponent implements OnInit, OnChanges {
 
 
   openingForm = this.fb2.group({
-    startTime: ["08:00", [Validators.required]],
-    closingTime: ["16:00", [Validators.required]],
+    startTime: [this.decimalToTime(480), [Validators.required]],
+    closingTime: [this.decimalToTime(800), [Validators.required]],
 
     monday: [false, [Validators.required]],
     tuesday: [false, [Validators.required]],
@@ -107,7 +107,7 @@ export class PlaceFormComponent implements OnInit, OnChanges {
     this.save.emit(
       Object.assign(new Place(), this.placeForm.value)
     );
-    console.log(this.placeForm.value);
+    //console.log(this.placeForm.value);
   }
 
   delButton(): void {
@@ -123,7 +123,7 @@ export class PlaceFormComponent implements OnInit, OnChanges {
   }
 
   decimalToTime(int: number): string{
-    console.log(int);
+    //console.log(int);
     let temp = 0;
     while (int>=60){
         int -= 60;

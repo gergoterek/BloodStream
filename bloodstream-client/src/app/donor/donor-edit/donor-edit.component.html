@@ -1,0 +1,71 @@
+<form *ngIf="donor" [formGroup]="donorForm" (ngSubmit)="onFormSave()">
+    <div>    
+        <h1>Edit:  {{ donor.donorName }}</h1> 
+        <h3>ID:  {{ donor.id }}</h3> 
+     </div>  
+
+     <mat-form-field>
+        <input matInput formControlName="taj" required>
+        <mat-placeholder class='placeholder'> TAJ </mat-placeholder>
+        <mat-error *ngIf="taj.invalid  && (taj.dirty || taj.touched) && taj.errors.required"
+            >TAJ is required</mat-error>
+        
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="idCard" required>
+        <mat-placeholder class='placeholder'> ID Card </mat-placeholder>
+        <mat-error *ngIf="idCard.invalid  && (idCard.dirty || idCard.touched) && idCard.errors.required"
+            >ID Card is required</mat-error>
+        
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Role" formControlName="role" required>
+        <mat-option value="ROLE_DONOR"> DONOR </mat-option>
+        <mat-option value="ROLE_NURSE"> NURSE </mat-option>
+        <mat-option value="ROLE_ADMIN"> ADMIN </mat-option>
+        </mat-select>
+        <mat-error *ngIf="role.invalid && (role.dirty || role.touched) && role.errors.required">
+        Role is required!
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Blood Type" formControlName="bloodType" required>
+
+            <mat-option value="undefined"> undefined</mat-option>
+            <mat-option value="A_POZ"> A + </mat-option>
+            <mat-option value="A_NEG"> A - </mat-option>
+            <mat-option value="B_POZ"> B + </mat-option>
+            <mat-option value="B_NEG"> B - </mat-option>
+            <mat-option value="AB_POZ"> AB + </mat-option>
+            <mat-option value="AB_NEG"> AB - </mat-option>
+            <mat-option value="ZERO_POZ"> 0 + </mat-option>
+            <mat-option value="ZERO_NEG"> 0 - </mat-option>
+        </mat-select>
+        <mat-error *ngIf="bloodType.invalid && (bloodType.dirty || bloodType.touched) && bloodType.errors.required">
+            Blood Type is required!
+        </mat-error>
+    </mat-form-field>
+
+    <button 
+        *ngIf="donor.id !== authService.user.id"
+        mat-flat-button
+        color="primary"    
+        type="button"    
+        (click)=onFormSave()
+        [disabled]="donorForm.invalid"
+        [routerLink]="['/donor']"
+    >Save</button>
+
+    <button 
+        *ngIf="donor.id === authService.user.id"
+        mat-flat-button
+        color="primary"    
+        type="button"    
+        (click)=onFormSave()
+        [disabled]="donorForm.invalid"
+        [routerLink]="['/login']"
+    >Save</button>
+</form>
+{{donorForm.value | json}}

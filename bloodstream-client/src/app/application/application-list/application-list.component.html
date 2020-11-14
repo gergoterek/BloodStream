@@ -1,0 +1,23 @@
+<h1>Applications</h1>
+
+<mat-nav-list class="example-form" *ngIf="applications">
+    <div *ngIf="authService.isLoggedIn && !authService.isDonor()">
+        <a *ngFor="let application of applications" mat-list-item
+            (click)="selectedApplication = application"
+            [class.selected]="application === selectedApplication"
+            [routerLink]="['/application', application.id]"
+        >         
+            <!-- <mat-icon *ngIf="!place.active" matListIcon style="color: grey">toggle_off</mat-icon> -->
+            <!-- <mat-icon *ngIf="place.active" matListIcon style="color: green">toggle_on</mat-icon> -->
+              
+            <h3 matLine> {{application.donor.donorName}}</h3>
+            <!-- <small matLine> -->
+            <small>
+                <mat-icon>access_time</mat-icon> 
+                 {{ application.appliedDate | date: 'y/MM/dd hh:mm'}}
+            </small>
+
+            <p matLine>{{ application.place.name}}</p>
+        </a>
+    </div>
+</mat-nav-list>

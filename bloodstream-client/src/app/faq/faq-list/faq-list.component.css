@@ -16,6 +16,10 @@ mat-icon {
   align-content: center;
   text-align: center;
 }
+h1 {
+  margin:15px;
+}
+
 
 mat-nav-list {
   text-align: center; 

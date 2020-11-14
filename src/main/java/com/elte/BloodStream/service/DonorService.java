@@ -79,17 +79,18 @@ public class DonorService {
 
     //NURSE - /donor/profile/change/donordata
     // (changeable: name, role, blood_type, TAJ, idCard )
-    public ResponseEntity<Donor> changeDonorDataByAdmin(Donor donor){
+    public ResponseEntity<Donor> changeDonorDataByAdmin(Integer id, Donor donor){
 
-        Optional<Donor> foundDonor = donorRepository.findById(donor.getId());
+        Optional<Donor> foundDonor = donorRepository.findById(id);
         if (foundDonor.isPresent()) {
-            foundDonor.get().setRole(donor.getRole());
-            foundDonor.get().setBloodType(donor.getBloodType());
-            foundDonor.get().setDonorName(donor.getDonorName());
-            foundDonor.get().setTAJ(donor.getTAJ());
-            foundDonor.get().setIdCard(donor.getIdCard());
+            Donor modifiedDonor = foundDonor.get();
+            modifiedDonor.setRole(donor.getRole());
+            modifiedDonor.setBloodType(donor.getBloodType());
+            //foundDonor.get().setDonorName(donor.getDonorName());
+            modifiedDonor.setTAJ(donor.getTAJ());
+            modifiedDonor.setIdCard(donor.getIdCard());
 
-            return ResponseEntity.ok(donorRepository.save(foundDonor.get()));
+            return ResponseEntity.ok(donorRepository.save(modifiedDonor));
         } else{
             return ResponseEntity.badRequest().build();
         }

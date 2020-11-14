@@ -1,5 +1,5 @@
 .example-form {
-    background-color: rgb(87, 175, 185);
+    background-color: rgb(133, 98, 105);
     padding: 0px;
     /* margin: 10px; */
     width: 100%;
@@ -12,10 +12,6 @@
     border: solid 0.1px #000;
     align-content: center;
     text-align: center;
-  }
-
-  button {
-    margin-top: 10px;
   }
 
   h1 {

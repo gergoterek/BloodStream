@@ -13,6 +13,7 @@ export class DonorService {
 
   private donorUrl = 'http://localhost:8080/donor/all';
   private donorIdUrl = 'http://localhost:8080/donor/profile';
+  private donorEditUrl = 'http://localhost:8080/donor/profile/edit';
   private regUrl = 'http://localhost:8080/donor/registration';
 
   constructor(
@@ -40,4 +41,17 @@ export class DonorService {
       httpOptions
     ).toPromise();
   }
+
+  //"/profile/:id/edit"
+  modifyDonor(id: number, donor: Donor): Promise<Donor> {
+    return this.http.patch<Donor>(
+      `${this.donorEditUrl}/${id}`,
+      donor,
+      httpOptions
+    ).toPromise();
+  }
+  
+
+
+
 }

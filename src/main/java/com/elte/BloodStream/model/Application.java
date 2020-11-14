@@ -23,7 +23,7 @@ public class Application {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = READ_ONLY)
+    //@JsonProperty(access = READ_ONLY)
     @Column(updatable = false)
     private Integer applyId;
 

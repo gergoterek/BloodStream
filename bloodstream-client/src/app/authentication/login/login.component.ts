@@ -28,12 +28,13 @@ export class LoginComponent implements OnInit {
     private router: Router
     
   ) {
-    if (this.authService.isLoggedIn){
-        this.authService.logout();
-    }
+    
    }
 
   ngOnInit(): void {
+    if (this.authService.isLoggedIn){
+      this.authService.logout();
+    }
     
   }
 

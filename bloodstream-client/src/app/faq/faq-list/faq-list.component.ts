@@ -28,7 +28,6 @@ export class FaqListComponent implements OnInit {
     this.faqs = await this.faqService.getFaqs();
     
     let del = this.route.snapshot.url;
-    console.log(del);
     if (del.length === 3){
       if(String(del).split(",")[2] === "del"){
         this.router.navigate(['/faq'])

@@ -1,7 +1,11 @@
-export interface Application {
-    id: number;
+import { Donation } from './donation';
+import { Donor } from './donor';
+import { Place } from './place';
+
+export class Application {
+    applyId: number;
     appliedDate: string;
-    donationID: number;
-    donorID: number;
-    placeID: number;
+    donation: Donation;
+    donor: Donor;
+    place: Place;
 }

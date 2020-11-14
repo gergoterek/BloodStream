@@ -1,0 +1,47 @@
+<div *ngIf="donor">
+    <h1 class="">Welcome  {{donor.donorName}}</h1>
+
+    <table id="customers">        
+        <tr>
+            <th colspan="2">Profile</th>
+        </tr>
+        <tr>
+            <td class="td">DonorID</td>
+            <td>{{donor.id}}</td>
+        </tr>
+        <tr>
+            <td class="td">Username</td>
+            <td>{{donor.username}}</td>
+        </tr>
+        <tr>
+            <td class="td">Donor name</td>
+            <td>{{donor.donorName}}</td>
+        </tr>
+        <tr>
+            <td class="td">Birth Date</td>
+            <td>{{donor.birthDate  | date: 'y/MM/dd'}}</td>
+        </tr>
+        <tr>
+            <td class="td">TAJ</td>
+            <td>{{donor.taj}}</td>
+        </tr>
+        <tr>
+            <td class="td">Male</td>
+            <td>{{donor.male}}</td>
+        </tr>
+        <tr>
+            <td class="td">Next Possible Donation Date</td>
+            <td>{{donor.nextDonationDate | date: 'y/MM/dd' }}</td>
+        </tr>
+        <tr>
+            <td class="td">Role</td>
+            <td>{{donor.role}}</td>
+        </tr>
+        <tr>
+            <td class="td">Total Donation Number</td>
+            <td>{{donor.totalDonations}}</td>
+        </tr>
+
+    </table>
+
+</div>

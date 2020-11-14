@@ -40,6 +40,10 @@ import { FaqListComponent } from './faq/faq-list/faq-list.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { PlaceEditComponent } from './place/place-edit/place-edit.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { DonorEditComponent } from './donor/donor-edit/donor-edit.component';
+import { LandingPageComponent } from './donor/landing-page/landing-page.component';
+import { ApplicationListComponent } from './application/application-list/application-list.component';
+import { ApplicationFormComponent } from './application/application-form/application-form.component';
 
 
 @NgModule({
@@ -62,8 +66,12 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     NewsFormComponent,
     NewsEditComponent,
     PlaceEditComponent,
+    DonorEditComponent,
+    LandingPageComponent,
+    ApplicationListComponent,
+    ApplicationFormComponent,
     // MatDatetimepickerModule,
-    // MatNativeDatetimeModule,
+    // MatNativeDatetimeModule,sd
   ],
   imports: [
     RoutingModule,

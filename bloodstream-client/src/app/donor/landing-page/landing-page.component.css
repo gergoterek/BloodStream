@@ -1,23 +1,17 @@
-/* dt {
-    display: block;
-    text-align: left;
-  }
-dd {
-    display: block;
-    text-align: left;
-} */
-
 dl{
     display: block;
     text-align: left;
 }
 dt {
     font-weight: bold;
-  }
+}
 
-  .td {
-      font-weight: bold;
-  }
+.td {
+    font-weight: bold;
+}
+h1 {
+    margin:15px;
+}
 
   #customers {
     font-family: Arial, Helvetica, sans-serif;
@@ -37,12 +31,8 @@ dt {
   #customers th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
+    text-align: center;
+    background-color: #46aab5;
     color: white;
   }
   
-  button {
-    margin-top: 30px;
-    margin-inline-end: 20px;
-}

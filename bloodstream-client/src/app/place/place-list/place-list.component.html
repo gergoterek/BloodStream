@@ -4,11 +4,15 @@
 <mat-nav-list class="example-form">
     <div *ngIf="authService.isDonor()">
         <ng-container *ngFor="let place of places">
-            <a  *ngIf="place.isActive" mat-list-item>               
+            <a mat-list-item
+                (click)="selectedPlace = place"
+                [class.selected]="place === selectedPlace"
+                [routerLink]="['/application', place.id]"
+            >               
                 <h3 matLine>{{ place.name}}</h3>
                 <!-- <small matLine> -->
                 <small>
-                    <mat-icon>access_time</mat-icon> {{ place.city }}
+                    <mat-icon>location_on</mat-icon> {{ place.city }}
                 </small>
 
                 <p matLine>{{ place.address}}</p>
@@ -22,18 +26,19 @@
             [class.selected]="place === selectedPlace"
             [routerLink]="['/place', place.id]"
         >         
-            <mat-icon *ngIf="!place.isActive" matListIcon style="color: grey">toggle_off</mat-icon>
-            <mat-icon *ngIf="place.isActive" matListIcon style="color: green">toggle_on</mat-icon>
+            <mat-icon *ngIf="!place.active" matListIcon style="color: grey">toggle_off</mat-icon>
+            <mat-icon *ngIf="place.active" matListIcon style="color: green">toggle_on</mat-icon>
               
             <h3 matLine>{{ place.name}}</h3>
             <!-- <small matLine> -->
             <small>
-                <mat-icon>access_time</mat-icon> {{ place.city }}
+                <mat-icon>location_on</mat-icon> {{ place.city }}
             </small>
 
             <p matLine>{{ place.address}}</p>
         </a>
     </div>
+</mat-nav-list>
 
 
 
@@ -54,7 +59,6 @@
             <p matLine>{{ place.openingTime.openingTime}}</p>
         </a>        
     </div> -->
-</mat-nav-list>
 
 <button 
     *ngIf="!authService.isDonor()"
