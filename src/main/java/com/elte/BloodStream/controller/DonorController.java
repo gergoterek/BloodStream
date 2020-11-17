@@ -45,7 +45,7 @@ public class DonorController {
     public ResponseEntity<Donor> changeDonorPassword(@RequestBody Donor donor) { return donorService.changeDonorPassword(donor); }
 
 
-    //ADMIN (changeable: name, role, blood_type, TAJ, idCard )
+    //ADMIN (changeable: role, blood_type, TAJ, idCard )
     @PatchMapping("/profile/edit/{id}")
     public ResponseEntity<Donor> changeDonorDataByAdmin(@PathVariable Integer id, @RequestBody Donor donor) {
         return donorService.changeDonorDataByAdmin(id, donor);

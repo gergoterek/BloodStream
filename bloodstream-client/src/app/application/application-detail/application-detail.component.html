@@ -1,0 +1,115 @@
+<h1>Application details</h1>
+
+<table id="customers" *ngIf="application">
+  <tr>
+    <th>Data</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td class="td">Donor Name</td>
+    <td>{{application.donor.donorName}}</td>
+  </tr>
+  <tr>
+    <td class="td">Donor ID</td>
+    <td>{{application.donor.id}}</td>
+  </tr>
+  
+  <tr>
+    <td class="td">Date</td>
+    <td>{{application.appliedDate | date: 'y/MM/dd HH:mm'}}</td>
+  </tr>
+  
+  <tr>
+    <td class="td">Place</td>
+    <td>{{application.place.name}}</td>
+  </tr>
+  <tr>
+    <td class="td">Application ID</td>
+    <td>{{application.applyId}}</td>
+  </tr>
+  <tr>
+    <td class="td">
+        <mat-icon matListIcon style="color: green">pending</mat-icon>
+        Confirmed
+    </td>
+    <td>{{ isConfirmed() }}</td>
+  </tr>
+  <tr>
+    <td class="td">
+      <mat-icon matListIcon style="color: blue">airport_shuttle</mat-icon>
+        Transported</td>
+    <td>{{ isTransported() }}</td>
+  </tr>
+</table>
+
+<div *ngIf="application && authService.isDonor()">
+  <button mat-raised-button
+      color="wipe"
+      [routerLink]="['../../donation']"
+  > 
+    <mat-icon matListIcon style="color: black">keyboard_backspace</mat-icon>
+    Back </button>
+
+    <button mat-raised-button
+        *ngIf="!isConfirmed()"
+        color="wipe"
+        type="button"
+        (click)="delButton()"
+    > 
+        Delete application
+        <mat-icon matListIcon style="color: red">clear</mat-icon>
+    </button>
+
+</div>
+
+
+<div *ngIf="application && !authService.isDonor()">
+  <h2>{{title}}</h2>
+  <button mat-raised-button
+      color="wipe"
+      [routerLink]="['../../donor/profile', application.donor.id]"
+  > 
+    <mat-icon matListIcon style="color: black">keyboard_backspace</mat-icon>
+    Back </button>
+
+    <button mat-raised-button
+        *ngIf="!isConfirmed()"
+        color="wipe"
+        type="button"
+        (click)="delButton()"
+        [routerLink]="['../../', 'donor']"
+    > 
+        Delete application
+        <mat-icon matListIcon style="color: red">clear</mat-icon>
+    </button>
+  <button mat-raised-button
+      *ngIf="!definedBlood()"
+      color="accent"
+      type="button"
+      [routerLink]="['../../donor', application.donor.id, 'edit']"
+  > 
+      Edit Donor
+      <mat-icon matListIcon style="color: orange">build</mat-icon>
+  </button>
+
+  <button mat-raised-button
+      *ngIf="definedBlood() && !isConfirmed()"
+      color="primary"
+      type="button"
+      (click)="setConfirmed()"
+  > 
+      Check-in
+      <mat-icon matListIcon style="color: green">done</mat-icon>
+  </button>
+
+  <button mat-raised-button
+      *ngIf="isConfirmed() && !isTransported()"
+      color="primary"
+      type="button"
+      (click)="setTransport()"
+  > 
+      <mat-icon matListIcon style="color: blue">airport_shuttle</mat-icon>
+      Set transported
+  </button>
+
+</div>

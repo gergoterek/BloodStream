@@ -17,8 +17,12 @@
   <div *ngIf="authService.isLoggedIn && authService.isDonor()">
     <button mat-button routerLink="/faq">FAQ</button>
     <button mat-button routerLink="/news">News</button>
-    <button mat-button routerLink="/message">Messages</button>
-    <button mat-button routerLink="/place">Donation</button>
+    <button mat-button routerLink="/message">
+      Messages
+      <mat-icon matListIcon *ngIf="newMsg.length !== 0" style="color: red">fiber_new</mat-icon>
+    </button>
+    <button mat-button routerLink="/place">Apply for Donation</button>
+    <button mat-button routerLink="/donation">My Donations</button>
   </div> 
 
   <div *ngIf="authService.isLoggedIn && !authService.isDonor()">
@@ -27,7 +31,7 @@
     <button mat-button routerLink="/place">Places</button>
     <button mat-button routerLink="/news">News</button>
     <button mat-button routerLink="/message">Messages</button>
-    <button mat-button routerLink="/application/all">Applications</button>
+    <button mat-button [routerLink]="['/application']">Applications</button>
   </div> 
   
   <div *ngIf="!authService.isLoggedIn">
@@ -39,6 +43,9 @@
     
   <div *ngIf="authService.isLoggedIn">
     <small>{{ authService.user.donorName }}</small>
+    <small *ngIf="authService.isDonor()"> (donor) </small>
+    <small *ngIf="authService.isNurse()"> (nurse) </small>
+    <small *ngIf="authService.isAdmin()"> (admin) </small>
     <span class="flexExpand"></span>
     <button mat-button class="ert" (click)="logout()">Logout</button>      
   </div>

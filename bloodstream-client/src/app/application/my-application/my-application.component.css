@@ -1,0 +1,44 @@
+.example-form {
+    background-color: rgb(255, 0, 0);
+    padding: 0px;
+    margin-top: 10px;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+  }
+
+  :host /deep/ .mat-list-item-content {
+    padding: 0!important;
+    border: solid 0.1px #000;
+    align-content: center;
+    text-align: center;
+  }
+  h1{
+    padding-top: 30px;
+    text-align: left;
+    text-decoration: underline;
+    font-weight: 500;
+    
+}
+  h2, h3 {
+    margin-top: 20px;
+}
+
+.next {
+    background-color: rgb(137, 137, 137);
+    padding: 0px;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+}
+
+.gap {
+    padding: 0px;
+    margin-top: 30px;
+}
+
+.left {
+    align-content: left;
+    text-align: left;
+    justify-content: left;
+}

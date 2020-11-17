@@ -1,1 +1,117 @@
-<p>application-form works!</p>
+<div *ngIf="place">
+    <h1>New application</h1>
+        <table id="customers">        
+            <tr>
+                <th colspan="2">Place information</th>
+            </tr>
+            <tr>
+                <td class="td">Name</td>
+                <td>{{place.name}}</td>
+            </tr>
+            <tr>
+                <td class="td">City</td>
+                <td>{{place.city}}</td>
+            </tr>
+            <tr>
+                <td class="td">Address</td>
+                <td>{{place.address}}</td>            
+            </tr>
+            <tr>
+                <td class="td">Opening Time</td>
+                <td>{{start}}</td>
+            </tr>
+            <tr>
+                <td class="td">Closing Time</td>
+                <td>{{close}}</td>
+            </tr>
+        </table>
+
+        <table id="customers">        
+            <tr>
+                <th colspan="2">Opening days</th>
+            </tr>        
+            
+            <tr>
+                <td class="td">Monday</td>
+                <td *ngIf="place.openingTime.monday">Open</td>
+                <td *ngIf="!place.openingTime.monday">Closed</td>
+            </tr>
+            <tr>
+                <td class="td">Tuesday</td>
+                <td *ngIf="place.openingTime.tuesday">Open</td>
+                <td *ngIf="!place.openingTime.tuesday">Closed</td>
+            </tr>
+            <tr>
+                <td class="td">Wednesday</td>
+                <td *ngIf="place.openingTime.wednesday">Open</td>
+                <td *ngIf="!place.openingTime.wednesday">Closed</td>
+            </tr>
+            <tr>
+                <td class="td">Thursday</td>
+                <td *ngIf="place.openingTime.thursday">Open</td>
+                <td *ngIf="!place.openingTime.thursday">Closed</td>
+            </tr>
+            <tr>
+                <td class="td">Friday</td>
+                <td *ngIf="place.openingTime.friday">Open</td>
+                <td *ngIf="!place.openingTime.friday">Closed</td>
+            </tr>
+            <tr>
+                <td class="td">Saturday</td>
+                <td *ngIf="place.openingTime.saturday">Open</td>
+                <td *ngIf="!place.openingTime.saturday">Closed</td>
+            </tr>
+            <tr>
+                <td class="td">Sunday</td>
+                <td *ngIf="place.openingTime.sunday">Open</td>
+                <td *ngIf="!place.openingTime.sunday">Closed</td>
+            </tr>            
+        </table>
+
+
+
+</div>
+
+<form [formGroup]="applicationForm" (ngSubmit)="onFormSave()">
+
+    <mat-form-field>
+        <mat-label>Choose a publish date</mat-label>
+        <input matInput [matDatepicker]="picker"
+            formControlName="appliedDate" [min]="minDate" [max]="maxDate" required
+        ><mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi="true" #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button
+        *ngFor="let time of times"
+        color="primary"
+        type="button"
+        (click)="choose(time)"
+    > {{time}} </button>
+ 
+
+    <div *ngIf="setTime">
+        <h1>Choosed date: "{{setTime | date: 'y/MM/dd HH:mm'}}"</h1>        
+    </div> 
+    <div>
+        <button 
+            mat-raised-button
+            color="wipe"
+            type="reset"
+            [routerLink]="['/profile']"
+        > Cancel </button>
+        <button 
+            mat-raised-button
+            color="accent"    
+            type="button"
+            (click)="onFormSave()"
+            [disabled]="!setTime"
+            [routerLink]="['/profile']"
+        > Send application </button>
+    </div>
+</form>
+
+
+
+
+{{applicationForm.value | json}}

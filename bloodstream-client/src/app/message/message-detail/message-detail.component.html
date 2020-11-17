@@ -1,0 +1,30 @@
+<h1>Message details</h1>
+
+<table id="customers" *ngIf="msg">
+  <tr>
+    <th>Data</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td class="td">Sending Date</td>
+    <td>{{msg.sendDate | date: 'y/MM/dd HH:mm'}}</td>
+  </tr>
+  <tr>
+    <td class="td">Title</td>
+    <td>{{msg.title}}</td>
+  </tr>
+  <tr>
+    <td class="td">Message</td>
+    <td>{{msg.message}}</td>
+  </tr> 
+  
+  <tr *ngIf="msg.applyId">
+    <td class="td">Application</td>
+    <td>{{application.applyID}}</td>
+  </tr>
+  <tr *ngIf="!authService.isDonor()">
+    <td class="td">Seen</td>
+    <td>{{ msg.seen }}</td>
+  </tr>
+</table>
+

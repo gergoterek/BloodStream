@@ -44,6 +44,9 @@ import { DonorEditComponent } from './donor/donor-edit/donor-edit.component';
 import { LandingPageComponent } from './donor/landing-page/landing-page.component';
 import { ApplicationListComponent } from './application/application-list/application-list.component';
 import { ApplicationFormComponent } from './application/application-form/application-form.component';
+import { MyApplicationComponent } from './application/my-application/my-application.component';
+import { ApplicationDetailComponent } from './application/application-detail/application-detail.component';
+import { MessageDetailComponent } from './message/message-detail/message-detail.component';
 
 
 @NgModule({
@@ -70,6 +73,9 @@ import { ApplicationFormComponent } from './application/application-form/applica
     LandingPageComponent,
     ApplicationListComponent,
     ApplicationFormComponent,
+    MyApplicationComponent,
+    ApplicationDetailComponent,
+    MessageDetailComponent,
     // MatDatetimepickerModule,
     // MatNativeDatetimeModule,sd
   ],

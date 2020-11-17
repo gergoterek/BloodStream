@@ -20,6 +20,10 @@ h1 {
   margin:15px;
 }
 
+button {
+  margin: 10px;
+}
+
 
 mat-nav-list {
   text-align: center; 

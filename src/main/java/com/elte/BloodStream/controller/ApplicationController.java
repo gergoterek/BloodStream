@@ -27,8 +27,24 @@ public class ApplicationController {
 
     //fv-ek leellenőrizve 10.14.
 
-    //ROLE_DONOR - /application/new
-    @PostMapping("/new")
+    //ADMIN - /application/all
+    @GetMapping("/all")
+    public List<Application> getAllApplications() { return applicationService.getAllApplications(); }
+
+    @GetMapping("/{applyID}")
+    public Application getApplication(@PathVariable Integer applyID) { return applicationService.getApplication(applyID); }
+
+
+    //DONOR - /application/{donorID}
+    @GetMapping("/donor/{donorID}")
+    public List<Application> getDonorPastApplications(@PathVariable Integer donorID) { return applicationService.getDonorPastApplications(donorID); }
+
+    //DONOR - /application/{donorID}
+    @GetMapping("/next/{donorID}")
+    public Application getNextApplication(@PathVariable Integer donorID) { return applicationService.getNextApplication(donorID); }
+
+    //ROLE_DONOR - /application
+    @PostMapping("")
     public ResponseEntity<Application> newApplication(@RequestBody Application application){
         return applicationService.newApplication(application); }
 
@@ -41,17 +57,20 @@ public class ApplicationController {
 
 
     //ADMIN - /application/set/appeared/{id}
-    @PostMapping("/set/donation/{applicationID}")
-    public ResponseEntity<Application> setDonation(@PathVariable Integer applicationID){ return applicationService.setDonation(applicationID); }
+    @PatchMapping("/donation/{applicationID}")
+    public ResponseEntity<Application> setDonation(@PathVariable Integer applicationID, @RequestBody Application application){
+        return applicationService.setDonation(applicationID, application);
+    }
 
 
     //ADMIN /application/set/used/{id}
-    @PostMapping("/set/used/{donationID}")
-    public ResponseEntity<Donation> setDonationTransport(@PathVariable Integer donationID) { return applicationService.setDonationTransport(donationID); }
+    @PatchMapping("/transport/{donationID}")
+    public ResponseEntity<Application> setDonationTransport(@PathVariable Integer donationID, @RequestBody Application application) {
+        return applicationService.setDonationTransport(donationID, application);
+    }
 
 
-    //ADMIN - /application/all
-    @GetMapping("/all")
-    public List<Application> getAllApplications() { return applicationService.getAllApplications(); }
+
+
 
 }

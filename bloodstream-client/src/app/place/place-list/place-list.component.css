@@ -7,6 +7,15 @@
     text-align: center;
   }
 
+  .example-form2 {
+    background-color: rgb(255, 0, 0);
+    padding: 0px;
+    /* margin: 10px; */
+    width: 100%;
+    align-content: center;
+    text-align: center;
+  }
+
   :host /deep/ .mat-list-item-content {
     padding: 0!important;
     border: solid 0.1px #000;
@@ -22,6 +31,6 @@
     margin: 10px;
   }
 
-  h1 {
+  h1, h2, h3 {
     margin:15px;
 }

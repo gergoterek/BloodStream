@@ -9,7 +9,7 @@ dt {
 .td {
     font-weight: bold;
 }
-h1 {
+h1, h2, h3 {
     margin:15px;
 }
 
@@ -35,4 +35,19 @@ h1 {
     background-color: #46aab5;
     color: white;
   }
-  
+
+  .example-form {
+    background-color: rgb(255, 0, 0);
+    padding: 0px;
+    /* margin: 10px; */
+    width: 100%;
+    align-content: center;
+    text-align: center;
+  }
+
+  :host /deep/ .mat-list-item-content {
+    padding: 0!important;
+    border: solid 0.1px #000;
+    align-content: center;
+    text-align: center;
+  }

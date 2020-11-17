@@ -8,9 +8,9 @@ import { News } from '../domain/news';
 })
 export class NewsService {
 
-  private newsAllUrl = 'http://localhost:8080/news/all';
-  private newsUrl = 'http://localhost:8080/news';
-  private delNewsUrl = 'http://localhost:8080/news/delete';
+  private allUrl = 'http://localhost:8080/news/all';
+  private url = 'http://localhost:8080/news';
+  private delUrl = 'http://localhost:8080/news/delete';
 
 
   constructor(
@@ -19,14 +19,14 @@ export class NewsService {
 
   getAllNews(): Promise<News[]> {
     return this.http.get<News[]>(
-      this.newsAllUrl,
+      this.allUrl,
       httpOptions
     ).toPromise();
   }
 
   getNews(id: number): Promise<News> {
     return this.http.get<News>(
-      `${this.newsUrl}/${id}`,
+      `${this.url}/${id}`,
       httpOptions
     ).toPromise();
   }
@@ -34,7 +34,7 @@ export class NewsService {
   modifyNews(id: number, news: News): Promise<News> {
     console.log(id);
     return this.http.put<News>(
-      `${this.newsUrl}/${id}`,
+      `${this.url}/${id}`,
       news,
       httpOptions
     ).toPromise();
@@ -42,7 +42,7 @@ export class NewsService {
 
   addNews(news: News): Promise<News> {
     return this.http.post<News>(
-      this.newsUrl,
+      this.url,
       news,
       httpOptions
     ).toPromise();
@@ -50,7 +50,7 @@ export class NewsService {
 
   deleteNews(id: number): Promise<News> {
     return this.http.delete<News>(
-      `${this.delNewsUrl}/${id}`,
+      `${this.delUrl}/${id}`,
       httpOptions
     ).toPromise();
   }

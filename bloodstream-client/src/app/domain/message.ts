@@ -1,10 +1,13 @@
-export interface Message {
+import { Application } from './application';
+import { Donor } from './donor';
+
+export class Message {
     msgId: number;
     message: string;
     seen: boolean;
     sendDate: string;
     title: string;
-    applyID: number;
-    donorID: number;
+    application: Application;
+    donor: Donor;
 
 }

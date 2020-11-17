@@ -1,13 +1,27 @@
+<div *ngIf="authService.isDonor()">
+    <ng-container *ngIf="nextApp">
+        <h1> You have an existing reservation for donation</h1>
+            <button mat-raised-button color="primary" [routerLink]="['/donation']">
+                Go to donations
+            </button>   
+    </ng-container>
+    <ng-container *ngIf="!ready() && !nextApp">
+        <h2> Sorry, you have to wait 56 days after your last donation: </h2>
+        <h2 matLine>
+            You will be able to donate after: {{ authService.user.nextDonationDate | date: 'y/MM/dd'}}
+        </h2>
+    </ng-container>
+</div>
 
-<h1>Donation places</h1>
+<mat-nav-list *ngIf="places && showPlaces()">
+    <h1>{{title}}</h1>
 
-<mat-nav-list class="example-form">
-    <div *ngIf="authService.isDonor()">
+    <div class="example-form" *ngIf="authService.isDonor()">        
         <ng-container *ngFor="let place of places">
             <a mat-list-item
                 (click)="selectedPlace = place"
                 [class.selected]="place === selectedPlace"
-                [routerLink]="['/application', place.id]"
+                [routerLink]="['/application', 'place', place.id]"
             >               
                 <h3 matLine>{{ place.name}}</h3>
                 <!-- <small matLine> -->
@@ -20,7 +34,8 @@
         </ng-container>
     </div>
 
-    <div *ngIf="!authService.isDonor()">
+    <div class="example-form" *ngIf="!authService.isDonor()">
+        
         <a *ngFor="let place of places" mat-list-item
             (click)="selectedPlace = place"
             [class.selected]="place === selectedPlace"

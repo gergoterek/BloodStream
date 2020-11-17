@@ -69,8 +69,7 @@ public class Donor {
     //@CreationTimestamp
     private Date birthDate;
 
-    @Column(nullable = false)
-    @UpdateTimestamp
+    @Column
     private LocalDateTime nextDonationDate;
 
     @Column(nullable = false)

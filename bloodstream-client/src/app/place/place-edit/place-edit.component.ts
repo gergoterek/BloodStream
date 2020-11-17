@@ -40,8 +40,7 @@ export class PlaceEditComponent implements OnInit {
       //console.log(JSON.stringify(this.place));
       //this.placeForm.check();
       //console.log(JSON.stringify(this.place.active));
-    } else {
-    }
+    } 
   }
  
   

@@ -1,5 +1,5 @@
 export interface Donation {
-    id: number;
+    donationId: number;
     donationDate: string;
     transportDate: string;
 }

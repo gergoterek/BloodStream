@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from 'src/app/domain/message';
 import { MessageService } from '../message.service';
 
@@ -11,14 +11,28 @@ import { MessageService } from '../message.service';
 })
 export class MessageFormComponent implements OnInit {
 
+  id: number;
+  
   constructor(
     private fb: FormBuilder,
     public messageService: MessageService,
     private router: Router,
+    private route: ActivatedRoute,
+    
   ) { }
 
   ngOnInit(): void {
-  }
+      const id = this.route.snapshot.paramMap.get('id');
+      if (id) {
+        this.id = +id;
+        this.msgForm.patchValue({
+          donorID: id
+          //(this.donor.bloodType === null) ? "undefined" : this.donor.bloodType,
+        }); 
+
+        this.donorID.disable();
+      }
+}
   
   
   msgForm = this.fb.group({
@@ -38,8 +52,11 @@ export class MessageFormComponent implements OnInit {
   get donorID() { return this.msgForm.get('donorID'); }
 
   async onFormSave() {
+    this.donorID.enable();
+    console.log(JSON.stringify(this.msgForm.value));
     const msg = this.msgForm.value as Message;
     await this.messageService.sendMsgToDonor(msg);
+    this.router.navigate(['/message', 'del']);
   }
 
 

@@ -10,16 +10,24 @@
     <td>{{donor.id}}</td>
   </tr>
   <tr>
-    <td class="td">Username</td>
-    <td>{{donor.username}}</td>
-  </tr>
-  <tr>
     <td class="td">Donor name</td>
     <td>{{donor.donorName}}</td>
   </tr>
   <tr>
+    <td class="td">Blood Type</td>
+    <td>{{donor.bloodType}}</td>
+  </tr>
+  <tr>
     <td class="td">Birth Date</td>
     <td>{{donor.birthDate  | date: 'y/MM/dd'}}</td>
+  </tr>
+  <tr>
+    <td class="td">Username</td>
+    <td>{{donor.username}}</td>
+  </tr>
+  <tr>
+    <td class="td">ID Card</td>
+    <td>{{donor.idCard}}</td>
   </tr>
   <tr>
     <td class="td">TAJ</td>
@@ -45,42 +53,82 @@
 </table>
 
 
-<p>
-  <button mat-flat-button color="wipe" [routerLink]="['/donor', id, 'edit']">Edit</button>
-    <!-- [routerLink]="['/donor', donor.id, 'edit']">Edit</a> -->
+<p *ngIf="donor">
+  <button mat-flat-button color="accent" [routerLink]="['/donor', id, 'edit']">
+    <mat-icon matListIcon style="color: orange">build</mat-icon>
+    Edit Donor</button>
+  <button mat-flat-button *ngIf="donor.role === 'ROLE_DONOR'"color="primary" [routerLink]="['/message', 'new', id]">Send Message</button>
 </p>
 
-<!-- <dl *ngIf="donor">
-  <dt>DonorID</dt>
-  <dd>{{donor.id}}</dd>
-  
-  <dt>Username</dt>
-  <dd>{{donor.username}}</dd>
 
-  <dt>Donor name</dt>
-  <dd>{{donor.donorName}}</dd>
 
-  
-  <dt>Birth Date</dt>
-  <dd>{{donor.birthDate  | date: 'y/MM/dd'}}</dd>
-  
-  <dt>TAJ</dt>
-  <dd>{{donor.taj}}</dd>
- 
 
-  <dt>IDcard</dt>
-  <dd>{{donor.idCard}}</dd>
 
-  <dt>Male</dt>
-  <dd>{{donor.male}}</dd>
 
-  <dt>Next Possible Donation Date</dt>
-  <dd>{{donor.nextDonationDate | date: 'y/MM/dd' }}</dd>
+<mat-nav-list  *ngIf="nextApp">  
+  <h1>Donor following donation</h1>    
+      <div class="example-form">     
+          <a
+              mat-list-item
+              [routerLink]="['../../../','application', nextApp.applyId]"
+          > 
+          <!-- <mat-icon matListIcon type="button" (click)="delButton()" style="color: rgb(0, 0, 0)">clear</mat-icon>  -->
+          <small>                  
+            <mat-icon>access_time</mat-icon> 
+              {{ nextApp.appliedDate | date: 'y/MM/dd HH:mm'}}
+          </small>
+          <!-- <button mat-raised-button class="but" > 
+            Confirm
+            <mat-icon matListIcon type="button" (click)="delButton()" style="color: rgb(14, 209, 0)">done</mat-icon>     
+          </button> -->
+                   
+              <h3 matLine> {{nextApp.donor.donorName}}</h3>
+              
+              <p matLine>{{ nextApp.place.name}}</p>
+          </a>
+      </div>
+</mat-nav-list>
 
-  <dt>Role</dt>
-  <dd>{{donor.role}}</dd>
-
-  <dt>Total Donation Number</dt>
-  <dd>{{donor.totalDonations}}</dd>  
-</dl> -->
+<mat-nav-list class="gap" *ngIf="pastApp.length !== 0">
+  <h1>Donor past donations</h1>
+  <ng-container *ngIf="unTransported.length !== 0">    
+      <h2> Pending to transport:</h2>    
+      <div class="next" *ngFor="let application of unTransported" >            
+          <a
+              mat-list-item
+              style="text-decoration:none"
+              (click)="selectedApp = application"
+              [class.selected]="application === selectedApp"
+              [routerLink]="['../../../','application', application.applyId]"
+          >                      
+              <mat-icon matListIcon style="color: green">pending</mat-icon>
+               <h3 matLine> {{application.donor.donorName}}</h3> 
+              <small>
+                  <mat-icon>access_time</mat-icon>                   
+                  {{ application.appliedDate | date: 'y/MM/dd HH:mm'}}
+              </small>              
+              <p matLine>{{ application.place.name}}</p>
+          </a>
+      </div>
+  </ng-container>
+<ng-container *ngIf="transportedApp.length !== 0"> 
+  <h2> Transported:</h2>   
+      <div class="next" *ngFor="let application of transportedApp">                      
+          <a
+              mat-list-item
+              style="text-decoration:none"
+              [routerLink]="['../../../','application', application.applyId]"
+          >         
+          <mat-icon matListIcon style="color: blue">airport_shuttle</mat-icon>
+              
+              <h3 matLine> {{application.donor.donorName}}</h3> 
+              <small>
+                <mat-icon>access_time</mat-icon>                   
+                {{ application.appliedDate | date: 'y/MM/dd HH:mm'}}
+              </small>
+              <p matLine>{{ application.place.name}}</p>
+          </a>
+      </div>
+  </ng-container>
+</mat-nav-list>
 

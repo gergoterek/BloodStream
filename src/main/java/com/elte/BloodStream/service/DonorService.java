@@ -86,7 +86,6 @@ public class DonorService {
             Donor modifiedDonor = foundDonor.get();
             modifiedDonor.setRole(donor.getRole());
             modifiedDonor.setBloodType(donor.getBloodType());
-            //foundDonor.get().setDonorName(donor.getDonorName());
             modifiedDonor.setTAJ(donor.getTAJ());
             modifiedDonor.setIdCard(donor.getIdCard());
 

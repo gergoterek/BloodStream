@@ -9,9 +9,11 @@ import { Message } from '../domain/message';
 })
 export class MessageService {
 
-  private donorMessagesUrl = 'http://localhost:8080/message';
+  private donorMessagesUrl = 'http://localhost:8080/message/donor';
+  private messagesUrl = 'http://localhost:8080/message';
   private allMessagesUrl = 'http://localhost:8080/message/all';
   private sendMsgUrl = 'http://localhost:8080/message/send';
+  private seenMsgUrl = 'http://localhost:8080/message/seen';
 
   constructor(
     private http: HttpClient,
@@ -24,10 +26,24 @@ export class MessageService {
       httpOptions
     ).toPromise();
   }
+  getMessage(id: number): Promise<Message> {
+    return this.http.get<Message>(
+      `${this.messagesUrl}/${id}`,
+      httpOptions
+    ).toPromise();
+  }
 
-  getDonorMessages(): Promise<Message[]> {
+  setSeen(id: number, msg: Message): Promise<Message> {
+    return this.http.patch<Message>(
+      `${this.seenMsgUrl}/${id}`,
+      msg,
+      httpOptions
+    ).toPromise();
+  }
+
+  getDonorMessages(id: number): Promise<Message[]> {
     return this.http.get<Message[]>(
-      `${this.donorMessagesUrl}/${this.authService.user.id}`,
+      `${this.donorMessagesUrl}/${id}`,
       httpOptions
     ).toPromise();
   }
@@ -35,7 +51,7 @@ export class MessageService {
 
   sendMsgToDonor(msg: Message): Promise<Message> {
     return this.http.post<Message>(
-      `${this.sendMsgUrl}/${msg.donorID}`,
+      `${this.sendMsgUrl}/${msg.donor.id}`,
       msg,
       httpOptions
     ).toPromise();

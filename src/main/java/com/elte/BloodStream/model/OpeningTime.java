@@ -28,39 +28,39 @@ public class OpeningTime {
     private Place place;
 
 
-    @NotNull
+
     @Column
     private boolean monday;
 
-    @NotNull
+
     @Column
     private boolean tuesday;
 
-    @NotNull
+
     @Column
     private boolean wednesday;
 
-    @NotNull
+
     @Column
     private boolean thursday;
 
-    @NotNull
+
     @Column
     private boolean friday;
 
-    @NotNull
+
     @Column
     private boolean saturday;
 
-    @NotNull
+
     @Column
     private boolean sunday;
 
-    @NotNull
+
     @Column
     private int startTime;
 
-    @NotNull
+
     @Column
     private int closingTime;
 

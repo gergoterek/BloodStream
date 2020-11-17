@@ -1,16 +1,17 @@
 <h1>Message list</h1>
 
 <mat-nav-list >
-    <div class="example-form">
+    <div class="example-form" *ngIf="!authService.isDonor()">
         <a *ngFor="let message of messages" mat-list-item
           (click)="selectedMessage = message"
           [class.selected]="message === selectedMessage"
+          [routerLink]="[message.msgId]"
         >        
-            <mat-icon *ngIf="message.seen === false && isDonor" matListIcon style="color: orange">fiber_new</mat-icon>
             <h3 matLine> {{ message.title }}</h3>
             <!-- <small matLine> -->
             <small>
-                <mat-icon >access_time</mat-icon>  {{ message.sendDate | date: 'y/MM/d hh:mm'}}
+                <mat-icon >access_time</mat-icon>  
+                {{ message.sendDate | date: 'y/MM/d HH:mm'}}
             </small>
             <p matLine>{{ message.message}}</p>
         </a>        
@@ -20,5 +21,24 @@
         mat-flat-button color="primary"
         [routerLink]="['/message', 'new']"
     >Send message</button>
+    
+</mat-nav-list>
+
+<mat-nav-list >
+    <div class="example-form" *ngIf="authService.isDonor()">
+        <a *ngFor="let message of messages" mat-list-item
+          (click)="selectedMessage = message"
+          [class.selected]="message === selectedMessage"
+          [routerLink]="[message.msgId]"
+        >        
+            <mat-icon *ngIf="message.seen === false" matListIcon style="color: red">fiber_new</mat-icon>
+            <h3 matLine> {{ message.title }}</h3>
+            <!-- <small matLine> -->
+            <small>
+                <mat-icon >access_time</mat-icon>  {{ message.sendDate | date: 'y/MM/d HH:mm'}}
+            </small>
+            <p matLine>{{ message.message}}</p>
+        </a>        
+    </div>
     
 </mat-nav-list>

@@ -1,0 +1,92 @@
+<h2 *ngIf="nextApp"> Your next donation:</h2>
+<div  *ngIf="!nextApp">
+    <h2> Ooops, it looks like you have no following donation:(</h2>
+    <button mat-flat-button color="primary" [routerLink]="['/place']"> Apply now!</button>
+</div>
+
+
+<mat-nav-list  *ngIf="nextApp">      
+        <div class="example-form">     
+            <a
+                mat-list-item
+                [routerLink]="['../', 'application', nextApp.applyId]"
+            > 
+            <!-- <mat-icon matListIcon type="button" (click)="delButton()" style="color: rgb(0, 0, 0)">clear</mat-icon> -->
+            <!-- <a
+                mat-list-item
+                (click)="selectedApplication = application"
+                [class.selected]="application === selectedApplication"
+                [routerLink]="['/application', application.applyId]"
+            >          -->
+                <!-- <mat-icon *ngIf="!place.active" matListIcon style="color: grey">toggle_off</mat-icon> -->
+                <!-- <mat-icon *ngIf="place.active" matListIcon style="color: green">toggle_on</mat-icon> -->
+                
+                <h3 matLine> {{nextApp.donor.donorName}}</h3>
+                <!-- <small matLine> -->
+                <small>
+                    
+                    <mat-icon>access_time</mat-icon> 
+                    {{ nextApp.appliedDate | date: 'y/MM/dd HH:mm'}}
+                </small>
+
+                <p matLine>{{ nextApp.place.name}}</p>
+            </a>
+        </div>
+</mat-nav-list>
+
+<mat-list class="gap" *ngIf="pastApp">
+    <h1>Your past donations</h1>
+    <ng-container >    
+        <h2> Pending to transport:</h2>    
+        <div class="next" *ngFor="let application of pastApp" >            
+            <a
+                mat-list-item
+                *ngIf="!application.donation.transportDate"
+                style="text-decoration:none"
+                (click)="selectedApplication = application"
+                [class.selected]="application === selectedApplication"
+                [routerLink]="['../', 'application', application.applyId]"
+            >         
+                <!-- <mat-icon *ngIf="!place.active" matListIcon style="color: grey">toggle_off</mat-icon> -->
+                <!-- <mat-icon *ngIf="place.active" matListIcon style="color: green">toggle_on</mat-icon> -->
+               
+                <mat-icon matListIcon style="color: green">
+                        pending</mat-icon>
+                 <h3 matLine> {{application.donor.donorName}}</h3> 
+                <!-- <small matLine> -->
+                <small>
+                    <mat-icon>access_time</mat-icon> 
+                    
+                    {{ application.appliedDate | date: 'y/MM/dd HH:mm'}}
+                </small>
+
+                <p matLine>{{ application.place.name}}</p>
+            </a>
+        </div>
+    </ng-container>
+<ng-container >
+    <h2> Transported:</h2>   
+        <div class="next" *ngFor="let application of pastApp">      
+                   
+            <a
+                mat-list-item
+                *ngIf="application.donation.transportDate"
+                style="text-decoration:none"
+                (click)="selectedApplication = application"
+                [class.selected]="application === selectedApplication"
+                [routerLink]="['../', 'application', application.applyId]"
+            >         
+                <mat-icon matListIcon style="color: blue">airport_shuttle</mat-icon> 
+                <h3 matLine> {{application.donor.donorName}}</h3> 
+                <!-- <small matLine> -->
+                <small>
+                    <mat-icon>access_time</mat-icon> 
+                    
+                    {{ application.appliedDate | date: 'y/MM/dd HH:mm'}}
+                </small>
+
+                <p matLine>{{ application.place.name}}</p>
+            </a>
+        </div>
+    </ng-container>
+</mat-list>

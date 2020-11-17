@@ -1,5 +1,6 @@
 package com.elte.BloodStream.controller;
 
+import com.elte.BloodStream.model.Application;
 import com.elte.BloodStream.model.Donor;
 import com.elte.BloodStream.model.Message;
 import com.elte.BloodStream.repository.DonorRepository;
@@ -20,9 +21,15 @@ public class MessageController {
     //Fv-ek leellenőrizve 10.14.
 
     //ROLE_DONOR - ADMIN
-    @GetMapping("/{donorID}")
+    @GetMapping("/donor/{donorID}")
     public Iterable<Message> getDonorMessages(@PathVariable Integer donorID) {
         return messageService.getDonorMessages(donorID);
+    }
+
+    //ROLE_DONOR - ADMIN
+    @GetMapping("/{id}")
+    public Message getMessage(@PathVariable Integer id) {
+        return messageService.getMessage(id);
     }
 
     //ADMIN
@@ -35,5 +42,11 @@ public class MessageController {
     @PostMapping("send/{donorID}")
     public ResponseEntity<Message> createMessage(@RequestBody Message msg, @PathVariable Integer donorID) {
         return messageService.createMessage(msg, donorID);
+    }
+
+    //ADMIN - /application/set/appeared/{id}
+    @PatchMapping("seen/{id}")//donorID
+    public ResponseEntity<Message> setSeen(@PathVariable Integer id, @RequestBody Message msg){
+        return messageService.setSeen(id, msg);
     }
 }

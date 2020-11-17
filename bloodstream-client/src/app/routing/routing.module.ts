@@ -20,6 +20,9 @@ import { DonorEditComponent } from '../donor/donor-edit/donor-edit.component';
 import { LandingPageComponent } from '../donor/landing-page/landing-page.component';
 import { ApplicationListComponent } from '../application/application-list/application-list.component';
 import { ApplicationFormComponent } from '../application/application-form/application-form.component';
+import { MyApplicationComponent } from '../application/my-application/my-application.component';
+import { ApplicationDetailComponent } from '../application/application-detail/application-detail.component';
+import { MessageDetailComponent } from '../message/message-detail/message-detail.component';
 
 
 
@@ -128,7 +131,25 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'message/del',
+    component: MessageListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'message/:id',
+    component: MessageDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'message/new',
+    component: MessageFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
+  },
+  {
+    path: 'message/new/:id',
     component: MessageFormComponent,
     canActivate: [AuthGuard],
     data: {
@@ -170,22 +191,39 @@ const routes: Routes = [
     }
   },
   {
-    path: 'application/:applyId',
-    component: ApplicationFormComponent,
-    canActivate: [AuthGuard],
-    // data: {
-    //   roles: ['ROLE_DONOR']
-    // }
-  },
-  {
-    path: 'application/all',
+    path: 'application',
     component: ApplicationListComponent,
     canActivate: [AuthGuard],
     data: {
       roles: ['ROLE_NURSE', 'ROLE_ADMIN']
     }
   },
-
+  {
+    path: 'application/:applyId',
+    component: ApplicationDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'application/place/:placeId',
+    component: ApplicationFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_DONOR']
+    }
+  },
+  {
+    path: 'donation',
+    component: MyApplicationComponent,
+    canActivate: [AuthGuard], 
+    data: {
+      roles: ['ROLE_DONOR']
+    }
+  },
+  {
+    path: 'donation/del',
+    component: MyApplicationComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'profile',
     component: LandingPageComponent,

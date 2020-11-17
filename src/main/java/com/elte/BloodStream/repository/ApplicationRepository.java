@@ -1,6 +1,7 @@
 package com.elte.BloodStream.repository;
 
 import com.elte.BloodStream.model.Application;
+import com.elte.BloodStream.model.Donor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,4 +17,10 @@ public interface ApplicationRepository extends CrudRepository<Application, Integ
 
     @Query(value = "select * from application where donation_id=?1", nativeQuery = true)
     Optional<Application> findByDonationID(Integer donationID);
+
+    List<Application> findAllByDonorIdAndDonationIsNotNull(Integer donorID);
+
+    //@Query(value = "SELECT * FROM application WHERE donor_id=?1 AND donation_id IS NULL", nativeQuery = true)
+    Application findByDonorIdAndDonationIsNull(Integer donorID);
+    Optional<Application>  findByApplyId(Integer applyId);
 }

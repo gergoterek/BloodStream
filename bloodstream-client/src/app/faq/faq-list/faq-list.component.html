@@ -19,24 +19,12 @@
     </div>    
 </mat-nav-list>
 
-<mat-nav-list 
-    class="example-form2" 
-    *ngIf="authService.isLoggedIn && (authService.isAdmin() || authService.isNurse())"
->
-     
-    <div>
-                  
-        <a 
-            mat-list-item
-            [routerLink]="['/faq', 'add']"
-        >
-        <span class="flexExpand"></span>
-            <mat-icon style="color: rgb(0, 0, 0)">control_point</mat-icon>        
-            
-            <!-- <h3 matLine>New FAQ</h3> -->
-        </a>
-    </div>
-</mat-nav-list>
+<button 
+    *ngIf="authService.isLoggedIn && !authService.isDonor()"
+    mat-flat-button color="primary"
+    [routerLink]="['/faq', 'add']"
+> New faq </button>
+
 
 <mat-list *ngIf="!authService.isLoggedIn"> 
         <a class="example-form" *ngFor="let faq of faqs" mat-list-item
@@ -49,20 +37,10 @@
 </mat-list>
 
 <mat-list class="example-form" *ngFor="let faq of faqs">
-    <a  *ngIf="authService.isLoggedIn && authService.isDonor()" mat-list-item
-    >
+    <a mat-list-item *ngIf="authService.isLoggedIn && authService.isDonor()">
         <h3 matLine>{{ faq.question }}</h3>
-        <p matLine>
-            {{ faq.answer}}
-        </p>
+        <p matLine> {{ faq.answer}} </p>
     </a>    
 </mat-list>
-
-
-
-<!-- <button mat-flat-button color="primary"
-            type="submit"
-            [disabled]="faqForm.invalid"
-        >Save</button> -->
 
 

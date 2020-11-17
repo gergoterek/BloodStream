@@ -1,11 +1,11 @@
-<h1>Applications</h1>
+<h1>Choose an application place!</h1>
 
 <mat-nav-list class="example-form" *ngIf="applications">
     <div *ngIf="authService.isLoggedIn && !authService.isDonor()">
         <a *ngFor="let application of applications" mat-list-item
             (click)="selectedApplication = application"
             [class.selected]="application === selectedApplication"
-            [routerLink]="['/application', application.id]"
+            [routerLink]="['/application', application.applyId]"
         >         
             <!-- <mat-icon *ngIf="!place.active" matListIcon style="color: grey">toggle_off</mat-icon> -->
             <!-- <mat-icon *ngIf="place.active" matListIcon style="color: green">toggle_on</mat-icon> -->
@@ -14,7 +14,7 @@
             <!-- <small matLine> -->
             <small>
                 <mat-icon>access_time</mat-icon> 
-                 {{ application.appliedDate | date: 'y/MM/dd hh:mm'}}
+                 {{ application.appliedDate | date: 'y/MM/dd HH:mm'}}
             </small>
 
             <p matLine>{{ application.place.name}}</p>

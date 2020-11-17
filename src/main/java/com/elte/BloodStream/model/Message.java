@@ -44,7 +44,7 @@ public class Message {
     //@JsonBackReference
     @ManyToOne()
     @JoinColumn(referencedColumnName = "DONOR_ID", name = "donor_id")
-    @JsonIgnore
+    //@JsonIgnore
     private Donor donor;
 
 

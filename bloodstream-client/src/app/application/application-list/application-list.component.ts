@@ -15,6 +15,7 @@ import { ApplicationService } from '../application.service';
 export class ApplicationListComponent implements OnInit {
 
 
+
   applications: Application[] = [];
   // filteredDonors = [];
   // selectedBloodType = '';
@@ -30,7 +31,7 @@ export class ApplicationListComponent implements OnInit {
 
   async ngOnInit() {
     this.applications = await this.applicationService.getApplications();
-    console.log(JSON.stringify(this.applications));
+    //console.log(JSON.stringify(this.applications));
 
     let del = this.route.snapshot.url;
     if (del.length === 3){
@@ -40,4 +41,5 @@ export class ApplicationListComponent implements OnInit {
     }
   }
 
+  
 }
