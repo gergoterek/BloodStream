@@ -10,6 +10,7 @@ export class PlaceService {
 
   private allUrl = 'http://localhost:8080/place/all';
   private url = 'http://localhost:8080/place';
+  private cityUrl = 'http://localhost:8080/place/city';
   private delUrl = 'http://localhost:8080/place/delete';
 
   constructor(
@@ -23,9 +24,17 @@ export class PlaceService {
     ).toPromise();
   }
 
+
   getPlace(id: number): Promise<Place> {
     return this.http.get<Place>(
       `${this.url}/${id}`,
+      httpOptions
+    ).toPromise();
+  }
+
+  getPlacesByCity(city: string): Promise<Place[]> {
+    return this.http.get<Place[]>(
+      `${this.cityUrl}/${city}`,
       httpOptions
     ).toPromise();
   }

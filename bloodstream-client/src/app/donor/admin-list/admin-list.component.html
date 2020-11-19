@@ -1,0 +1,24 @@
+<h1>Manage nurses and admins</h1>
+
+<mat-nav-list >
+    <div class="example-form" *ngIf="admins">
+        <a *ngFor="let admin of admins" mat-list-item
+          (click)="selectedAdmin = admin"
+          [class.selected]="admin === selectedAdmin"
+          [routerLink]="['/donor', 'profile', admin.id]"
+        >
+            <mat-icon matListIcon *ngIf="admin.role === 'ROLE_NURSE'">person_search</mat-icon> 
+            <mat-icon matListIcon  *ngIf="admin.role === 'ROLE_ADMIN'">supervised_user_circle</mat-icon> 
+                
+            <!-- <mat-icon *ngIf="donor.bloodType === null"  matListIcon style="color: green">access_time</mat-icon> -->
+            <h1 matLine>{{ admin.donorName }}</h1>
+            <!-- <small matLine> -->
+            <small>
+                <mat-icon matIcon>verified_user</mat-icon> 
+                {{ admin.username }}
+            </small>
+
+            <p matLine>{{ admin.role }}</p>
+        </a>        
+    </div>
+</mat-nav-list>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationService } from 'src/app/application/application.service';
 import { AuthGuard } from 'src/app/authentication/auth.guard';
@@ -18,12 +19,14 @@ export class PlaceListComponent implements OnInit {
   nextApp: Application;
 
   places: Place[] = [];
+  allPlaces: Place[] = [];
   // filteredDonors = [];
   // selectedBloodType = '';
    selectedPlace = null;
    title: string;
 
   constructor(
+    private fb: FormBuilder,
     public placeService: PlaceService,
     public authService: AuthService,
     private route: ActivatedRoute,
@@ -31,10 +34,17 @@ export class PlaceListComponent implements OnInit {
     private appService: ApplicationService,
   ) { }
 
+  cityForm = this.fb.group({
+    city: [""],
+  });
+  get city() { return this.cityForm.get('city'); }
+
+
 
   async ngOnInit() {
     this.title = this.authService.isDonor ? "Choose a donation place!" : "Donation places"; 
-    this.places = await this.placeService.getPlaces();
+    this.allPlaces = await this.placeService.getPlaces();
+    this.places = this.allPlaces;
     this.nextApp = await this.appService.getNextApplication(this.authService.user.id);
 
     let del = this.route.snapshot.url;
@@ -43,11 +53,27 @@ export class PlaceListComponent implements OnInit {
         this.router.navigate(['/place'])
       }
     }
-    
+    //console.log(new Date(this.authService.user.nextDonationDate).getTime());
   }
 
+  search() {
+    if (!this.cityForm.value.city){
+      this.places = this.allPlaces;
+    } else{
+      this.places = this.allPlaces.filter(place => place.city.toLowerCase() === this.cityForm.value.city.toLowerCase());      
+    }
+
+    if(this.places.length === 0) {
+      this.title = "Not found!";
+    } else {
+      this.title = "Choose a donation place!"
+    }
+  }
+
+
+
   ready(): boolean {    
-    return new Date(this.authService.user.nextDonationDate).getDate() <= new Date().getDate();
+    return new Date(this.authService.user.nextDonationDate).getTime() <= new Date().getTime();
   }
 
   showPlaces(): boolean{

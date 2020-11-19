@@ -17,6 +17,7 @@ export class ApplicationService {
   private delUrl = 'http://localhost:8080/application/delete';
   private donationUrl = 'http://localhost:8080/application/donation';
   private transportUrl = 'http://localhost:8080/application/transport';
+  private dateUrl = 'http://localhost:8080/application/date';
 
   constructor(
     private http: HttpClient
@@ -72,6 +73,13 @@ export class ApplicationService {
     return this.http.patch<Application>(
       `${this.transportUrl}/${id}`,
       app,
+      httpOptions
+    ).toPromise();
+  }
+
+  isFullDate(date: Date, id: number): Promise<Boolean> {
+    return this.http.get<Boolean>(
+      `${this.dateUrl}/${date}/${id}`,
       httpOptions
     ).toPromise();
   }

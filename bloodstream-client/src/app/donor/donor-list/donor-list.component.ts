@@ -3,6 +3,7 @@ import { Donor } from '../../domain/donor';
 import { BloodType } from '../../domain/bloodtype';
 import { Role } from '../../domain/role';
 import { DonorService } from '../donor.service';
+import { AuthService } from 'src/app/authentication/auth.service';
 
 
 @Component({
@@ -18,12 +19,14 @@ export class DonorListComponent implements OnInit {
   selectedDonors = null;
 
   constructor(
-    public donorService: DonorService
+    public donorService: DonorService,
+    public authService: AuthService,
   ) { }
 
 
   async ngOnInit() {
     this.donors = await this.donorService.getDonors();
+    this.donors = this.donors.filter( donor => donor.role === "ROLE_DONOR");
     this.filterDonors();
   }
 

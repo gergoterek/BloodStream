@@ -1,5 +1,5 @@
 .example-form {
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(103, 85, 85);
     padding: 0px;
     margin-top: 10px;
     width: 100%;
@@ -42,3 +42,7 @@
     text-align: left;
     justify-content: left;
 }
+
+button {
+    margin: 15px;
+  }

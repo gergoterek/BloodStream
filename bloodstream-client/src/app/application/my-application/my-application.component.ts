@@ -14,7 +14,6 @@ export class MyApplicationComponent implements OnInit {
   pastApp: Application[] = [];
   nextApp: Application;
   selectedApp = null;
-  title = "";
 
   constructor(
     public authService: AuthService,
@@ -27,15 +26,11 @@ export class MyApplicationComponent implements OnInit {
   async ngOnInit() {
     this.pastApp = await this.applicationService.getDonorPastApplications(this.authService.user.id);
     this.nextApp = await this.applicationService.getNextApplication(this.authService.user.id);
-    console.log(JSON.stringify(this.pastApp));
+    //console.log(JSON.stringify(this.pastApp));    
+  }
 
-    // let del = this.route.snapshot.url;
-    // console.log(del);
-    // if (del.length === 2){
-    //   if(String(del).split(",")[2] === "del"){
-    //     this.router.navigate(['/donation'])
-    //   }
-    // }
+  letDonate(): boolean {
+    return new Date(this.authService.user.nextDonationDate).getDate() >= new Date().getDate();
   }
 
 //   delButton(): void {

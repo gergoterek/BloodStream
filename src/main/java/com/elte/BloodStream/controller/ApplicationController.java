@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,9 @@ public class ApplicationController {
     @GetMapping("/{applyID}")
     public Application getApplication(@PathVariable Integer applyID) { return applicationService.getApplication(applyID); }
 
+
+    @GetMapping("/date/{date}/{id}")
+    public Boolean getFullDate(@PathVariable Date date, @PathVariable Integer id) { return applicationService.getFullDate(date, id); }
 
     //DONOR - /application/{donorID}
     @GetMapping("/donor/{donorID}")

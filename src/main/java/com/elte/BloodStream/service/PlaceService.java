@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
@@ -28,6 +29,11 @@ public class PlaceService {
     public Iterable<Place> getAllPlaces() {
         return placeRepository.findAll();
     }
+
+//    //Donor
+//    public Iterable<Place> getPlacesByCity(String city) {
+//        return placeRepository.findAllByCity(city);
+//    }
 
     //public  Iterable<OpeningTime> getAllOpeningTimes(){return openingTimeRepository.findAll();}
 

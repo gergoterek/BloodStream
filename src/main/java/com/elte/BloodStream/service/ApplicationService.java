@@ -6,11 +6,15 @@ import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +43,36 @@ public class ApplicationService {
 
     //DONOR - /application/{applyID}
     public Application getApplication(Integer id) { return applicationRepository.findByApplyId(id).get(); }
+
+    //("/date/{date}")
+    public Boolean getFullDate(Date date, Integer id) {
+
+        List<Application> app = applicationRepository.findAllByPlaceIdAndDonationIsNull(id);
+
+
+        LocalDate ld1 = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).toLocalDate();
+        //LocalDate ld2 = LocalDateTime.ofInstant(instant2, ZoneId.systemDefault()).toLocalDate();
+
+//        if (ld1.isEqual(LocalDateTime.ofInstant(a.getAppliedDate().toInstant(), ZoneId.systemDefault()).toLocalDate())) {
+//            System.out.println("blubb");
+//        }
+
+        int num = 0;
+        for(Application a : app){
+            System.out.println(a.getAppliedDate());
+            System.out.println("MOOOOOOOOOOOST" + date);
+
+            if (ld1.isEqual(LocalDateTime.ofInstant(a.getAppliedDate().toInstant(), ZoneId.systemDefault()).toLocalDate())) {
+                ++num;
+            }
+            if (date.equals(a.getAppliedDate())) {
+                System.out.println("Date1 is equal Date2");
+            }
+            System.out.println(num);
+        }
+        return num < 1;
+    }
+
 
     //ADMIN - /application/{donorID}
     public List<Application> getDonorPastApplications(Integer id) {

@@ -47,6 +47,7 @@ import { ApplicationFormComponent } from './application/application-form/applica
 import { MyApplicationComponent } from './application/my-application/my-application.component';
 import { ApplicationDetailComponent } from './application/application-detail/application-detail.component';
 import { MessageDetailComponent } from './message/message-detail/message-detail.component';
+import { AdminListComponent } from './donor/admin-list/admin-list.component';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { MessageDetailComponent } from './message/message-detail/message-detail.
     MyApplicationComponent,
     ApplicationDetailComponent,
     MessageDetailComponent,
+    AdminListComponent,
     // MatDatetimepickerModule,
     // MatNativeDatetimeModule,sd
   ],

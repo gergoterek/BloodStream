@@ -1,5 +1,5 @@
 .example-form {
-    background-color: rgb(251, 122, 122);
+    background-color: rgb(56, 219, 186);
     padding: 0px;
     /* margin: 10px; */
     width: 100%;
@@ -21,14 +21,3 @@ button {
   margin-top: 30px;
   margin-inline-end: 20px;
 }
-
-
-/* 
-  .mat {
-    padding: 10px;
-    margin: 10px;
-  } */
-
-  /* .card{
-    margin: 1rem;
-  } */

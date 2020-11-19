@@ -23,6 +23,7 @@ import { ApplicationFormComponent } from '../application/application-form/applic
 import { MyApplicationComponent } from '../application/my-application/my-application.component';
 import { ApplicationDetailComponent } from '../application/application-detail/application-detail.component';
 import { MessageDetailComponent } from '../message/message-detail/message-detail.component';
+import { AdminListComponent } from '../donor/admin-list/admin-list.component';
 
 
 
@@ -37,6 +38,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
+  },
+  {
+    path: 'admin',
+    component: AdminListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN']
     }
   },
   {

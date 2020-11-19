@@ -33,6 +33,12 @@ public class PlaceController {
         return placeService.getPlace(id);
     }
 
+//    //Donor
+//    @GetMapping("/city/{city}")
+//    public Iterable<Place> getPlacesByCity(@PathVariable String city) {
+//        return placeService.getPlacesByCity(city);
+//    }
+
     //NURSE
     @PostMapping("")
     public ResponseEntity<Place> createPlace(

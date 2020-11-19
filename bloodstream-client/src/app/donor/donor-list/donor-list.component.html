@@ -33,6 +33,18 @@
 </mat-nav-list>
 
 
+
+<button mat-raised-button
+    *ngIf="authService.isAdmin()"
+    type="button"
+    color="accent"
+    [routerLink]="['/admin']"
+>   
+    Manage Admins 
+    <mat-icon  matListIcon style="color: orange">settings</mat-icon> 
+</button>
+
+
     <!-- <table>
         <thead>
             <tr>

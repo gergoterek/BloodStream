@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface PlaceRepository extends CrudRepository<Place, Integer> {
     Optional<Place> findById(Integer id);
     List<Place> findAll();
+
+    List<Place> findAllByCity(String city);
 }
