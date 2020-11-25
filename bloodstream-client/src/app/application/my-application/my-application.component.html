@@ -8,7 +8,7 @@
 
 
 <mat-nav-list  *ngIf="nextApp">      
-    <div class="example-form">     
+    <div class="example-form2">     
         <a
             mat-list-item
             [routerLink]="['../', 'application', nextApp.applyId]"
@@ -36,7 +36,7 @@
     </div>
 </mat-nav-list>
 
-<mat-list class="gap" *ngIf="pastApp">
+<mat-nav-list class="gap" *ngIf="pastApp.length !== 0">
     <h1>Your past donations</h1>
     <ng-container >    
         <h2> Pending to transport:</h2>    
@@ -91,4 +91,4 @@
             </a>
         </div>
     </ng-container>
-</mat-list>
+</mat-nav-list>

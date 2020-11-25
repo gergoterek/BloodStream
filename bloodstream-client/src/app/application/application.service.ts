@@ -32,6 +32,7 @@ export class ApplicationService {
     ).toPromise();
   }
 
+
   getApplication(id: number): Promise<Application> {
     return this.http.get<Application>(
       `${this.url}/${id}`,
@@ -83,6 +84,8 @@ export class ApplicationService {
       httpOptions
     ).toPromise();
   }
+
+  
   
 
   

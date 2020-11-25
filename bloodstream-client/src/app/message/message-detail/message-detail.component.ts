@@ -36,7 +36,7 @@ export class MessageDetailComponent implements OnInit {
       }
       if (this.authService.isDonor()) {
         this.msg.seen = true;
-        console.log(JSON.stringify(this.msg));
+        //console.log(JSON.stringify(this.msg));
         await this.messageService.setSeen(this.msg.msgId, this.msg);
         this.appComp.fillMsg();
       }

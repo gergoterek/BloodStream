@@ -18,6 +18,8 @@ export class DonorListComponent implements OnInit {
   selectedBloodType = '';
   selectedDonors = null;
 
+  now: Date = new Date();
+
   constructor(
     public donorService: DonorService,
     public authService: AuthService,
@@ -27,6 +29,12 @@ export class DonorListComponent implements OnInit {
   async ngOnInit() {
     this.donors = await this.donorService.getDonors();
     this.donors = this.donors.filter( donor => donor.role === "ROLE_DONOR");
+
+    this.donors.sort(function(a, b){
+      if(a.donorName < b.donorName) { return -1; }
+      if(a.donorName > b.donorName) { return 1; }
+      return 0;
+  })
     this.filterDonors();
   }
 
@@ -39,6 +47,10 @@ export class DonorListComponent implements OnInit {
   onFilterChange(data){
     this.selectedBloodType = data;
     this.filterDonors();
+  }
+
+  nextDon(date: string): boolean {
+    return new Date(date).getTime()<this.now.getTime();
   }
 
   

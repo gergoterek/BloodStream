@@ -1,4 +1,6 @@
 <h1>Frequently Asked Questions</h1>
+<h2 *ngIf="faqs.length===0">There is no FAQ</h2>
+
 
 <mat-nav-list class="example-form" >
     <div  *ngIf="authService.isLoggedIn && (authService.isAdmin() || authService.isNurse())">

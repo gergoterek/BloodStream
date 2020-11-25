@@ -48,6 +48,8 @@ import { MyApplicationComponent } from './application/my-application/my-applicat
 import { ApplicationDetailComponent } from './application/application-detail/application-detail.component';
 import { MessageDetailComponent } from './message/message-detail/message-detail.component';
 import { AdminListComponent } from './donor/admin-list/admin-list.component';
+import { InformationPageComponent } from './authentication/information-page/information-page.component';
+import { ChoosePlaceComponent } from './application/choose-place/choose-place.component';
 
 
 @NgModule({
@@ -78,6 +80,8 @@ import { AdminListComponent } from './donor/admin-list/admin-list.component';
     ApplicationDetailComponent,
     MessageDetailComponent,
     AdminListComponent,
+    InformationPageComponent,
+    ChoosePlaceComponent,
     // MatDatetimepickerModule,
     // MatNativeDatetimeModule,sd
   ],

@@ -30,7 +30,7 @@
   <tr>
     <td class="td">
         <mat-icon matListIcon style="color: green">pending</mat-icon>
-        Confirmed
+        Checked-in
     </td>
     <td>{{ isConfirmed() }}</td>
   </tr>
@@ -48,7 +48,7 @@
       [routerLink]="['../../donation']"
   > 
     <mat-icon matListIcon style="color: black">keyboard_backspace</mat-icon>
-    Back </button>
+    Donations </button>
 
     <button mat-raised-button
         *ngIf="!isConfirmed()"
@@ -69,15 +69,14 @@
       color="wipe"
       [routerLink]="['../../donor/profile', application.donor.id]"
   > 
-    <mat-icon matListIcon style="color: black">keyboard_backspace</mat-icon>
-    Back </button>
+    <mat-icon matListIcon style="color: black">perm_identity</mat-icon>
+    Donor profile </button>
 
     <button mat-raised-button
         *ngIf="!isConfirmed()"
         color="wipe"
         type="button"
         (click)="delButton()"
-        [routerLink]="['../../', 'donor']"
     > 
         Delete application
         <mat-icon matListIcon style="color: red">clear</mat-icon>

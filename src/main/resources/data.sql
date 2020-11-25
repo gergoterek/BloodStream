@@ -9,7 +9,7 @@ INSERT INTO donor (blood_type, donor_name, password, role, username, TAJ, id_car
          'ROLE_ADMIN', 'jeno72', 423423123, '1D899R', '2001-03-23', CURRENT_TIMESTAMP(), 1);
 INSERT INTO donor (blood_type, donor_name, password, role, username, TAJ, id_card, birth_date, next_donation_date, male) VALUES
         (null, 'Kathi Béla', '$2a$04$YDiv9c./ytEGZQopFfExoOgGlJL6/o0er0K.hiGb5TGKHUL8Ebn..',
-        'ROLE_DONOR', 'kati', 423431123, '1D899R', '2010-03-23', CURRENT_TIMESTAMP(), 1);
+        'ROLE_NURSE', 'kati', 423431123, '1D899R', '2010-03-23', CURRENT_TIMESTAMP(), 1);
 INSERT INTO donor (blood_type, donor_name, password, role, username, TAJ, id_card, birth_date, next_donation_date, male) VALUES
         ('A_NEG', 'Godeny Gyorrgy', '$2a$04$YDiv9c./ytEGZQopFfExoOgGlJL6/o0er0K.hiGb5TGKHUL8Ebn..',
          'ROLE_NURSE', 'donor', 423423113, '1D899R', '2009-03-23', CURRENT_TIMESTAMP(), 0);

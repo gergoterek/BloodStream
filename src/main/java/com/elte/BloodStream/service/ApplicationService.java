@@ -60,13 +60,9 @@ public class ApplicationService {
         int num = 0;
         for(Application a : app){
             System.out.println(a.getAppliedDate());
-            System.out.println("MOOOOOOOOOOOST" + date);
 
             if (ld1.isEqual(LocalDateTime.ofInstant(a.getAppliedDate().toInstant(), ZoneId.systemDefault()).toLocalDate())) {
                 ++num;
-            }
-            if (date.equals(a.getAppliedDate())) {
-                System.out.println("Date1 is equal Date2");
             }
             System.out.println(num);
         }
@@ -138,7 +134,12 @@ public class ApplicationService {
             newDonation.setDonationDate(LocalDateTime.now());
             newDonation.setTransportDate(null);
             modifiedApplication.setDonation(newDonation);
-            modifiedApplication.getDonor().setNextDonationDate(LocalDateTime.now().plusDays(56));
+
+            if ( reachedLimit(application.getDonor()) ){
+
+            } else {
+                modifiedApplication.getDonor().setNextDonationDate(LocalDateTime.now().plusDays(56));
+            }
 
             donationRepository.save(newDonation);
             //optionalApplication.get().getDonor().getApplications().add(optionalApplication.get());
@@ -165,6 +166,21 @@ public class ApplicationService {
             return ResponseEntity.notFound().build();
         }
     }
+
+    boolean reachedLimit (Donor donor){
+        int countApplications = 0;
+        LocalDateTime l;
+        for (Application app : donor.getApplications()){
+            LocalDateTime time =
+                    LocalDateTime.ofInstant(app.getAppliedDate().toInstant(), ZoneId.systemDefault());
+            if ( time.isAfter( LocalDateTime.now().minusDays(365-56)) ){
+                ++countApplications;
+
+            }
+        }
+        return countApplications > 5;
+    }
+
 
 
 }

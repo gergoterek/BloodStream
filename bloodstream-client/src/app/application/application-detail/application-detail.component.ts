@@ -22,7 +22,6 @@ export class ApplicationDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private donorService: DonorService,
     private appService: ApplicationService,
     public authService: AuthService,
     private router: Router,
@@ -34,7 +33,7 @@ export class ApplicationDetailComponent implements OnInit {
     if (id) {
       this.id = +id;
       this.application = await this.appService.getApplication(this.id);
-      console.log(JSON.stringify(this.application));
+      //console.log(JSON.stringify(this.application));
       if(this.authService.isDonor() && this.application.donor.id !== this.authService.user.id){
         this.authService.logout();
       }

@@ -50,7 +50,7 @@ public class Donor {
     @Column(columnDefinition="tinyint(1) default 0")
     private int totalDonations = 0;
 
-    @Column(nullable = true)
+
     @Enumerated(EnumType.STRING)
     private BloodTypes bloodType;
 

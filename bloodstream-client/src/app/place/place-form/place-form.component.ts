@@ -110,9 +110,9 @@ export class PlaceFormComponent implements OnInit, OnChanges {
     //console.log(this.placeForm.value);
   }
 
-  delButton(): void {
-      this.placeService.deletePlace(this.place.id);
-  }
+  // delButton(): void {
+  //     this.placeService.deletePlace(this.place.id);
+  // }
 
   timeToDecimal(time: string): number {
     //console.log(time);

@@ -49,7 +49,7 @@ public class Message {
 
 
 //    @JsonIgnore
-    @OneToOne
+    @OneToOne()
     @JoinColumn(referencedColumnName = "applyId", name = "apply_id")
     private Application application;
 }

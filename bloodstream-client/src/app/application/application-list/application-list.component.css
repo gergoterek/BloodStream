@@ -1,10 +1,21 @@
 .example-form {
-    background-color: rgb(133, 98, 105);
+    background-color: rgb(112, 44, 135);
     padding: 0px;
-    /* margin: 10px; */
+    margin-top: 10px;
     width: 100%;
     align-content: center;
     text-align: center;
+  }
+
+  .example-form2 {
+    background-color: rgb(255, 0, 0);
+    padding: 0px;
+    margin: 10px;
+    width: 100%;
+  }
+
+  div.h2 {
+      padding-top: 20px;
   }
 
   :host /deep/ .mat-list-item-content {
@@ -13,7 +24,32 @@
     align-content: center;
     text-align: center;
   }
-
-  h1 {
-    margin:15px;
+  h1{
+    padding-top: 30px;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: 500;
+    
 }
+  h2, h3 {
+    margin-top: 20px;
+}
+
+.next {
+    background-color: rgb(61, 79, 62);
+    padding: 0px;
+    width: 100%;
+    align-content: center;
+    text-align: center;
+}
+
+.gap {
+    padding: 0px;
+    margin-top: 30px;
+}
+
+
+
+button {
+    margin: 15px;
+  }

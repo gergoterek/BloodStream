@@ -31,20 +31,19 @@ export class DonorEditComponent implements OnInit {
     if (id) {
       this.id = +id;
       this.donor = await this.donorService.getDonor(this.id);
+      console.log(JSON.stringify(this.donor)); 
       this.donorForm.patchValue(this.donor);
       this.donorForm.patchValue({
         bloodType: (this.donor.bloodType === null) ? "undefined" : this.donor.bloodType,
-      }); 
-
+      });
     }
-    //console.log(JSON.stringify(this.donor));
   }
 
 
   donorForm = this.fb.group({
     taj: ['', [Validators.required]],
     idCard: ['', [Validators.required]],
-    role: [{value: 'UNDEFINED', disabled: this.authService.isNurse()}, [Validators.required]],
+    role: [{value: '', disabled: this.authService.isNurse()}, [Validators.required]],
     bloodType: ['', [Validators.required]],
     //nextDonationDate: ['', [Validators.required]],
   });  
@@ -55,10 +54,20 @@ export class DonorEditComponent implements OnInit {
   get bloodType() { return this.donorForm.get('bloodType'); }
 
   async onFormSave() {
-    //this.donor = Object.assign(new Donor(), this.donorForm.value);   
-    //console.log(JSON.stringify(this.donor)); 
+    //console.log(this.donorForm.value.bloodType.toString() )
+    if(this.authService.isNurse()){
+      this.role.enable();
+      this.donorForm.patchValue({
+        role: this.donor.role
+      });
+    }
+    if ( this.donorForm.value.bloodType.toString() === "undefined"){
+      this.donorForm.patchValue({
+        bloodType: null,
+      });
+    }
+    console.log(JSON.stringify(this.donorForm.value)); 
     const donor = this.donorForm.value as Donor;
-    //console.log(JSON.stringify(donor)); 
     await this.donorService.modifyDonor(this.id, donor);
   }
 

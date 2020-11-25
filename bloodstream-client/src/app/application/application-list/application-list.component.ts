@@ -14,12 +14,15 @@ import { ApplicationService } from '../application.service';
 })
 export class ApplicationListComponent implements OnInit {
 
-
+  id: number;
 
   applications: Application[] = [];
-  // filteredDonors = [];
-  // selectedBloodType = '';
-   selectedApplication = null;
+  nextApps: Application[] = [];
+  unTransported: Application[] = [];
+  transported: Application[] = [];
+  temp: Application[] = [];
+  
+  selectedApplication = null;
 
   constructor(
     public applicationService: ApplicationService,
@@ -31,15 +34,27 @@ export class ApplicationListComponent implements OnInit {
 
   async ngOnInit() {
     this.applications = await this.applicationService.getApplications();
-    //console.log(JSON.stringify(this.applications));
-
-    let del = this.route.snapshot.url;
-    if (del.length === 3){
-      if(String(del).split(",")[2] === "del"){
-        this.router.navigate(['/place'])
-      }
+    //console.log(JSON.stringify(this.applications))
+    const id = this.route.snapshot.paramMap.get('placeId');
+    if (id) {
+      this.id = +id;
+      this.applications = this.applications.filter(app => app.place.id === this.id);
     }
+    this.initArrays();
   }
 
+  initArrays(){
+    this.applications.sort(function(a,b) {
+      return new Date(b.appliedDate).getTime() - new Date(a.appliedDate).getTime();
+    });
+
+    this.nextApps = this.applications.filter(app => app.donation === null);
+    this.temp = this.applications.filter(app => app.donation !== null);
+
+    this.unTransported = this.temp.filter(app => app.donation.transportDate === null);
+    this.temp = this.temp.filter(app => app.donation.transportDate !== null);
+
+    this.transported = this.temp;
+  }
   
 }

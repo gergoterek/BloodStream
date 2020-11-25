@@ -1,11 +1,12 @@
 <h1>Message list</h1>
+<h2 *ngIf="messages.length===0">You have no messages</h2>
 
-<mat-nav-list >
+<mat-nav-list *ngIf="messages">
     <div class="example-form" *ngIf="!authService.isDonor()">
         <a *ngFor="let message of messages" mat-list-item
           (click)="selectedMessage = message"
           [class.selected]="message === selectedMessage"
-          [routerLink]="[message.msgId]"
+          [routerLink]="['/message', 'detail', message.msgId]"
         >        
             <h3 matLine> {{ message.title }}</h3>
             <!-- <small matLine> -->
@@ -29,7 +30,7 @@
         <a *ngFor="let message of messages" mat-list-item
           (click)="selectedMessage = message"
           [class.selected]="message === selectedMessage"
-          [routerLink]="[message.msgId]"
+          [routerLink]="['/message', 'detail', message.msgId]"
         >        
             <mat-icon *ngIf="message.seen === false" matListIcon style="color: red">fiber_new</mat-icon>
             <h3 matLine> {{ message.title }}</h3>

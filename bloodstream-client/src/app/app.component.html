@@ -3,15 +3,15 @@
 </app-main-nav> -->
 
 <mat-toolbar color="wipe" id="parent">
-  <button mat-button *ngIf="!authService.isLoggedIn" routerLink="/login">
+  <button mat-button *ngIf="!authService.isLoggedIn" routerLink="/information">
       <mat-icon>home</mat-icon>
       Home
   </button>
 
-  <button mat-button *ngIf="authService.isLoggedIn" routerLink="/profile">
+  <!-- <button mat-button *ngIf="authService.isLoggedIn" routerLink="/profile">
     <mat-icon>account_circle</mat-icon>
     Profile
-</button>
+</button> -->
   
 
   <div *ngIf="authService.isLoggedIn && authService.isDonor()">
@@ -42,7 +42,9 @@
   <span class="flexExpand"></span>
     
   <div *ngIf="authService.isLoggedIn">
-    <small>{{ authService.user.donorName }}</small>
+    <button mat-button class="prof" routerLink="/profile"> 
+            <mat-icon matListIcon>account_circle</mat-icon> {{ authService.user.donorName }}
+    </button>
     <small *ngIf="authService.isDonor()"> (donor) </small>
     <small *ngIf="authService.isNurse()"> (nurse) </small>
     <small *ngIf="authService.isAdmin()"> (admin) </small>

@@ -82,6 +82,18 @@ public class MessageService {
         }
     }
 
+    void regMessage(Donor donor){
+        Message msg = new Message();
+        msg.setTitle("Regisztáció");
+        msg.setMessage("Köszönjük, hogy regisztrált oldalunkra! Foglaljon időpontot már most!");
+        msg.setSeen(false);
+        msg.setDonor(donor);
+        msg.setApplication(null);
+        msg.setSendDate(LocalDateTime.now());
+        // donor.getMessages().add(msg);
+        messageRepository.save(msg);
+    }
+
     void transportNewMsg(Application application){
         Message msg = new Message();
         msg.setTitle("Visszajelzes a veradasarol");

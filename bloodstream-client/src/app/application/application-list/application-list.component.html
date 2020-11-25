@@ -1,23 +1,85 @@
-<h1>Choose an application place!</h1>
+<h2 *ngIf="nextApps.length === 0">There is no active future application</h2>
+<h1 *ngIf="nextApps.length !== 0">Upcoming applications:</h1>
 
-<mat-nav-list class="example-form" *ngIf="applications">
-    <div *ngIf="authService.isLoggedIn && !authService.isDonor()">
-        <a *ngFor="let application of applications" mat-list-item
-            (click)="selectedApplication = application"
-            [class.selected]="application === selectedApplication"
-            [routerLink]="['/application', application.applyId]"
-        >         
-            <!-- <mat-icon *ngIf="!place.active" matListIcon style="color: grey">toggle_off</mat-icon> -->
-            <!-- <mat-icon *ngIf="place.active" matListIcon style="color: green">toggle_on</mat-icon> -->
-              
-            <h3 matLine> {{application.donor.donorName}}</h3>
+<mat-nav-list  *ngIf="nextApps.length !== 0">      
+    <div class="example-form">     
+        <a
+            *ngFor="let app of nextApps"
+            mat-list-item
+            [routerLink]="['../../', app.applyId]"
+        >             
+            <h3 matLine> {{app.donor.donorName}}</h3>
             <!-- <small matLine> -->
             <small>
+                
                 <mat-icon>access_time</mat-icon> 
-                 {{ application.appliedDate | date: 'y/MM/dd HH:mm'}}
+                {{ app.appliedDate | date: 'y/MM/dd HH:mm'}}
             </small>
-
-            <p matLine>{{ application.place.name}}</p>
+            <p matLine>{{ app.place.name}}</p>
         </a>
     </div>
 </mat-nav-list>
+
+<h2 *ngIf="unTransported.length === 0">There is no past untransported application</h2>
+<h2 *ngIf="transported.length === 0">There is no past transported application</h2>
+<mat-nav-list class="gap" *ngIf="unTransported.length !== 0 || transported.length !== 0">
+    <ng-container >    
+        <h2> Pending to transport:</h2>    
+        <div class="next" *ngFor="let application of unTransported" >            
+            <a
+                mat-list-item
+                *ngIf="!application.donation.transportDate"
+                (click)="selectedApplication = application"
+                [class.selected]="application === selectedApplication"
+                [routerLink]="['../../', application.applyId]"
+            >         
+                <!-- <mat-icon *ngIf="!place.active" matListIcon style="color: grey">toggle_off</mat-icon> -->
+                <!-- <mat-icon *ngIf="place.active" matListIcon style="color: green">toggle_on</mat-icon> -->
+               
+                <mat-icon matListIcon style="color: green">
+                        pending</mat-icon>
+                 <h3 matLine> {{application.donor.donorName}}</h3> 
+                <!-- <small matLine> -->
+                <small>
+                    <mat-icon>access_time</mat-icon> 
+                    
+                    {{ application.appliedDate | date: 'y/MM/dd HH:mm'}}
+                </small>
+
+                <p matLine>{{ application.place.name}}</p>
+            </a>
+        </div>
+    </ng-container>
+<ng-container >
+    <h2> Transported:</h2>   
+        <div class="next" *ngFor="let application of transported">      
+                   
+            <a
+                mat-list-item
+                *ngIf="application.donation.transportDate"
+                (click)="selectedApplication = application"
+                [class.selected]="application === selectedApplication"
+                [routerLink]="['../../', application.applyId]"
+            >         
+                <mat-icon matListIcon style="color: blue">airport_shuttle</mat-icon> 
+                <h3 matLine> {{application.donor.donorName}}</h3> 
+                <!-- <small matLine> -->
+                <small>
+                    <mat-icon>access_time</mat-icon> 
+                    
+                    {{ application.appliedDate | date: 'y/MM/dd HH:mm'}}
+                </small>
+
+                <p matLine>{{ application.place.name}}</p>
+            </a>
+        </div>
+    </ng-container>
+</mat-nav-list>
+
+<button mat-raised-button
+      color="wipe"
+      [routerLink]="['../../']"
+  > 
+    <mat-icon matListIcon style="color: black">keyboard_backspace</mat-icon>
+    Back 
+</button>

@@ -51,15 +51,16 @@ public class PlaceService {
         return ResponseEntity.ok(placeRepository.save(place));
     }
 
-    //NURSE - news/delete/{id}
-    public ResponseEntity deletePlace(Integer id) {
-        try {
-            placeRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    //NURSE - news/delete/{id}
+//    public ResponseEntity<Place> deletePlace(Integer id) {
+//        Optional<Place> foundPlace = placeRepository.findById(id);
+//        if (foundPlace.isPresent()) {
+//            placeRepository.deleteById(id);
+//            return ResponseEntity.ok().build();
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     //NURSE - /news/modify
     public ResponseEntity<Place> modifyPlace(Place place, Integer id){

@@ -4,8 +4,11 @@
     <mat-form-field>
         <input matInput formControlName="donorID" required>
         <mat-placeholder class='placeholder'> Donor ID</mat-placeholder>
-        <mat-error *ngIf="donorID.invalid  && (donorID.dirty || donorID.touched) && donorID.errors.required"
+        <mat-error *ngIf="donorID.invalid  && (donorID.dirty || donorID.touched) && donorID.errors.required"    
             >DonorID is required</mat-error>
+        <mat-error *ngIf="donorID.invalid && (donorID.dirty || donorID.touched) && donorID.errors.pattern">
+            Not a valid ID! Must contains only numbers!
+        </mat-error>
     </mat-form-field>
     <mat-form-field>
         <input matInput formControlName="title" required>
@@ -33,7 +36,7 @@
         color="primary"      
         type="button"    
         (click)=onFormSave()   
-        [disabled]="msgForm.invalid"
+        [disabled]="msgForm.invalid || !existingID()"
         [routerLink]="['/message']"
     >Send</button>
         

@@ -19,11 +19,14 @@ export class PlaceListComponent implements OnInit {
   nextApp: Application;
 
   places: Place[] = [];
+  filteredPlaces: Place[] = [];
   allPlaces: Place[] = [];
-  // filteredDonors = [];
-  // selectedBloodType = '';
-   selectedPlace = null;
-   title: string;
+  applications: Application [] = [];
+  
+  selectedPlace = null;
+  title: string;
+
+  chooseApplication: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -42,32 +45,38 @@ export class PlaceListComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.title = this.authService.isDonor ? "Choose a donation place!" : "Donation places"; 
-    this.allPlaces = await this.placeService.getPlaces();
-    this.places = this.allPlaces;
+    this.routeManage(this.route.snapshot.url);
+    this.allPlaces = await this.placeService.getPlaces();    
+    this.applications = await this.appService.getDonorPastApplications(this.authService.user.id);
     this.nextApp = await this.appService.getNextApplication(this.authService.user.id);
+    
 
-    let del = this.route.snapshot.url;
+    if(this.chooseApplication || this.authService.isDonor()){
+      this.allPlaces = this.allPlaces.filter(place => place.active === true);      
+    }
+    this.places = this.allPlaces;
+    
+    this.initTitle();
+  }
+
+  routeManage(del: any){
     if (del.length === 3){
       if(String(del).split(",")[2] === "del"){
         this.router.navigate(['/place'])
       }
     }
-    //console.log(new Date(this.authService.user.nextDonationDate).getTime());
+    if(String(del) === "application" || this.authService.isDonor()){
+      this.chooseApplication = true;
+    }
   }
 
-  search() {
+  onKey() {
     if (!this.cityForm.value.city){
       this.places = this.allPlaces;
     } else{
-      this.places = this.allPlaces.filter(place => place.city.toLowerCase() === this.cityForm.value.city.toLowerCase());      
+      this.places = this.allPlaces.filter(place => place.city.toLowerCase().includes(this.cityForm.value.city.toLowerCase()));        
     }
-
-    if(this.places.length === 0) {
-      this.title = "Not found!";
-    } else {
-      this.title = "Choose a donation place!"
-    }
+    this.changeTitle();
   }
 
 
@@ -78,6 +87,22 @@ export class PlaceListComponent implements OnInit {
 
   showPlaces(): boolean{
     return (this.ready() && !this.nextApp) || !this.authService.isDonor();
+  }
+
+  initTitle(){
+    this.title = this.authService.isDonor ? "Choose a donation place!" : "Donation places"; 
+    if( this.allPlaces.length === 0){
+      this.title = "There is no active place right now!";
+    }
+  }
+
+  changeTitle(){
+    if(this.places.length === 0) {
+      this.title = "Not found!";
+    } else {
+      this.title = "Choose a donation place!"
+    }
+    console.log(this.cityForm.value.city)
   }
 
 }

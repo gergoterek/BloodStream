@@ -24,6 +24,8 @@ import { MyApplicationComponent } from '../application/my-application/my-applica
 import { ApplicationDetailComponent } from '../application/application-detail/application-detail.component';
 import { MessageDetailComponent } from '../message/message-detail/message-detail.component';
 import { AdminListComponent } from '../donor/admin-list/admin-list.component';
+import { InformationPageComponent } from '../authentication/information-page/information-page.component';
+import { ChoosePlaceComponent } from '../application/choose-place/choose-place.component';
 
 
 
@@ -114,6 +116,11 @@ const routes: Routes = [
     }
   },
   {
+    path: 'place/application',
+    component: PlaceEditComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'place/:id',
     component: PlaceEditComponent,
     canActivate: [AuthGuard]
@@ -145,7 +152,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'message/:id',
+    path: 'message/detail/:id',
     component: MessageDetailComponent,
     canActivate: [AuthGuard]
   },
@@ -201,7 +208,7 @@ const routes: Routes = [
   },
   {
     path: 'application',
-    component: ApplicationListComponent,
+    component: PlaceListComponent,
     canActivate: [AuthGuard],
     data: {
       roles: ['ROLE_NURSE', 'ROLE_ADMIN']
@@ -214,6 +221,14 @@ const routes: Routes = [
   },
   {
     path: 'application/place/:placeId',
+    component: ApplicationListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_NURSE', 'ROLE_ADMIN']
+    }
+  },
+  {
+    path: 'application/new/place/:placeId',
     component: ApplicationFormComponent,
     canActivate: [AuthGuard],
     data: {
@@ -241,6 +256,10 @@ const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationComponent
+  },
+  {
+    path: 'information',
+    component: InformationPageComponent
   },
   {
     path: '**',

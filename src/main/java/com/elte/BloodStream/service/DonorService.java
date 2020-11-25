@@ -33,6 +33,9 @@ public class DonorService {
     AuthenticatedUser authenticatedUser;
 
     @Autowired
+    MessageService messageService;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     //GUEST - /donor/login
@@ -56,6 +59,8 @@ public class DonorService {
             newDonor.setTAJ(donor.getTAJ());
             newDonor.setBirthDate(donor.getBirthDate());
             newDonor.setMale(donor.isMale());
+
+            //messageService.regMessage(newDonor);
 
             return ResponseEntity.ok(donorRepository.save(newDonor));
         } else {
@@ -85,6 +90,7 @@ public class DonorService {
         if (foundDonor.isPresent()) {
             Donor modifiedDonor = foundDonor.get();
             modifiedDonor.setRole(donor.getRole());
+
             modifiedDonor.setBloodType(donor.getBloodType());
             modifiedDonor.setTAJ(donor.getTAJ());
             modifiedDonor.setIdCard(donor.getIdCard());

@@ -15,8 +15,8 @@
           [routerLink]="['/donor', 'profile', donor.id]"
         >
             <mat-icon *ngIf="donor.totalDonations === 0"   matListIcon style="color: red">fiber_new</mat-icon>
-            <mat-icon *ngIf="donor.bloodType === 'A_NEG'" matListIcon style="color: orange">check_circle</mat-icon>
-            <mat-icon *ngIf="donor.bloodType === null"  matListIcon style="color: green">access_time</mat-icon>
+            <mat-icon *ngIf="nextDon(donor.nextDonationDate)"   matListIcon style="color: black">check_circle_outline</mat-icon>
+            <mat-icon *ngIf="donor.bloodType === null"  matListIcon style="color: green">error</mat-icon>
             <h1 matLine>{{ donor.donorName }}</h1>
             <!-- <small matLine> -->
             <small>

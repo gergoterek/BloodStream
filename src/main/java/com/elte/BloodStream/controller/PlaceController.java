@@ -47,9 +47,9 @@ public class PlaceController {
         return placeService.createPlace(place);
     }
 
-    //NURSE
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity deletePlace (@PathVariable Integer id) { return placeService.deletePlace(id); }
+//    //NURSE
+//    @DeleteMapping("/delete/{id}")
+//    public ResponseEntity<Place> deletePlace (@PathVariable Integer id) { return placeService.deletePlace(id); }
 
 
     //NURSE

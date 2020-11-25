@@ -1,6 +1,7 @@
 <h1>News</h1>
+<h2 *ngIf="news.length===0">You have no news</h2>
 
-<mat-nav-list class="example-form">
+<mat-list class="example-form">
     <div *ngIf="authService.isDonor()">
         <ng-container *ngFor="let new of news">
             <a  *ngIf="isPublished(new.publishDate)" mat-list-item
@@ -21,7 +22,8 @@
             </a>
         </ng-container>
     </div>
-
+</mat-list>
+<mat-nav-list class="example-form">
     <div  *ngIf="!authService.isDonor()">
         <a *ngFor="let new of news" mat-list-item          
             (click)="selectedNews = new"

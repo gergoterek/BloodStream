@@ -76,7 +76,7 @@
 
     <mat-form-field>
         <mat-label>Choose a publish date</mat-label>
-        <input matInput [matDatepicker]="picker"
+        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter"
             formControlName="appliedDate" [min]="minDate" [max]="maxDate" required
         ><mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker touchUi="true" #picker></mat-datepicker>
@@ -109,7 +109,7 @@
             type="button"
             (click)="onFormSave()"
             [disabled]="!setTime || isFullDate"
-            [routerLink]="['/profile']"
+            [routerLink]="['/donation']"
         > Send application </button>
     </div>
 </form>

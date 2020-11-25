@@ -41,5 +41,10 @@ export class MessageListComponent implements OnInit {
         this.router.navigate(['/message'])
       }
     }
+    this.messages.sort(function(a,b) {
+      return new Date(b.sendDate).getTime() - new Date(a.sendDate).getTime();
+      //return new Date(a.sendDate).getTime() - new Date(b.sendDate).getTime();
+    });
+    
   }
 }

@@ -6,38 +6,48 @@
             </button>   
     </ng-container>
     <ng-container *ngIf="!ready() && !nextApp">
-        <h2> Sorry, you have to wait 56 days after your last donation: </h2>
+        <h2> You have reached the yearly donation limit or your 56 days rest time does not run out: </h2>
         <h2 matLine>
             You will be able to donate after: {{ authService.user.nextDonationDate | date: 'y/MM/dd'}}
         </h2>
     </ng-container>
 </div>
+<ng-container *ngIf="places && allPlaces.length !== 0">
+    <div class="example-form" *ngIf="!chooseApplication">
+        <form [formGroup]="cityForm" (ngSubmit)="search()">
+            <mat-form-field>
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city" placeholder="City" (keyup)="onKey()">
+            </mat-form-field>
+            <button mat-flat-button color="primary" type="button" (click)="onKey()">
+                Search
+            </button>
+        </form>
+    </div>
 
-<div class="example-form" *ngIf="places && showPlaces()">
-    <form [formGroup]="cityForm" (ngSubmit)="search()">
-        <mat-form-field>
-            <mat-label>City</mat-label>
-            <input matInput formControlName="city" placeholder="City" value="">
-        </mat-form-field>
-        <button mat-flat-button color="primary" type="button" (click)="search()">
-            Search
-        </button>
-        
-    </form>
-    <!-- {{cityForm.value | json}} -->
-</div>
+    <div class="example-form2" *ngIf="chooseApplication && !nextApp">
+        <form [formGroup]="cityForm" (ngSubmit)="search()" >
+            <mat-form-field>
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city" placeholder="City" (keyup)="onKey()">
+            </mat-form-field>
+            <button mat-flat-button color="primary" type="button" (click)="onKey()">
+                Search
+            </button>        
+        </form>
+    </div>
+</ng-container>
+
 
 <mat-nav-list *ngIf="places && showPlaces()">
-    <h1>{{title}}</h1>
+    <h1>{{title}}</h1>    
 
-    
-
-    <div class="example-form" *ngIf="authService.isDonor()">        
+    <div class="example-form2" *ngIf="chooseApplication && authService.isDonor()">        
         <ng-container *ngFor="let place of places">
             <a mat-list-item
                 (click)="selectedPlace = place"
                 [class.selected]="place === selectedPlace"
-                [routerLink]="['/application', 'place', place.id]"
+                [routerLink]="['/application', 'new', 'place', place.id]"
             >               
                 <h3 matLine>{{ place.name}}</h3>
                 <!-- <small matLine> -->
@@ -50,7 +60,26 @@
         </ng-container>
     </div>
 
-    <div class="example-form" *ngIf="!authService.isDonor()">
+
+    <div class="example-form2" *ngIf="chooseApplication && !authService.isDonor()">
+        
+        <a *ngFor="let place of places" mat-list-item
+            (click)="selectedPlace = place"
+            [class.selected]="place === selectedPlace"
+            [routerLink]="['place', place.id]"
+        >                      
+            <h3 matLine>{{ place.name}}</h3>
+            <!-- <small matLine> -->
+            <small>
+                <mat-icon>location_on</mat-icon> {{ place.city }}
+            </small>
+
+            <p matLine>{{ place.address}}</p>
+        </a>
+    </div>
+
+    
+    <div class="example-form" *ngIf="!chooseApplication && !authService.isDonor()">
         
         <a *ngFor="let place of places" mat-list-item
             (click)="selectedPlace = place"
@@ -74,25 +103,9 @@
 
 
 
-    <!-- <small matLine> -->
-    <!-- <div>
-        <a *ngFor="let place of places" mat-list-item
-          (click)="selectedPlace = place"
-          [class.selected]="place === selectedPlace"
-        >        
-            <mat-icon *ngIf="place.isActive === true" matListIcon style="color: orange">check_circle</mat-icon>
-            <h3 matLine>{{ place.name }}</h3>
-            <small>
-                <mat-icon>verified_user</mat-icon> {{ place.address}}
-                <mat-icon>access_time</mat-icon> {{ place.city }}
-            </small>
-
-            <p matLine>{{ place.openingTime.openingTime}}</p>
-        </a>        
-    </div> -->
 
 <button 
-    *ngIf="!authService.isDonor()"
+    *ngIf="!chooseApplication && !authService.isDonor()"
     mat-flat-button color="primary"
     [routerLink]="['/place', 'add']"
 >Add place</button>

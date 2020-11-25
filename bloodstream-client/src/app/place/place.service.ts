@@ -55,12 +55,12 @@ export class PlaceService {
     ).toPromise();
   }
 
-  deletePlace(id: number): Promise<Place> {
-    return this.http.delete<Place>(
-      `${this.delUrl}/${id}`,
-      httpOptions
-    ).toPromise();
-  }
+  // deletePlace(id: number): Promise<Place> {
+  //   return this.http.delete<Place>(
+  //     `${this.delUrl}/${id}`,
+  //     httpOptions
+  //   ).toPromise();
+  // }
 
 
 }

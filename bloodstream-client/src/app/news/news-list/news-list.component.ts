@@ -35,6 +35,11 @@ export class NewsListComponent implements OnInit {
         this.router.navigate(['/news'])
       }
     }
+
+    this.news.sort(function(a,b) {
+      //return new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime();
+      return new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime();
+    });
   }
 
   isPublished(date: Date): boolean{

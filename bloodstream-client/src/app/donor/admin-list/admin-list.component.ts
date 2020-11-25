@@ -21,6 +21,12 @@ export class AdminListComponent implements OnInit {
 
   async ngOnInit() {
     this.admins = (await this.donorService.getDonors()).filter( donor => donor.role !== "ROLE_DONOR");
+
+    this.admins.sort(function(a, b){
+      if(a.donorName < b.donorName) { return -1; }
+      if(a.donorName > b.donorName) { return 1; }
+      return 0;
+    })
   }
 
 

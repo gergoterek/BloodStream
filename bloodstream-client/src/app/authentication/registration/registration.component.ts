@@ -13,8 +13,8 @@ export class RegistrationComponent implements OnInit {
 
 
   now = Date.now();//new Date(2020, 11, 09);
-  minDate = new Date(1955, 1,1)//18-65év
-  maxDate = new Date(2002, 1,1);
+  minDate: Date;//18-65év
+  maxDate: Date;
 
   // dateFilter = date => {
   //   const day = date.getDay();
@@ -31,11 +31,11 @@ export class RegistrationComponent implements OnInit {
   hidePassword = true;
   donorForm = this.fb.group({
     donorName: ['', [Validators.required]],
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    taj: ['', [Validators.required]],
+    username: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    taj: ['', [Validators.required, Validators.pattern(/\d+/), Validators.minLength(9)]],
     birthDate: ['', [Validators.required]],
-    idCard: ['', [Validators.required]],
+    idCard: ['', [Validators.required, Validators.minLength(6)]],
     male: ['', [Validators.required]],    
     // bloodType: [null],    
     // nextDonationDate: [null],    
@@ -60,6 +60,10 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.minDate = new Date();
+    this.minDate.setFullYear(this.minDate.getFullYear()-65);
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear()-18);
   }
 
   async onFormSave() {

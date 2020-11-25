@@ -36,6 +36,13 @@ export class ApplicationFormComponent implements OnInit {
   
   application: Application = new Application();
   applications: Application [] = [];
+
+  dateFilter: any;
+
+  days: boolean [] = [];
+
+  daysEnableToApply = 14;
+  appInterval = 30;
   
 
   constructor(
@@ -44,7 +51,6 @@ export class ApplicationFormComponent implements OnInit {
     private placeService: PlaceService,
     private applicationService: ApplicationService,
     public authService: AuthService,
-    //public matDatepickerFilter: DatepickerFilterExample,
   ) { }
 
   applicationForm = this.fb.group({
@@ -57,21 +63,12 @@ export class ApplicationFormComponent implements OnInit {
   async ngOnInit() {
     this.placeInit();
     this.minDate = (new Date(this.now).getTime() >= new Date(this.authService.user.nextDonationDate).getTime()) ?
-    this.addMinutes(this.now, 1440) : new Date(this.authService.user.nextDonationDate);
+    this.addMinutes( this.now, 1440 * this.daysEnableToApply) : new Date(this.authService.user.nextDonationDate);
 
-    this.maxDate = this.addMinutes(this.minDate, 1440*14);
-
-    this.applications = (await this.applicationService.getApplications()).filter(app => app.place.id === this.place.id);
-    this.applications = this.applications.filter(app => app.donation === null);
+    this.maxDate = this.addMinutes(this.minDate, 1440*14);    
   }
-  // toggle = true;
-  // status = 'Enable'; 
-
-  // enableDisableRule(job) {
-  //     this.toggle = !this.toggle;
-  //     this.status = this.toggle ? 'Enable' : 'Disable';
-  // }
       
+  //1 évben 5 lehet a max adás
 
   isFreeTime(time: string): boolean{
     if(this.isSetDate){
@@ -96,7 +93,7 @@ export class ApplicationFormComponent implements OnInit {
     this.applicationForm.value.donor = this.authService.user;
 
     this.applicationForm.value.place = this.place;
-    console.log(JSON.stringify(this.applicationForm.value));
+    //console.log(JSON.stringify(this.applicationForm.value));
     await this.applicationService.newApplication(this.applicationForm.value as Application); 
   }
 
@@ -111,11 +108,11 @@ export class ApplicationFormComponent implements OnInit {
     this.time = time;
     if (this.applicationForm.value.appliedDate){
       this.date = this.applicationForm.value.appliedDate;
-      console.log(this.date);
+      //console.log(this.date);
       //console.log(new Date(this.appliedDate.value).getMinutes() + this.timeToDecimal(time));
-      console.log(this.addMinutes(this.appliedDate.value, this.timeToDecimal(time)));
+      //console.log(this.addMinutes(this.appliedDate.value, this.timeToDecimal(time)));
       this.setTime =  this.addMinutes(this.appliedDate.value, this.timeToDecimal(time));  
-      console.log(this.setTime);
+      //console.log(this.setTime);
 
       this.isFullDate = false;
       // this.applications = this.applications.filter(app => new Date(app.appliedDate).getTime() === this.setTime.getTime());
@@ -155,19 +152,34 @@ export class ApplicationFormComponent implements OnInit {
 
     this.fillTimes();
 
+    this.applications = (await this.applicationService.getApplications()).filter(app => app.place.id === this.place.id);
+    this.applications = this.applications.filter(app => app.donation === null);
     
+    this.days.push(this.place.openingTime.monday, this.place.openingTime.tuesday, this.place.openingTime.wednesday, this.place.openingTime.thursday,
+                     this.place.openingTime.friday, this.place.openingTime.saturday, this.place.openingTime.sunday);
+     //console.log(JSON.stringify(this.days));
+
+
+     this.dateFilter = (date: Date) => 
+                                           (this.days[6] ? date.getDay()===0 : false) 
+                                        || (this.days[1] ? date.getDay()===1 : false) 
+                                        || (this.days[2] ? date.getDay()===2 : false) 
+                                        || (this.days[3] ? date.getDay()===3 : false) 
+                                        || (this.days[4] ? date.getDay()===4 : false) 
+                                        || (this.days[5] ? date.getDay()===5 : false) 
+                                        || (this.days[0] ? date.getDay()===6 : false);
+                                                        
   }
 
   fillTimes(){
     let temp = this.place.openingTime.closingTime - this.place.openingTime.startTime;
     this.times.push(this.decimalToTime(this.place.openingTime.closingTime - temp));
     //console.log(temp);
-    while(temp>=30){
-      temp -= 30;
+    while(temp>=this.appInterval){
+      temp -= this.appInterval;
       this.times.push(this.decimalToTime(this.place.openingTime.closingTime - temp));
       //console.log(temp);
     }
-    console.log(JSON.stringify(this.times));
   }
 
   addMinutes(date, minutes) {
@@ -198,10 +210,3 @@ export class ApplicationFormComponent implements OnInit {
 
 
 }
-// export class DatepickerFilterExample {
-//   myFilter = (d: Date | null): boolean => {
-//     const day = (d || new Date()).getDay();
-//     // Prevent Saturday and Sunday from being selected.
-//     return day !== 0 && day !== 6;
-//   }
-// }
