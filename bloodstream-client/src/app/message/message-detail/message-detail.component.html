@@ -1,6 +1,6 @@
 <h1>Message details</h1>
 
-<table id="customers" *ngIf="msg">
+<table id="customers" *ngIf="msg && msg.donor">
   <tr>
     <th>Data</th>
     <th>Value</th>
@@ -8,6 +8,10 @@
   <tr>
     <td class="td">Sending Date</td>
     <td>{{msg.sendDate | date: 'y/MM/dd HH:mm'}}</td>
+  </tr>
+  <tr>
+    <td class="td">Donor ID</td>
+    <td>{{msg.donor.id}}</td>
   </tr>
   <tr>
     <td class="td">Title</td>

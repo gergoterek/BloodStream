@@ -1,17 +1,20 @@
 <!-- <app-main-nav>
   
 </app-main-nav> -->
+  <!-- <button mat-button *ngIf="authService.isLoggedIn" routerLink="/profile">
+    <mat-icon>account_circle</mat-icon>
+    Profile
+</button> -->
 
+
+<!--   
 <mat-toolbar color="wipe" id="parent">
   <button mat-button *ngIf="!authService.isLoggedIn" routerLink="/information">
       <mat-icon>home</mat-icon>
       Home
   </button>
 
-  <!-- <button mat-button *ngIf="authService.isLoggedIn" routerLink="/profile">
-    <mat-icon>account_circle</mat-icon>
-    Profile
-</button> -->
+
   
 
   <div *ngIf="authService.isLoggedIn && authService.isDonor()">
@@ -59,7 +62,185 @@
     
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+
+
+  <mat-toolbar color="wipe">
+      
+ 
+
+    <div fxShow="true" fxHide.lt-md="true">
+          
+          <ng-container *ngIf="authService.isLoggedIn && authService.isDonor()">
+            <button mat-button routerLink="/faq">FAQ</button>
+            <button mat-button routerLink="/news">News</button>
+            <button mat-button routerLink="/message">
+                Messages
+                <mat-icon matListIcon *ngIf="newMsg.length !== 0" style="color: red">fiber_new</mat-icon>
+            </button>
+            <button mat-button routerLink="/place">Apply for Donation</button>
+            <button mat-button routerLink="/donation">My Donations</button>
+          </ng-container> 
+        
+          <ng-container *ngIf="authService.isLoggedIn && !authService.isDonor()">
+            <button mat-button routerLink="/faq">FAQ</button>
+            <button mat-button routerLink="/donor">Donors</button>
+            <button mat-button routerLink="/place">Places</button>
+            <button mat-button routerLink="/news">News</button>
+            <button mat-button routerLink="/message">Messages</button>
+            <button mat-button [routerLink]="['/application']">Applications</button>
+          </ng-container> 
+          
+          <ng-container *ngIf="!authService.isLoggedIn">
+            <button mat-button routerLink="/login">Login</button>      
+            <button mat-button routerLink="/registration">Registration</button>      
+          </ng-container>
+        
+
+          
+
+    </div>
+
+    <mat-icon fxShow="true" fxHide.gt-sm="true" matListIcon (click)="sidenav.toggle()">menu</mat-icon>
+    <span class="flexExpand"></span>
+
+    <div fxShow="true" fxHide.lt-md="true">
+        <ng-container *ngIf="authService.isLoggedIn">
+          <button mat-button class="prof" routerLink="/profile"> 
+                  <mat-icon matListIcon>account_circle</mat-icon> {{ authService.user.donorName }}
+          </button>
+          <small *ngIf="authService.isDonor()"> (donor) </small>
+          <small *ngIf="authService.isNurse()"> (nurse) </small>
+          <small *ngIf="authService.isAdmin()"> (admin) </small>
+
+          <button mat-button class="ert" (click)="logout()">Logout</button>      
+        </ng-container>
+      
+        <ng-container *ngIf="!authService.isLoggedIn">
+          <button mat-button routerLink="/information">
+            
+            About
+          </button>    
+          <button mat-button class="ert" routerLink="/faq">FAQ <mat-icon>help</mat-icon> </button>  
+        </ng-container>
+    </div>
+
+    
+      
+   
+  </mat-toolbar>
+
+
+
+
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav #sidenav fxLayout="column">
+      <div fxLayout="column">
+
+        <button mat-button *ngIf="!authService.isLoggedIn" routerLink="/information">
+          <mat-icon>help</mat-icon>
+          About
+      </button>
+        <ng-container *ngIf="authService.isLoggedIn && authService.isDonor()">
+          <button mat-button routerLink="/faq">FAQ</button>
+          <button mat-button routerLink="/news">News</button>
+          <button mat-button routerLink="/message">
+              Messages
+              <mat-icon matListIcon *ngIf="newMsg.length !== 0" style="color: red">fiber_new</mat-icon>
+          </button>
+          <button mat-button routerLink="/place">Apply for Donation</button>
+          <button mat-button routerLink="/donation">My Donations</button>
+        </ng-container> 
+      
+        <ng-container *ngIf="authService.isLoggedIn && !authService.isDonor()">
+          <button mat-button routerLink="/faq">FAQ</button>
+          <button mat-button routerLink="/donor">Donors</button>
+          <button mat-button routerLink="/place">Places</button>
+          <button mat-button routerLink="/news">News</button>
+          <button mat-button routerLink="/message">Messages</button>
+          <button mat-button [routerLink]="['/application']">Applications</button>
+        </ng-container> 
+        
+        <ng-container *ngIf="!authService.isLoggedIn">
+          <button mat-button routerLink="/login">Login</button>      
+          <button mat-button routerLink="/registration">Registration</button>      
+        </ng-container>
+
+        <ng-container *ngIf="authService.isLoggedIn">
+          <button mat-button class="prof" routerLink="/profile"> 
+                <mat-icon matListIcon>account_circle</mat-icon> {{ authService.user.donorName }}
+          </button>
+            
+          <button mat-button class="ert" (click)="logout()">Logout</button>      
+        </ng-container>
+      
+        <ng-container *ngIf="!authService.isLoggedIn">
+          <button mat-button class="ert" routerLink="/faq">FAQ</button>      
+        </ng-container>
+      </div>
+    </mat-sidenav>
+
+    
+    <mat-sidenav-content>
+
+      <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+    
+  </mat-sidenav-container>
+
+
+
+
+
+
+
+
+
+
+<!-- <div fxShow="true" fxHide.gt-sm="true">
+  <a href="#" (click)="sidenav.toggle()">Show Side Menu</a>
+</div>
+Copy
+Final Code
+The whole code for a responsive navbar menu will look like this:
+
+<div style="height: 100vh;">
+  <mat-toolbar color="primary">
+    <span>Responsive Navigation</span>
+
+    <span class="example-spacer"></span>
+
+    <div fxShow="true" fxHide.lt-md="true">
+      
+      <a href="#" mat-button>Menu Item 1</a>
+      <a href="#" mat-button>Menu Item 2</a>
+      <a href="#" mat-button>Menu Item 3</a>
+      <a href="#" mat-button>Menu Item 4</a>
+      <a href="#" mat-button>Menu Item 5</a>
+      <a href="#" mat-button>Menu Item 6</a>
+    </div>
+
+    <div fxShow="true" fxHide.gt-sm="true">
+      <a href="#" (click)="sidenav.toggle()">Show Side Menu</a>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav #sidenav fxLayout="column">
+      <div fxLayout="column">
+        <a (click)="sidenav.toggle()" href="#" mat-button>Close</a>
+        <a href="#" mat-button>Menu Item 1</a>
+        <a href="#" mat-button>Menu Item 2</a>
+        <a href="#" mat-button>Menu Item 3</a>
+        <a href="#" mat-button>Menu Item 4</a>
+        <a href="#" mat-button>Menu Item 5</a>
+        <a href="#" mat-button>Menu Item 6</a>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content>
+  </mat-sidenav-container>
+</div> -->
 
 
 

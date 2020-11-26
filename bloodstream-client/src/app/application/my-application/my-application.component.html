@@ -1,5 +1,5 @@
 <h2 *ngIf="nextApp"> Your next donation:</h2>
-<div *ngIf="!nextApp" class="example-form">
+<div *ngIf="!nextApp">
     <h2 *ngIf="letDonate()"> It looks like you have no following donation:(</h2>
     <h2 *ngIf="!letDonate()"> Sorry, you have to wait 56 days after your last donation: 
         {{authService.user.nextDonationDate | date: 'y/MM/dd'}}</h2>

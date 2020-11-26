@@ -19,6 +19,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FlexLayoutModule } from '@angular/flex-layout';
 // import { MatDatetimepickerModule, MatNativeDatetimeModule } from "@mat-datetimepicker/core";
 
 import { DonorListComponent } from './donor/donor-list/donor-list.component';
@@ -105,6 +106,7 @@ import { ChoosePlaceComponent } from './application/choose-place/choose-place.co
     MatDatepickerModule,
     MatCheckboxModule,
     MatSlideToggleModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

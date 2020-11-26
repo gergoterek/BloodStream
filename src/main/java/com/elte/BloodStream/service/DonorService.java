@@ -117,6 +117,11 @@ public class DonorService {
         return donorRepository.findAll();
     }
 
+//    //NURSE - /donor/all/admin
+//    public Iterable<Donor> getAllAdmins() {
+//        return donorRepository.findAllByRole(r);
+//    }
+
     //NURSE - donor/all/orderbynameasc
     public Iterable<Donor> getAllDonorsOrderByNameAsc() {
         return donorRepository.findAllByOrderByDonorNameAsc();

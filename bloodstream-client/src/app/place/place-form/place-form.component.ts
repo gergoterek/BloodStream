@@ -27,7 +27,13 @@ export class PlaceFormComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.place.openingTime !== undefined){
       //console.log(JSON.stringify(this.place));
-      this.placeForm.patchValue(this.place);
+      this.placeForm.patchValue({
+        name: this.place.name,
+        city: this.place.city,
+        address: this.place.address,
+        id: this.place.id,
+        active: this.place.active,
+      });
       //console.log(JSON.stringify(this.place));
       //this.openingForm.patchValue(this.place.openingTime); 
       //console.log(this.place.openingTime.startTime);

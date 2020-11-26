@@ -34,10 +34,10 @@ export class MessageFormComponent implements OnInit {
           donorID: id
           //(this.donor.bloodType === null) ? "undefined" : this.donor.bloodType,
         }); 
-
         this.donorID.disable();
       } else {
         this.donors = await this.donorService.getDonors();
+        this.donors = this.donors.filter(donor => donor.role === "ROLE_DONOR");
         console.log(JSON.stringify(this.donors));
       }
 
@@ -57,18 +57,17 @@ export class MessageFormComponent implements OnInit {
 
   async onFormSave() {
     this.donorID.enable();
-    console.log(JSON.stringify(this.msgForm.value));
     const msg = this.msgForm.value as Message;
-    await this.messageService.sendMsgToDonor(msg);
+    await this.messageService.sendMsgToDonor(msg, parseInt(this.donorID.value));
     this.router.navigate(['/message', 'del']);
   }
 
   existingID(): boolean {
     if(this.donors && this.msgForm.value.donorID){
-      let filterDonors = this.donors.filter(donor => donor.id === this.msgForm.value.donorID);
+      let filterDonors = this.donors.filter(donor => donor.id === parseInt(this.msgForm.value.donorID));
       return (filterDonors.length) !== 0;
     } else {
-      return true;
+      return false;
     }
   }
 

@@ -19,7 +19,26 @@ small {
 }
 
 
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
 
+.mat-sidenav-content {
+    background-color: transparent;
+}
+.mat-sidenav-container {
+    background-color: transparent;
+    color: black;
+}
+
+.icon{
+    margin: 0;
+    padding: 0;
+}
 /*
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 

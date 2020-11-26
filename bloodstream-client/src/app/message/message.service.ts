@@ -49,9 +49,9 @@ export class MessageService {
   }
 
 
-  sendMsgToDonor(msg: Message): Promise<Message> {
+  sendMsgToDonor(msg: Message, donorID: number): Promise<Message> {
     return this.http.post<Message>(
-      `${this.sendMsgUrl}/${msg.donor.id}`,
+      `${this.sendMsgUrl}/${donorID}`,
       msg,
       httpOptions
     ).toPromise();

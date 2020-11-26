@@ -15,7 +15,7 @@
   }
 
   div.h2 {
-      padding-top: 20px;
+      padding-top: 10px;
   }
 
   :host /deep/ .mat-list-item-content {
@@ -32,7 +32,7 @@
     
 }
   h2, h3 {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .next {
@@ -55,5 +55,5 @@
 }
 
 button {
-    margin: 15px;
+    margin: 10px;
   }

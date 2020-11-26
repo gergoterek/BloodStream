@@ -51,6 +51,11 @@ public class DonorController {
         return donorService.changeDonorDataByAdmin(id, donor);
     }
 
+//    //ADMIN
+//    @GetMapping("/all/admin")
+//    public Iterable<Donor> getAllAdmins() {
+//        return donorService.getAllAdmins();
+//    }
 
     //ADMIN
     @GetMapping("/all")
