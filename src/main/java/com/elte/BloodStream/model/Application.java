@@ -3,6 +3,7 @@ package com.elte.BloodStream.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,10 @@ public class Application {
     //"appliedTime": "2019-04-02 11:45",
     @Column
     private Date appliedDate;
+
+    @Nullable
+    @Column(updatable = false)
+    private Long directedDonationCode;
 
 
     //@JsonIgnore

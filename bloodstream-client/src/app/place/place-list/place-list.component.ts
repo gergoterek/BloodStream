@@ -59,13 +59,24 @@ export class PlaceListComponent implements OnInit {
     this.initTitle();
   }
 
-  routeManage(del: any){
-    if (del.length === 3){
-      if(String(del).split(",")[2] === "del"){
+  async routeManage(url: any){
+    // const placeId = this.route.snapshot.paramMap.get('placeId');
+    // if (placeId) {
+    //   this.placeId = +placeId;
+    //   if (this.nextApp !== null){
+    //       this.nextApp = null; 
+    //     } else {         
+    //       this.nextApp = await this.applicationService.getApplication(this.applyplaceIdId);
+    //     }        
+    // }
+    // this.router.navigate(["/donor/profile", this.id]);
+
+    if (url.length === 3){
+      if(String(url).split(",")[2] === "del"){
         this.router.navigate(['/place'])
       }
     }
-    if(String(del) === "application" || this.authService.isDonor()){
+    if(String(url) === "application" || this.authService.isDonor()){
       this.chooseApplication = true;
     }
   }
@@ -102,7 +113,7 @@ export class PlaceListComponent implements OnInit {
     } else {
       this.title = "Choose a donation place!"
     }
-    console.log(this.cityForm.value.city)
+    //console.log(this.cityForm.value.city)
   }
 
 }

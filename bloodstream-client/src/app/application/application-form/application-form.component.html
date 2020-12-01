@@ -75,7 +75,7 @@
 <form [formGroup]="applicationForm" (ngSubmit)="onFormSave()">
 
     <mat-form-field>
-        <mat-label>Choose a publish date</mat-label>
+        <mat-label>Choose application date</mat-label>
         <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter"
             formControlName="appliedDate" [min]="minDate" [max]="maxDate" required
         ><mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -90,6 +90,18 @@
             (click)="choose(time)"
             [disabled]="!isFreeTime(time)"
         > {{time}} </button>
+        <mat-form-field>
+            <input matInput formControlName="directedDonationCode">
+            <mat-placeholder class='placeholder'> Directed Donation Code (optional) </mat-placeholder>
+            <mat-error *ngIf="directedDonationCode.invalid && (directedDonationCode.dirty || directedDonationCode.touched) 
+                && directedDonationCode.errors.pattern">
+                Directed Donation Code must contain only numbers!
+            </mat-error>
+            <mat-error *ngIf="directedDonationCode.invalid && (directedDonationCode.dirty || directedDonationCode.touched) 
+                && directedDonationCode.hasError('minlength')">
+                Minimum length is 9!
+            </mat-error>
+        </mat-form-field>
     </div>
  
 
@@ -109,7 +121,6 @@
             type="button"
             (click)="onFormSave()"
             [disabled]="!setTime || isFullDate"
-            [routerLink]="['/donation']"
         > Send application </button>
     </div>
 </form>

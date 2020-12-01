@@ -9,9 +9,9 @@ import { Message } from '../domain/message';
 })
 export class MessageService {
 
-  private donorMessagesUrl = 'http://localhost:8080/message/donor';
-  private messagesUrl = 'http://localhost:8080/message';
-  private allMessagesUrl = 'http://localhost:8080/message/all';
+  private allMsgesUrl = 'http://localhost:8080/message/all';
+  private donorMsgUrl = 'http://localhost:8080/message/donor';
+  private msgUrl = 'http://localhost:8080/message';
   private sendMsgUrl = 'http://localhost:8080/message/send';
   private seenMsgUrl = 'http://localhost:8080/message/seen';
 
@@ -22,13 +22,13 @@ export class MessageService {
 
   getAllMessages(): Promise<Message[]> {
     return this.http.get<Message[]>(
-      this.allMessagesUrl,
+      this.allMsgesUrl,
       httpOptions
     ).toPromise();
   }
   getMessage(id: number): Promise<Message> {
     return this.http.get<Message>(
-      `${this.messagesUrl}/${id}`,
+      `${this.msgUrl}/${id}`,
       httpOptions
     ).toPromise();
   }
@@ -43,7 +43,7 @@ export class MessageService {
 
   getDonorMessages(id: number): Promise<Message[]> {
     return this.http.get<Message[]>(
-      `${this.donorMessagesUrl}/${id}`,
+      `${this.donorMsgUrl}/${id}`,
       httpOptions
     ).toPromise();
   }

@@ -22,7 +22,10 @@
 
 
     <div>
-      <button mat-flat-button type="submit" color="accent" [disabled]="form.invalid" [routerLink]="['/profile']">Login</button>
+      <button mat-flat-button type="submit" color="accent" [disabled]="form.invalid" [routerLink]="['/profile']">
+        Login
+        <mat-icon matListIcon >login </mat-icon>
+      </button>
     </div>
   </form>
 

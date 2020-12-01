@@ -92,7 +92,7 @@
           </ng-container> 
           
           <ng-container *ngIf="!authService.isLoggedIn">
-            <button mat-button routerLink="/login">Login</button>      
+            <button mat-button routerLink="/login"> Login</button>      
             <button mat-button routerLink="/registration">Registration</button>      
           </ng-container>
         
@@ -113,7 +113,10 @@
           <small *ngIf="authService.isNurse()"> (nurse) </small>
           <small *ngIf="authService.isAdmin()"> (admin) </small>
 
-          <button mat-button class="ert" (click)="logout()">Logout</button>      
+          <button mat-button class="ert" (click)="logout()">
+            Logout
+            <mat-icon matListIcon >exit_to_app </mat-icon>
+          </button>      
         </ng-container>
       
         <ng-container *ngIf="!authService.isLoggedIn">
@@ -121,13 +124,9 @@
             
             About
           </button>    
-          <button mat-button class="ert" routerLink="/faq">FAQ <mat-icon>help</mat-icon> </button>  
+          <button mat-button class="ert" routerLink="/faq">FAQ <mat-icon>question_answer</mat-icon> </button>  
         </ng-container>
-    </div>
-
-    
-      
-   
+    </div> 
   </mat-toolbar>
 
 
@@ -137,10 +136,7 @@
     <mat-sidenav #sidenav fxLayout="column">
       <div fxLayout="column">
 
-        <button mat-button *ngIf="!authService.isLoggedIn" routerLink="/information">
-          <mat-icon>help</mat-icon>
-          About
-      </button>
+        
         <ng-container *ngIf="authService.isLoggedIn && authService.isDonor()">
           <button mat-button routerLink="/faq">FAQ</button>
           <button mat-button routerLink="/news">News</button>
@@ -175,7 +171,8 @@
         </ng-container>
       
         <ng-container *ngIf="!authService.isLoggedIn">
-          <button mat-button class="ert" routerLink="/faq">FAQ</button>      
+          <button mat-button *ngIf="!authService.isLoggedIn" routerLink="/information"> About </button>
+        <button mat-button class="ert" routerLink="/faq">FAQ <mat-icon>question_answer</mat-icon> </button>   
         </ng-container>
       </div>
     </mat-sidenav>

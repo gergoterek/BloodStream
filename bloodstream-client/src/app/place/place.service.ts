@@ -8,10 +8,10 @@ import { httpOptions } from '../authentication/auth.service';
 })
 export class PlaceService {
 
-  private allUrl = 'http://localhost:8080/place/all';
-  private url = 'http://localhost:8080/place';
-  private cityUrl = 'http://localhost:8080/place/city';
-  private delUrl = 'http://localhost:8080/place/delete';
+  private allPlacesUrl = 'http://localhost:8080/place/all';
+  private placeUrl = 'http://localhost:8080/place';
+  // private cityUrl = 'http://localhost:8080/place/city';
+  // private delUrl = 'http://localhost:8080/place/delete';
 
   constructor(
     private http: HttpClient
@@ -19,7 +19,7 @@ export class PlaceService {
 
   getPlaces(): Promise<Place[]> {
     return this.http.get<Place[]>(
-      this.allUrl,
+      this.allPlacesUrl,
       httpOptions
     ).toPromise();
   }
@@ -27,21 +27,15 @@ export class PlaceService {
 
   getPlace(id: number): Promise<Place> {
     return this.http.get<Place>(
-      `${this.url}/${id}`,
+      `${this.placeUrl}/${id}`,
       httpOptions
     ).toPromise();
   }
 
-  getPlacesByCity(city: string): Promise<Place[]> {
-    return this.http.get<Place[]>(
-      `${this.cityUrl}/${city}`,
-      httpOptions
-    ).toPromise();
-  }
 
   modifyPlace(id: number, place: Place): Promise<Place> {
     return this.http.put<Place>(
-      `${this.url}/${id}`,
+      `${this.placeUrl}/${id}`,
       place,
       httpOptions
     ).toPromise();
@@ -49,12 +43,12 @@ export class PlaceService {
 
   addPlace(place: Place): Promise<Place> {
     return this.http.post<Place>(
-      this.url,
+      this.placeUrl,
       place,
       httpOptions
     ).toPromise();
   }
-
+}
   // deletePlace(id: number): Promise<Place> {
   //   return this.http.delete<Place>(
   //     `${this.delUrl}/${id}`,
@@ -62,5 +56,12 @@ export class PlaceService {
   //   ).toPromise();
   // }
 
+  
+  // getPlacesByCity(city: string): Promise<Place[]> {
+  //   return this.http.get<Place[]>(
+  //     `${this.cityUrl}/${city}`,
+  //     httpOptions
+  //   ).toPromise();
+  // }
 
-}
+

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { Application } from 'src/app/domain/application';
 import { Donor } from 'src/app/domain/donor';
 import { Place } from 'src/app/domain/place';
 import { PlaceService } from 'src/app/place/place.service';
 import { ApplicationService } from '../application.service';
+import { MyApplicationComponent } from '../my-application/my-application.component';
 
 @Component({
   selector: 'app-application-form',
@@ -51,24 +52,27 @@ export class ApplicationFormComponent implements OnInit {
     private placeService: PlaceService,
     private applicationService: ApplicationService,
     public authService: AuthService,
+    private router: Router,
+    //private myApplication: MyApplicationComponent,
   ) { }
 
   applicationForm = this.fb.group({
     appliedDate: [undefined, [Validators.required]],
+    directedDonationCode: ['', [Validators.required, Validators.pattern(/\d+/), Validators.minLength(9)]],
   });
 
   get appliedDate() { return this.applicationForm.get('appliedDate'); }
+  get directedDonationCode() { return this.applicationForm.get('directedDonationCode'); }
 
 
   async ngOnInit() {
     this.placeInit();
-    this.minDate = (new Date(this.now).getTime() >= new Date(this.authService.user.nextDonationDate).getTime()) ?
-    this.addMinutes( this.now, 1440 * this.daysEnableToApply) : new Date(this.authService.user.nextDonationDate);
+    this.minDate = (new Date(this.now).getTime() >= new Date(this.authService.user.nextDonationDate).getTime()) 
+        ? this.addMinutes( this.now, 1440 * 1) 
+        : new Date(this.authService.user.nextDonationDate);
 
-    this.maxDate = this.addMinutes(this.minDate, 1440*14);    
+    this.maxDate = this.addMinutes(this.minDate, 1440 * this.daysEnableToApply);    
   }
-      
-  //1 évben 5 lehet a max adás
 
   isFreeTime(time: string): boolean{
     if(this.isSetDate){
@@ -95,6 +99,8 @@ export class ApplicationFormComponent implements OnInit {
     this.applicationForm.value.place = this.place;
     //console.log(JSON.stringify(this.applicationForm.value));
     await this.applicationService.newApplication(this.applicationForm.value as Application); 
+    
+    this.router.navigate(['/donation', await (await this.applicationService.getNextApplication(this.authService.user.id)).applyId]);
   }
 
 

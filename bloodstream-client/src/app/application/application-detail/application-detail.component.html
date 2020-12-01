@@ -27,6 +27,12 @@
     <td class="td">Application ID</td>
     <td>{{application.applyId}}</td>
   </tr>
+  <tr *ngIf="application.directedDonationCode">
+    <td class="td" >
+      <mat-icon matListIcon style="color: black">directions</mat-icon>
+      Directed Donation Code</td>
+    <td>{{application.directedDonationCode}}</td>
+  </tr>
   <tr>
     <td class="td">
         <mat-icon matListIcon style="color: green">pending</mat-icon>

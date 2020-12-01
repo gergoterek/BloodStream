@@ -12,7 +12,7 @@
         </h2>
     </ng-container>
 </div>
-<ng-container *ngIf="places && allPlaces.length !== 0">
+<ng-container *ngIf="places && allPlaces.length !== 0 && !nextApp">
     <div class="example-form" *ngIf="!chooseApplication">
         <form [formGroup]="cityForm" (ngSubmit)="search()">
             <mat-form-field>
@@ -41,14 +41,14 @@
 
 <mat-nav-list *ngIf="places && showPlaces()">
     <h1>{{title}}</h1>    
-
-    <div class="example-form2" *ngIf="chooseApplication && authService.isDonor()">        
+ 
+    <div class="example-form2" *ngIf="chooseApplication && authService.isDonor()">     
         <ng-container *ngFor="let place of places">
             <a mat-list-item
                 (click)="selectedPlace = place"
                 [class.selected]="place === selectedPlace"
                 [routerLink]="['/application', 'new', 'place', place.id]"
-            >               
+            >               <!-- /application/new/place/:id -->   
                 <h3 matLine>{{ place.name}}</h3>
                 <!-- <small matLine> -->
                 <small>
@@ -67,9 +67,9 @@
             (click)="selectedPlace = place"
             [class.selected]="place === selectedPlace"
             [routerLink]="['place', place.id]"
-        >                      
+        >       <!-- /application/place/:id -->               
             <h3 matLine>{{ place.name}}</h3>
-            <!-- <small matLine> -->
+            
             <small>
                 <mat-icon>location_on</mat-icon> {{ place.city }}
             </small>
@@ -84,8 +84,8 @@
         <a *ngFor="let place of places" mat-list-item
             (click)="selectedPlace = place"
             [class.selected]="place === selectedPlace"
-            [routerLink]="['/place', place.id]"
-        >         
+            [routerLink]="['./', place.id]"
+        >         <!-- /place/:id -->   
             <mat-icon *ngIf="!place.active" matListIcon style="color: grey">toggle_off</mat-icon>
             <mat-icon *ngIf="place.active" matListIcon style="color: green">toggle_on</mat-icon>
               
@@ -107,5 +107,5 @@
 <button 
     *ngIf="!chooseApplication && !authService.isDonor()"
     mat-flat-button color="primary"
-    [routerLink]="['/place', 'add']"
+    [routerLink]="['./', 'add']" 
 >Add place</button>

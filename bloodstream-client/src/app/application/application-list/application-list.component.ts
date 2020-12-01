@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { Donation } from 'src/app/domain/donation';
@@ -42,6 +42,7 @@ export class ApplicationListComponent implements OnInit {
     }
     this.initArrays();
   }
+
 
   initArrays(){
     this.applications.sort(function(a,b) {

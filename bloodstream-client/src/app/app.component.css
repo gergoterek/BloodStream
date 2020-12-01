@@ -29,6 +29,7 @@ small {
 
 .mat-sidenav-content {
     background-color: transparent;
+    /* margin-top: 20px; */
 }
 .mat-sidenav-container {
     background-color: transparent;

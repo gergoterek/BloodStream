@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MyApplicationComponent } from '../my-application/my-application.component';
 
 import { ApplicationFormComponent } from './application-form.component';
 
@@ -8,7 +9,9 @@ describe('ApplicationFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApplicationFormComponent ]
+      declarations: [ ApplicationFormComponent ],
+      providers: [MyApplicationComponent]
+
     })
     .compileComponents();
   });

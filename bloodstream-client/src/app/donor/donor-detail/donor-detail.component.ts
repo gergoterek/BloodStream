@@ -14,6 +14,7 @@ import { DonorService } from '../donor.service';
 export class DonorDetailComponent implements OnInit {
 
   id: number;
+  applyId: number;
   donor: Donor;
 
   nextApp: Application;
@@ -25,19 +26,16 @@ export class DonorDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private donorService: DonorService,
-    private appService: ApplicationService,
+    private applicationService: ApplicationService,
     public authService: AuthService,
     private router: Router,
   ) { }
 
   async ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.id = +id;
-      this.donor = await this.donorService.getDonor(this.id);
-    }    
-    this.pastApp = await this.appService.getDonorPastApplications(this.id);
-    this.nextApp = await this.appService.getNextApplication(this.id);
+    this.routeManage(this.route.snapshot.url);
+      
+    this.pastApp = await this.applicationService.getDonorPastApplications(this.id);
+    this.nextApp = await this.applicationService.getNextApplication(this.id);
 
 
     this.unTransported = this.pastApp.filter(app => app.donation.transportDate === null);
@@ -47,6 +45,25 @@ export class DonorDetailComponent implements OnInit {
     //console.log(JSON.stringify(this.transportedApp));
 
   }  
+
+  async routeManage(del: any){
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.id = +id;
+      this.donor = await this.donorService.getDonor(this.id);
+    }  
+
+    const applyId = this.route.snapshot.paramMap.get('applyId');
+    if (applyId) {
+      this.applyId = +applyId;
+      if (this.nextApp !== null){
+          this.nextApp = null; 
+        } else {         
+          this.nextApp = await this.applicationService.getApplication(this.applyId);
+        }        
+    }
+    this.router.navigate(["/donor/profile", this.id]);
+  }
 
   
 }

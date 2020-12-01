@@ -9,7 +9,7 @@ import { Faq } from '../domain/faq';
 export class FaqService {
 
 
-  private faqAllUrl = 'http://localhost:8080/faq/all';
+  private allFaqUrl = 'http://localhost:8080/faq/all';
   private faqUrl = 'http://localhost:8080/faq';
   private delFaqUrl = 'http://localhost:8080/faq/delete';
 
@@ -19,7 +19,7 @@ export class FaqService {
 
   getFaqs(): Promise<Faq[]> {
     return this.http.get<Faq[]>(
-      this.faqAllUrl,
+      this.allFaqUrl,
       httpOptions
     ).toPromise();
   }

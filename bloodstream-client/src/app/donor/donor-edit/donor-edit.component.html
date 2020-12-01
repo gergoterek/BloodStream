@@ -48,24 +48,20 @@
         </mat-error>
     </mat-form-field>
 
-    <button 
-        *ngIf="donor.id !== authService.user.id"
+    <button
+        mat-flat-button
+        color="wipe"    
+        type="button"    
+        [routerLink]="['/donor']"
+    > Cancel </button>
+
+    <button
         mat-flat-button
         color="primary"    
         type="button"    
         (click)=onFormSave()
         [disabled]="donorForm.invalid"
         [routerLink]="['/donor']"
-    >Save</button>
-
-    <button 
-        *ngIf="donor.id === authService.user.id"
-        mat-flat-button
-        color="primary"    
-        type="button"    
-        (click)=onFormSave()
-        [disabled]="donorForm.invalid"
-        [routerLink]="['/login']"
-    >Save</button>
+    > Save </button>
 </form>
-{{donorForm.value | json}}
+<!-- {{donorForm.value | json}} -->

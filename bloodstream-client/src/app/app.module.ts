@@ -23,7 +23,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // import { MatDatetimepickerModule, MatNativeDatetimeModule } from "@mat-datetimepicker/core";
 
 import { DonorListComponent } from './donor/donor-list/donor-list.component';
-import { MainNavComponent } from '../assets/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BloodtypeFilterComponent } from './donor/bloodtype-filter/bloodtype-filter.component';
 import { LoginComponent } from './authentication/login/login.component';
@@ -50,7 +49,6 @@ import { ApplicationDetailComponent } from './application/application-detail/app
 import { MessageDetailComponent } from './message/message-detail/message-detail.component';
 import { AdminListComponent } from './donor/admin-list/admin-list.component';
 import { InformationPageComponent } from './authentication/information-page/information-page.component';
-import { ChoosePlaceComponent } from './application/choose-place/choose-place.component';
 
 
 @NgModule({
@@ -58,7 +56,6 @@ import { ChoosePlaceComponent } from './application/choose-place/choose-place.co
     AppComponent,
     FaqListComponent,
     DonorListComponent,
-    MainNavComponent,
     BloodtypeFilterComponent,
     LoginComponent,
     DonorDetailComponent,
@@ -82,9 +79,6 @@ import { ChoosePlaceComponent } from './application/choose-place/choose-place.co
     MessageDetailComponent,
     AdminListComponent,
     InformationPageComponent,
-    ChoosePlaceComponent,
-    // MatDatetimepickerModule,
-    // MatNativeDatetimeModule,sd
   ],
   imports: [
     RoutingModule,

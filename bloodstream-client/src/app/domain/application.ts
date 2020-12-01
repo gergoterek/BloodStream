@@ -5,6 +5,7 @@ import { Place } from './place';
 export class Application {
     applyId: number;
     appliedDate: string;
+    directedDonationCode: number;
     donation: Donation;
     donor: Donor;
     place: Place;

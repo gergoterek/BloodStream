@@ -58,7 +58,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
     this.save.emit(
       Object.assign(new News(), this.newsForm.value)
     );
-    console.log(JSON.stringify(this.newsForm.value));
+    //console.log(JSON.stringify(this.newsForm.value));
   }
 
   delButton(): void {

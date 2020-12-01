@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { Application } from 'src/app/domain/application';
 import { ApplicationService } from '../application.service';
@@ -14,6 +15,8 @@ export class MyApplicationComponent implements OnInit {
   pastApp: Application[] = [];
   nextApp: Application;
   selectedApp = null;
+  id: number;
+  modifiedApplication: Application
 
   constructor(
     public authService: AuthService,
@@ -24,6 +27,26 @@ export class MyApplicationComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get(':id');
+    if (id) {
+      this.id = +id;
+      if (this.nextApp.applyId === this.id){
+          this.nextApp = null;           
+      } else {
+          this.nextApp = await this.applicationService.getApplication(this.id);
+      }        
+    } 
+    this.router.navigate(['/donation']); 
+    
+
+    // let del = this.route.snapshot.url;
+    // //console.log(del);
+    // if (del.length === 2){
+    //   if(String(del).split(",")[1] === "del"){        
+    //     this.router.navigate(['/donation'])
+    //   }
+    // }
+  
     this.pastApp = await this.applicationService.getDonorPastApplications(this.authService.user.id);
     this.pastApp.sort(function(a,b) {
       return new Date(b.appliedDate).getTime() - new Date(a.appliedDate).getTime();
@@ -36,5 +59,6 @@ export class MyApplicationComponent implements OnInit {
   letDonate(): boolean {
     return new Date(this.authService.user.nextDonationDate).getDate() >= new Date().getDate();
   }
+
 
 }

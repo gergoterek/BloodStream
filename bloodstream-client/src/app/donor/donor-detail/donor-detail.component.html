@@ -34,8 +34,9 @@
     <td>{{donor.taj}}</td>
   </tr>
   <tr>
-    <td class="td">Male</td>
-    <td>{{donor.male}}</td>
+    <td class="td">Sex</td>
+    <td *ngIf="donor.male">Male</td>
+    <td *ngIf="!donor.male">Female</td>
   </tr>
   <tr>
     <td class="td">Next Possible Donation Date</td>
@@ -43,8 +44,10 @@
   </tr>
   <tr>
     <td class="td">Role</td>
-    <td>{{donor.role}}</td>
-  </tr>
+    <td *ngIf="donor.role === 'ROLE_DONOR'">Donor</td>
+    <td *ngIf="donor.role === 'ROLE_NURSE'">Nurse</td>
+    <td *ngIf="donor.role === 'ROLE_ADMIN'">Admin</td>
+</tr>
   <tr>
     <td class="td">Total Donation Number</td>
     <td>{{donor.totalDonations}}</td>

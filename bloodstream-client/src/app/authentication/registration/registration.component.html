@@ -87,7 +87,16 @@
         <mat-error *ngIf="male.invalid && (male.dirty || male.touched) && male.errors.required">
           Gender is required!
         </mat-error>
+
+        
     </mat-form-field>
+
+    <section>
+        <mat-checkbox formControlName="accepted" (click)="print()">I have read FAQ section and the requirements of the donation</mat-checkbox>
+        <mat-error *ngIf="accepted.invalid && (accepted.dirty || accepted.touched) && accepted.hasError('required')">
+            Acception of terms is required!
+          </mat-error>
+    </section>
  
     <button 
         mat-flat-button

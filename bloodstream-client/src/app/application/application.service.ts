@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Application } from '../domain/application';
 import { httpOptions } from '../authentication/auth.service';
-import { Donation } from '../domain/donation';
 
 
 @Injectable({
@@ -10,24 +9,24 @@ import { Donation } from '../domain/donation';
 })
 export class ApplicationService {
 
-  private allUrl = 'http://localhost:8080/application/all';
-  private url = 'http://localhost:8080/application';
-  private donorUrl = 'http://localhost:8080/application/donor';
-  private nextUrl = 'http://localhost:8080/application/next';
-  private delUrl = 'http://localhost:8080/application/delete';
-  private donationUrl = 'http://localhost:8080/application/donation';
-  private transportUrl = 'http://localhost:8080/application/transport';
+  private allAppUrl = 'http://localhost:8080/application/all';
+  private appUrl = 'http://localhost:8080/application';
+  private newAppUrl = 'http://localhost:8080/application/new';
+  private donorPastAppUrl = 'http://localhost:8080/application/donor';
+  private nextAppUrl = 'http://localhost:8080/application/next';
+  private delAppUrl = 'http://localhost:8080/application/delete';
+  private confirmedAppUrl = 'http://localhost:8080/application/donation';
+  private transportedAppUrl = 'http://localhost:8080/application/transport';
   private dateUrl = 'http://localhost:8080/application/date';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
-
   
 
   getApplications(): Promise<Application[]> {
     return this.http.get<Application[]>(
-      this.allUrl,
+      this.allAppUrl,
       httpOptions
     ).toPromise();
   }
@@ -35,14 +34,14 @@ export class ApplicationService {
 
   getApplication(id: number): Promise<Application> {
     return this.http.get<Application>(
-      `${this.url}/${id}`,
+      `${this.appUrl}/${id}`,
       httpOptions
     ).toPromise();
   }
 
   newApplication(application: Application): Promise<Application> {
     return this.http.post<Application>(
-      this.url,
+      this.newAppUrl,
       application,
       httpOptions
     ).toPromise();
@@ -50,21 +49,21 @@ export class ApplicationService {
 
   getDonorPastApplications(id: number): Promise<Application[]> {
     return this.http.get<Application[]>(
-      `${this.donorUrl}/${id}`,
+      `${this.donorPastAppUrl}/${id}`,
       httpOptions
     ).toPromise();
   }
 
   getNextApplication(id: number): Promise<Application> {
     return this.http.get<Application>(
-      `${this.nextUrl}/${id}`,
+      `${this.nextAppUrl}/${id}`,
       httpOptions
     ).toPromise();
   }
 
   setConfirmed(id: number, app: Application): Promise<Application> {
     return this.http.patch<Application>(
-      `${this.donationUrl}/${id}`,
+      `${this.confirmedAppUrl}/${id}`,
       app,
       httpOptions
     ).toPromise();
@@ -72,7 +71,7 @@ export class ApplicationService {
 
   setTransport(id: number, app: Application): Promise<Application> {
     return this.http.patch<Application>(
-      `${this.transportUrl}/${id}`,
+      `${this.transportedAppUrl}/${id}`,
       app,
       httpOptions
     ).toPromise();
@@ -85,7 +84,12 @@ export class ApplicationService {
     ).toPromise();
   }
 
-  
+  deleteApplication(id: number): Promise<Application> {
+    return this.http.delete<Application>(
+      `${this.delAppUrl}/${id}`,
+      httpOptions
+    ).toPromise();
+  }
   
 
   
@@ -106,10 +110,5 @@ export class ApplicationService {
   //   ).toPromise();
   // }
 
-  deleteApplication(id: number): Promise<Application> {
-    return this.http.delete<Application>(
-      `${this.delUrl}/${id}`,
-      httpOptions
-    ).toPromise();
-  }
+  
 }

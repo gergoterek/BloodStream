@@ -16,6 +16,7 @@ export class RegistrationComponent implements OnInit {
   minDate: Date;//18-65év
   maxDate: Date;
 
+
   // dateFilter = date => {
   //   const day = date.getDay();
   //   return day !== 0 && day !== 6;
@@ -36,7 +37,8 @@ export class RegistrationComponent implements OnInit {
     taj: ['', [Validators.required, Validators.pattern(/\d+/), Validators.minLength(9)]],
     birthDate: ['', [Validators.required]],
     idCard: ['', [Validators.required, Validators.minLength(6)]],
-    male: ['', [Validators.required]],    
+    male: ['', [Validators.required]],
+    accepted: [false, [Validators.required, Validators.requiredTrue]],    
     // bloodType: [null],    
     // nextDonationDate: [null],    
     // role: [null],    
@@ -51,6 +53,7 @@ export class RegistrationComponent implements OnInit {
   get birthDate() { return this.donorForm.get('birthDate'); }
   get idCard() { return this.donorForm.get('idCard'); }
   get male() { return this.donorForm.get('male'); }
+  get accepted() { return this.donorForm.get('accepted'); }
 
   constructor(
     private fb: FormBuilder,
@@ -67,9 +70,16 @@ export class RegistrationComponent implements OnInit {
   }
 
   async onFormSave() {
+    this.accepted.disable();
+    this.print();
+    console.log(JSON.stringify(this.donorForm.value))
     //this.donor = Object.assign(new Donor(), this.donorForm.value);    
     const donor = this.donorForm.value as Donor;
     await this.donorService.registration(donor);
+  }
+
+  print() {
+    console.log(this.accepted.value);
   }
 
 }

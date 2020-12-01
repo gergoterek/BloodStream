@@ -69,6 +69,13 @@ export class DonorEditComponent implements OnInit {
     console.log(JSON.stringify(this.donorForm.value)); 
     const donor = this.donorForm.value as Donor;
     await this.donorService.modifyDonor(this.id, donor);
+
+
+    if (this.authService.user.id === this.id){
+      this.authService.logout();
+    }
   }
+
+
 
 }

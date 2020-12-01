@@ -9,6 +9,7 @@ import com.elte.BloodStream.service.DonorService;
 import com.elte.BloodStream.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -25,18 +26,21 @@ public class NewsController {
         //Fv-ek leellenőrizve 10.14.
 
         //DONOR
+        @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
         @GetMapping("/all")
         public Iterable<News> getAllNews() {
                 return newsService.getAllNews();
         }
 
         //NURSE
+        @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
         @GetMapping("/{newsID}")
         public ResponseEntity<News> getNews(@PathVariable Integer newsID) {
                 return newsService.getNews(newsID);
         }
 
         //NURSE
+        @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
         @PostMapping("")
         public ResponseEntity<News> createNews(
                 @RequestBody News news
@@ -45,13 +49,17 @@ public class NewsController {
         }
 
         //NURSE
-        @DeleteMapping("/delete/{newsID}")
-        public ResponseEntity deleteNews (@PathVariable Integer newsID) { return newsService.deleteNews(newsID); }
-
-
-        //NURSE
+        @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
         @PutMapping("/{newsID}")
         public ResponseEntity<News> modifyNews (@PathVariable Integer newsID, @RequestBody News news) {
                 return newsService.modifyNews(news, newsID);
         }
+
+        //NURSE
+        @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
+        @DeleteMapping("/delete/{newsID}")
+        public ResponseEntity deleteNews (@PathVariable Integer newsID) { return newsService.deleteNews(newsID); }
+
+
+
 }

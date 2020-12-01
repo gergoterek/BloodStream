@@ -32,7 +32,8 @@
     
 }
   h2, h3 {
-    margin-top: 10px;
+    padding-top: 10px;
+    display: inline-block;
 }
 
 .next {
@@ -57,3 +58,8 @@
 button {
     margin: 10px;
   }
+
+span.titleSpan {
+  margin-top: 20px;
+}
+
