@@ -6,7 +6,7 @@
             </button>   
     </ng-container>
     <ng-container *ngIf="!ready() && !nextApp">
-        <h2> You have reached the yearly donation limit or your 56 days rest time does not run out: </h2>
+        <h2> Your 56 days rest time did not run out or you have reached the yearly donation limit! </h2>
         <h2 matLine>
             You will be able to donate after: {{ authService.user.nextDonationDate | date: 'y/MM/dd'}}
         </h2>
@@ -25,7 +25,7 @@
         </form>
     </div>
 
-    <div class="example-form2" *ngIf="chooseApplication && !nextApp">
+    <div class="example-form2" *ngIf="chooseApplication && !nextApp && ready()">
         <form [formGroup]="cityForm" (ngSubmit)="search()" >
             <mat-form-field>
                 <mat-label>City</mat-label>

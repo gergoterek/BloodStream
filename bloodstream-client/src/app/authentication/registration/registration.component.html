@@ -1,6 +1,9 @@
 <div>    
     <h1>Registration</h1>
  </div>   
+ <div *ngIf="message">
+    <h3>{{ message }} </h3>
+  </div>
 <form [formGroup]="donorForm" (ngSubmit)="onFormSave()"> 
     <mat-form-field>
         <input matInput formControlName="donorName" required>
@@ -26,7 +29,8 @@
     <mat-form-field>
         <input matInput formControlName="taj" required>
         <mat-placeholder class='placeholder'> TAJ </mat-placeholder>
-        <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && taj.errors.required">TAJ is required</mat-error>
+        <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && taj.errors.required">
+            TAJ is required</mat-error>
         <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && taj.errors.pattern">
             TAJ must contain only numbers!
         </mat-error>
@@ -92,7 +96,7 @@
     </mat-form-field>
 
     <section>
-        <mat-checkbox formControlName="accepted" (click)="print()">I have read FAQ section and the requirements of the donation</mat-checkbox>
+        <mat-checkbox formControlName="accepted">I have read FAQ section and the requirements of the donation</mat-checkbox>
         <mat-error *ngIf="accepted.invalid && (accepted.dirty || accepted.touched) && accepted.hasError('required')">
             Acception of terms is required!
           </mat-error>
@@ -104,7 +108,6 @@
         type="button"    
         (click)=onFormSave()
         [disabled]="donorForm.invalid"
-        [routerLink]="['/login']"
     >Register now</button>
     <!-- (click)=onFormSave() -->
 </form>

@@ -27,7 +27,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
   
   newsForm = this.fb.group({
     title: ['', [Validators.required]],
-    message: ['', [Validators.required]],
+    text: ['', [Validators.required]],
     publishDate: ['', [Validators.required]],
   });
   //time: ['', [Validators.required]],
@@ -38,7 +38,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
   @Output() save = new EventEmitter<News>();
   
   get title() { return this.newsForm.get('title'); }
-  get message() { return this.newsForm.get('message'); }
+  get text() { return this.newsForm.get('text'); }
   get publishDate() { return this.newsForm.get('publishDate'); }
   // get time() { return this.newsForm.get('time'); }
   

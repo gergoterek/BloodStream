@@ -32,8 +32,7 @@
     
 }
   h2, h3 {
-    padding-top: 10px;
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .next {
@@ -61,5 +60,6 @@ button {
 
 span.titleSpan {
   margin-top: 20px;
+  display: inline-block;
 }
 

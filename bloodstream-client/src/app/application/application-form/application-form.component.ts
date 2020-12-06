@@ -58,7 +58,7 @@ export class ApplicationFormComponent implements OnInit {
 
   applicationForm = this.fb.group({
     appliedDate: [undefined, [Validators.required]],
-    directedDonationCode: ['', [Validators.required, Validators.pattern(/\d+/), Validators.minLength(9)]],
+    directedDonationCode: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9)]],
   });
 
   get appliedDate() { return this.applicationForm.get('appliedDate'); }
@@ -103,7 +103,10 @@ export class ApplicationFormComponent implements OnInit {
     this.router.navigate(['/donation', await (await this.applicationService.getNextApplication(this.authService.user.id)).applyId]);
   }
 
-
+  isEmpty(): boolean {
+    //console.log(!this.directedDonationCode.value)
+    return !this.directedDonationCode;
+  }
 
 
   async choose(time: string){

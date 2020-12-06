@@ -120,7 +120,11 @@
             color="accent"    
             type="button"
             (click)="onFormSave()"
-            [disabled]="!setTime || isFullDate"
+            [disabled]="(!setTime || isFullDate) 
+                || (directedDonationCode.invalid 
+                && (directedDonationCode.dirty || directedDonationCode.touched) 
+                && directedDonationCode.hasError('minlength') || directedDonationCode.hasError('pattern')
+                && !isEmpty())"
         > Send application </button>
     </div>
 </form>

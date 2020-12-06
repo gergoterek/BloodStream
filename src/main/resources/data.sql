@@ -1,6 +1,6 @@
-INSERT INTO donor (blood_type, donor_name, password, role, username, TAJ, id_card, birth_date, next_donation_date, male) VALUES
+INSERT INTO donor (blood_type, donor_name, password, role, username, TAJ, id_card, birth_date, next_donation_date, male, total_donations) VALUES
         ('A_POZ', 'Terék Gergő', '$2a$04$YDiv9c./ytEGZQopFfExoOgGlJL6/o0er0K.hiGb5TGKHUL8Ebn..',
-         'ROLE_DONOR', 'rizsutt', 234231123, '1D899R', '2000-03-23', CURRENT_TIMESTAMP(), 1);
+         'ROLE_DONOR', 'rizsutt', 234231123, '1D899R', '2000-03-23', CURRENT_TIMESTAMP(), 1, 3);
 INSERT INTO donor (blood_type, donor_name, password, role, username, TAJ, id_card, birth_date, next_donation_date, male) VALUES
         ('ZERO_POZ', 'Pintér Dorottya', '$2a$04$YDiv9c./ytEGZQopFfExoOgGlJL6/o0er0K.hiGb5TGKHUL8Ebn..',
          'ROLE_ADMIN', 'pdorka97', 423431123, '1D899R', '1993-03-23', CURRENT_TIMESTAMP(), 0);
@@ -12,7 +12,7 @@ INSERT INTO donor (blood_type, donor_name, password, role, username, TAJ, id_car
         'ROLE_NURSE', 'kati', 423431123, '1D899R', '2010-03-23', CURRENT_TIMESTAMP(), 1);
 INSERT INTO donor (blood_type, donor_name, password, role, username, TAJ, id_card, birth_date, next_donation_date, male) VALUES
         ('A_NEG', 'Gődény György', '$2a$04$YDiv9c./ytEGZQopFfExoOgGlJL6/o0er0K.hiGb5TGKHUL8Ebn..',
-         'ROLE_DONOR', 'gödény', 423423113, '1D899R', '2009-03-23', CURRENT_TIMESTAMP(), 0);
+         'ROLE_DONOR', 'godeny', 423423113, '1D899R', '2009-03-23', CURRENT_TIMESTAMP(), 0);
 
 INSERT INTO place (address, city, active, name) VALUES ('Czuczor utca 8', 'Budapest', 1, 'Plazma');
 INSERT INTO place (address, city, active, name) VALUES ('Czuczor utca 9', 'Debrecen', 1, 'OVSZ');
@@ -40,8 +40,8 @@ INSERT INTO faq (question, answer) VALUES ('Kell-e varni veradas utan?', 'Igen c
 INSERT INTO message (title, message, send_date, seen, donor_id, apply_id) VALUES ('Your previous donation', 'Thank you!', CURRENT_TIMESTAMP(), 0, 1, null);
 INSERT INTO message (title, message, send_date, seen, donor_id, apply_id) VALUES ('Visszajelzes', 'Sajnos em megfelelő a verallapot!', CURRENT_TIMESTAMP(), 0, 2, null);
 
-INSERT INTO news (title, message, publish_date) VALUES ('Nyitvatartásunk','Hosszabbitott nyitvatartassal varjuk veradoinkat!', CURRENT_TIMESTAMP());
-INSERT INTO news (title, message, publish_date) VALUES ('Unnepi nyitvatartasunk', 'Unnepi nyitvatartasunk a kovetkezo:', CURRENT_TIMESTAMP());
+INSERT INTO news (title, text, publish_date) VALUES ('Nyitvatartásunk','Hosszabbitott nyitvatartassal varjuk veradoinkat!', CURRENT_TIMESTAMP());
+INSERT INTO news (title, text, publish_date) VALUES ('Unnepi nyitvatartasunk', 'Unnepi nyitvatartasunk a kovetkezo:', CURRENT_TIMESTAMP());
 
 
 INSERT INTO opening_time (place_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday, start_time, closing_time) VALUES

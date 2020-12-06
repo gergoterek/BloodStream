@@ -27,7 +27,7 @@ public class NewsService {
     public ResponseEntity<News> createNews(News news) {
         News createNews = new News();
         createNews.setTitle(news.getTitle());
-        createNews.setMessage(news.getMessage());
+        createNews.setText(news.getText());
         createNews.setPublishDate(news.getPublishDate());
 
         return ResponseEntity.ok(newsRepository.save(news));
@@ -49,7 +49,7 @@ public class NewsService {
         if (oldNews.isPresent()) {
             News createdNews = oldNews.get();
             createdNews.setTitle(news.getTitle());
-            createdNews.setMessage(news.getMessage());
+            createdNews.setText(news.getText());
             createdNews.setPublishDate(news.getPublishDate());
             return ResponseEntity.ok(newsRepository.save(createdNews));
         } else {

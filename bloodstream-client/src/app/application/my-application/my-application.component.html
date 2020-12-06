@@ -1,10 +1,29 @@
 <h2 *ngIf="nextApp"> Your next donation:</h2>
 <span class="titleSpan" *ngIf="!nextApp">
-    <h2 *ngIf="letDonate()"> It looks like you have no following donation!</h2>
-    <h2 *ngIf="!letDonate()"> Sorry, you have to wait 56 days after your last donation: 
-        {{authService.user.nextDonationDate | date: 'y/MM/dd'}}</h2>
-    <button mat-flat-button color="primary" [routerLink]="['/place']" [disabled]=!letDonate()> Apply now!</button>
+    <h2 *ngIf="letDonate()"> It looks like you have no following donation!</h2>    
+    <button mat-flat-button *ngIf="letDonate()" color="primary" [routerLink]="['/place']"> Apply now!</button>
 </span>
+
+<span class="titleSpan" *ngIf="!nextApp">
+    <h2 *ngIf="!letDonate()">  Your 56 days rest time did not run out or you have reached the yearly donation limit! </h2>
+    <h2 matLine *ngIf="!letDonate()">
+        You will be able to donate after: {{ authService.user.nextDonationDate | date: 'y/MM/dd'}}
+    </h2>
+</span>
+<!-- <div *ngIf="authService.isDonor()">
+    <ng-container *ngIf="nextApp">
+        <h1> You have an existing application</h1>
+            <button mat-raised-button color="primary" [routerLink]="['/donation']">
+                Go to donations
+            </button>   
+    </ng-container>
+    <ng-container *ngIf="!ready() && !nextApp">
+        <h2> You have reached the yearly donation limit or your 56 days rest time does not run out: </h2>
+        <h2 matLine>
+            You will be able to donate after: {{ authService.user.nextDonationDate | date: 'y/MM/dd'}}
+        </h2>
+    </ng-container>
+</div> -->
 
 
 <mat-nav-list  *ngIf="nextApp">      

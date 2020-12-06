@@ -11,6 +11,8 @@ export const httpOptions = {
   })
 };
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +22,8 @@ export class AuthService {
   user: Donor;
   redirectUrl: string;
 
-  private usersUrl = 'http://localhost:8080/donor';
+  private usersUrl = 'http://localhost:8080/donor';  
+  private regUrl = 'http://localhost:8080/donor/registration';
 
   constructor(
     private http: HttpClient
@@ -47,6 +50,14 @@ export class AuthService {
       console.log('hiba', e);
       return Promise.resolve(false);
     }
+  }
+
+  async registration(donor: Donor): Promise<Donor> {
+      return this.http.post<Donor>(
+      this.regUrl,
+      donor,
+      httpOptions,
+    ).toPromise();
   }
 
   isAdmin() {

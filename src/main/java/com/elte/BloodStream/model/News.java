@@ -31,7 +31,7 @@ public class News {
     private String title;
 
     @Column(nullable = false, length = 1000)
-    private String message;
+    private String text;
 
     @Column(nullable = false)
 //    @JsonFormat( pattern = "yyyy-MM-dd HH:mm a z")

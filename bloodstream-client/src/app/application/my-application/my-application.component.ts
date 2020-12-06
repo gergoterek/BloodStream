@@ -27,19 +27,23 @@ export class MyApplicationComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    const id = this.route.snapshot.paramMap.get(':id');
+    const id = this.route.snapshot.paramMap.get('id');
+    //console.log(String(id))
     if (id) {
       this.id = +id;
-      if (this.nextApp.applyId === this.id){
-          this.nextApp = null;           
+      if(this.nextApp){
+        if (this.nextApp.applyId === this.id){
+            this.nextApp = null;           
+        } 
       } else {
           this.nextApp = await this.applicationService.getApplication(this.id);
       }        
+      //console.log("run")
+      this.router.navigate(['/donation']); 
     } 
-    this.router.navigate(['/donation']); 
     
 
-    // let del = this.route.snapshot.url;
+    // let del = this.route.snapshot.url; 
     // //console.log(del);
     // if (del.length === 2){
     //   if(String(del).split(",")[1] === "del"){        
@@ -57,7 +61,7 @@ export class MyApplicationComponent implements OnInit {
   }
 
   letDonate(): boolean {
-    return new Date(this.authService.user.nextDonationDate).getDate() >= new Date().getDate();
+    return new Date(this.authService.user.nextDonationDate).getDate() <= new Date().getDate();
   }
 
 

@@ -28,7 +28,7 @@ public class DonorController {
 
     //GUEST
     @PostMapping("/registration")
-    public ResponseEntity<Donor> register(@RequestBody Donor donor) { return donorService.register(donor); }
+    public ResponseEntity<Boolean> register(@RequestBody Donor donor) { return donorService.register(donor); }
 
 
     //ROLE_DONOR

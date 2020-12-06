@@ -54,6 +54,8 @@ public class Donor {
     @Enumerated(EnumType.STRING)
     private BloodTypes bloodType;
 
+
+
     public enum BloodTypes {
         A_POZ, A_NEG, B_POZ, B_NEG, ZERO_POZ, ZERO_NEG, AB_POZ, AB_NEG
     }

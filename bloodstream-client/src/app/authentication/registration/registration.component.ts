@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Donor } from '../../domain/donor';
 import { DonorService } from '../../donor/donor.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -29,12 +30,14 @@ export class RegistrationComponent implements OnInit {
   //const newDate = new Date(); 
   // console.log(makeDate(newDate));
 
+  message: string;
+  isFailed: boolean;
   hidePassword = true;
   donorForm = this.fb.group({
     donorName: ['', [Validators.required]],
     username: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(8)]],
-    taj: ['', [Validators.required, Validators.pattern(/\d+/), Validators.minLength(9)]],
+    taj: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9)]],
     birthDate: ['', [Validators.required]],
     idCard: ['', [Validators.required, Validators.minLength(6)]],
     male: ['', [Validators.required]],
@@ -57,7 +60,8 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public donorService: DonorService,
+    public authService: AuthService,
+    //public donorService: DonorService,
     // private location: Location,
     private router: Router,
   ) { }
@@ -67,20 +71,31 @@ export class RegistrationComponent implements OnInit {
     this.minDate.setFullYear(this.minDate.getFullYear()-65);
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear()-18);
+    this.message = "";
+    this.isFailed = false;
   }
 
   async onFormSave() {
     this.accepted.disable();
-    this.print();
-    console.log(JSON.stringify(this.donorForm.value))
+    //this.print();
+    //console.log(JSON.stringify(this.donorForm.value))
     //this.donor = Object.assign(new Donor(), this.donorForm.value);    
     const donor = this.donorForm.value as Donor;
-    await this.donorService.registration(donor);
+    const success = await this.authService.registration(donor);
+    //console.log(JSON.stringify(success));
+    if (success) {
+      this.router.navigate(["/login"])
+    } else {
+      this.message = 'Registration failed, try with different username!'
+    }
   }
 
-  print() {
-    console.log(this.accepted.value);
-  }
+
+  // print() {
+  //   console.log(this.accepted.value);
+  // }
+
+
 
 }
 // export const MY_FORMATS = {

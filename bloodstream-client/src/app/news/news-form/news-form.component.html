@@ -10,10 +10,10 @@
             >Title is required</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <textarea matInput formControlName="message" required></textarea>
-        <mat-placeholder class='placeholder'> Message </mat-placeholder>
-        <mat-error *ngIf="message.invalid  && (message.dirty || message.touched) && message.errors.required"
-            >Message is required</mat-error>
+        <textarea matInput formControlName="text" required></textarea>
+        <mat-placeholder class='placeholder'> Text </mat-placeholder>
+        <mat-error *ngIf="text.invalid  && (text.dirty || text.touched) && text.errors.required"
+            >Text is required</mat-error>
     </mat-form-field>
 
     <mat-form-field>

@@ -1,6 +1,6 @@
 export class News {
     newsId: number;
-    message: string;
+    text: string;
     publishDate: string;
     title: string;
 }

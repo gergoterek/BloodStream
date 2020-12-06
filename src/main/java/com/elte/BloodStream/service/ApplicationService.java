@@ -114,8 +114,9 @@ public class ApplicationService {
             newDonation.setTransportDate(null);
             modifiedApplication.setDonation(newDonation);
 
-
-            modifiedApplication.getDonor().setNextDonationDate(calculateNextDonationTime(application.getDonor()));
+            modifiedApplication.getDonor().setTotalDonations(modifiedApplication.getDonor().getTotalDonations() + 1);
+            modifiedApplication.getDonor().setNextDonationDate(
+                    calculateNextDonationTime(optionalApplication.get().getDonor()));
 
 
             donationRepository.save(newDonation);

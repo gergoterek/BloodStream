@@ -1,5 +1,5 @@
 <h1>News</h1>
-<h2 *ngIf="news.length===0">You have no news</h2>
+<h2 *ngIf="news.length === 0">You have no news</h2>
 
 <mat-list class="example-form">
     <div *ngIf="authService.isDonor()">
@@ -15,10 +15,10 @@
                 <h3 matLine>{{ new.title }}</h3>
                 <!-- <small matLine> -->
                 <small>
-                    <mat-icon>access_time</mat-icon> {{ new.publishDate | date: 'y/MM/dd hh:mm'}}
+                    <mat-icon>access_time</mat-icon> {{ new.publishDate | date: 'y/MM/dd'}}
                 </small>
 
-                <p matLine>{{ new.message}}</p>
+                <p matLine>{{ new.text}}</p>
             </a>
         </ng-container>
     </div>
@@ -35,10 +35,10 @@
             <h3 matLine>{{ new.title }}</h3>
             <!-- <small matLine> -->
             <small>
-                <mat-icon>access_time</mat-icon> {{ new.publishDate | date: 'y/MM/dd hh:mm'}}
+                <mat-icon>access_time</mat-icon> {{ new.publishDate | date: 'y/MM/dd'}}
             </small>
 
-            <p matLine>{{ new.message}}</p>
+            <p matLine>{{ new.text}}</p>
         </a>
     </div>
     

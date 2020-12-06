@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/faq/**",
                         "/application/**",
                         "/message/**",
-                        "place/**"
+                        "/place/**"
                 ).permitAll()   // important!
                 .anyRequest().authenticated()
                 .and()
@@ -55,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
+
     }
 
     @Bean
