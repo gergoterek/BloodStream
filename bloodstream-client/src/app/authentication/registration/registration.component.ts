@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnInit {
     donorName: ['', [Validators.required]],
     username: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(8)]],
-    taj: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9)]],
+    taj: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9), Validators.maxLength(9)]],
     birthDate: ['', [Validators.required]],
     idCard: ['', [Validators.required, Validators.minLength(6)]],
     male: ['', [Validators.required]],

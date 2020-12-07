@@ -37,7 +37,7 @@ public class Donor {
     private String username;
 
 
-
+    @JsonProperty(access = WRITE_ONLY)
     @Column(nullable = false)
     private String password;
 

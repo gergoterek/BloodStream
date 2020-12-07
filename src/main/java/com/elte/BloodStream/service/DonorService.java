@@ -64,7 +64,6 @@ public class DonorService {
             donorRepository.save(newDonor);
             return ResponseEntity.ok(true);
         } else {
-            System.out.println("NINCSJIFNI");
             return ResponseEntity.ok(false);
         }
     }

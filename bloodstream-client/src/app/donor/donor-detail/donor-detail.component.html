@@ -13,7 +13,7 @@
     <td class="td">Donor name</td>
     <td>{{donor.donorName}}</td>
   </tr>
-  <tr>
+  <tr *ngIf="donor.role === 'ROLE_DONOR'">
     <td class="td">Blood Type</td>
     <td>{{donor.bloodType}}</td>
   </tr>
@@ -38,7 +38,7 @@
     <td *ngIf="donor.male">Male</td>
     <td *ngIf="!donor.male">Female</td>
   </tr>
-  <tr>
+  <tr *ngIf="donor.role === 'ROLE_DONOR'">
     <td class="td">Next Possible Donation Date</td>
     <td>{{donor.nextDonationDate | date: 'y/MM/dd' }}</td>
   </tr>
@@ -48,7 +48,7 @@
     <td *ngIf="donor.role === 'ROLE_NURSE'">Nurse</td>
     <td *ngIf="donor.role === 'ROLE_ADMIN'">Admin</td>
 </tr>
-  <tr>
+  <tr *ngIf="donor.role === 'ROLE_DONOR'">
     <td class="td">Total Donation Number</td>
     <td>{{donor.totalDonations}}</td>
   </tr>

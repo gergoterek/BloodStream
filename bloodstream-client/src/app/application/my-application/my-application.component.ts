@@ -31,13 +31,15 @@ export class MyApplicationComponent implements OnInit {
     //console.log(String(id))
     if (id) {
       this.id = +id;
-      if(this.nextApp){
-        if (this.nextApp.applyId === this.id){
-            this.nextApp = null;           
-        } 
-      } else {
-          this.nextApp = await this.applicationService.getApplication(this.id);
-      }        
+      console.log(JSON.stringify(this.nextApp));    
+      // if(this.nextApp !== undefined){
+      //   if (this.nextApp.applyId === this.id || this.nextApp.applyId !== null){
+      //       this.nextApp = null;           
+      //   }
+      // } else {
+      //     this.nextApp = await this.applicationService.getApplication(this.id);
+      // }  
+      this.nextApp = await this.applicationService.getNextApplication(this.authService.user.id);  
       //console.log("run")
       this.router.navigate(['/donation']); 
     } 

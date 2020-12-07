@@ -10,15 +10,21 @@
     <mat-form-field>
       <input matInput formControlName="username" required>
       <mat-placeholder class='placeholder'> Username </mat-placeholder>
-      <mat-error *ngIf="username.invalid">Username is required</mat-error>
+      <mat-error *ngIf="username.invalid && (username.dirty || username.touched) && username.errors.required">Username is required</mat-error>
+      <mat-error *ngIf="username.invalid && (username.dirty || username.touched) && username.hasError('minlength')">
+          Minimum username length is 6!
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput formControlName="password" required [type]="hidePassword ? 'password' : 'text'">
       <mat-placeholder class='placeholder'> Password </mat-placeholder>
       <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-      <mat-error *ngIf="password.invalid">Password is required</mat-error>
+      <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">Password is required (8 length)</mat-error>
+      <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.hasError('minlength')">Minimum length is 8</mat-error>
     </mat-form-field>
+
+    
 
 
     <div>

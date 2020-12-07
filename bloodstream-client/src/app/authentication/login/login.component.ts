@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   message: string;
   hidePassword = true;
   form = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    username: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
   get username() { return this.form.get('username'); }

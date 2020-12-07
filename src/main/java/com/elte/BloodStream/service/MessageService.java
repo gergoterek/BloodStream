@@ -84,7 +84,7 @@ public class MessageService {
 
     void regMessage(Donor donor){
         Message msg = new Message();
-        msg.setTitle("Regisztáció");
+        msg.setTitle("Registration");
         msg.setMessage("Köszönjük, hogy regisztrált oldalunkra! Foglaljon időpontot már most!");
         msg.setSeen(false);
         msg.setDonor(donor);
@@ -96,10 +96,10 @@ public class MessageService {
 
     void transportNewMsg(Application application){
         Message msg = new Message();
-        msg.setTitle("Visszajelzes a veradasarol");
+        msg.setTitle("Feedback about your previous donation");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        msg.setMessage("Köszönjük, hogy véradàsàval hozzàjàrult egy beteg gyògyulàsàhoz! Az Ön àltal adott vért a mai napon ("
-                + formatter.format(new Date()) + ") szàllìtottàk ki a kòrhàzba! Szép napot! OVSZ");
+        msg.setMessage("Thank you for your previous donation has been succesfully transported on ("
+                + formatter.format(new Date()) + ") to the destionation hospital! Have a nice day!");
         msg.setSendDate(LocalDateTime.now());
         msg.setApplication(application);
         msg.setDonor(application.getDonor());

@@ -20,29 +20,29 @@ public class FaqController {
     @Autowired
     FaqService faqService;
 
-    //Fv-ek leellenőrizve 10.14.
 
-    //GUEST
+
+
     @GetMapping("/all")
     public Iterable<Faq> getAllFaq() {
         return faqService.getAllFaq();
     }
 
-    //NURSE
+
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @GetMapping("/{faqId}")
     public ResponseEntity<Faq> getFaq(@PathVariable Integer faqId) {
         return faqService.getFaq(faqId);
     }
 
-    //NURSE
+
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @PutMapping("/{faqID}")
     public ResponseEntity<Faq> modifyFaq(@PathVariable Integer faqID, @RequestBody Faq faq) {
         return faqService.modifyFaq(faqID, faq);
     }
 
-    //NURSE
+
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @PostMapping("")
     public ResponseEntity<Faq> createFaq(
@@ -51,11 +51,11 @@ public class FaqController {
         return faqService.createFaq(faq);
     }
 
-    //NURSE
+
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @DeleteMapping("/delete/{faqID}")
     public ResponseEntity<Faq> deleteFaq(@PathVariable Integer faqID) {
-        return faqService.deleteFaq(faqID);
+        return faqService.deleteFaq(new Faq());
     }
 
 }

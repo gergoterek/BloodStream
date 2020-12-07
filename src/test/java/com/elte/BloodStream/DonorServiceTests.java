@@ -8,10 +8,15 @@ import com.elte.BloodStream.service.DonorService;
 import org.apache.tomcat.jni.Local;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static com.elte.BloodStream.model.Donor.BloodTypes.A_POZ;
+import static com.elte.BloodStream.model.Donor.Role.ROLE_DONOR;
 import static org.junit.Assert.assertEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
@@ -23,7 +28,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DonorServiceTest {
+public class DonorServiceTests {
 
         @Autowired
         private DonorService donorService;
@@ -32,15 +37,34 @@ public class DonorServiceTest {
         private DonorRepository donorRepository;
 
         @Test
-        public void getAllApplicationsTest() {
+        public void getDonorsTest() {
             when(donorRepository.findAll()).thenReturn(Stream
-                    .of( new Donor()).collect(Collectors.toList()
+                    .of( new Donor
+                        (
+                            100,"user", "password", "User",
+                            true,0,  A_POZ, 123456789, "1Q2W3E", new Date(),
+                            LocalDateTime.now(), ROLE_DONOR, null, null
+                        )
+                    ).collect(Collectors.toList()
             ));
             assertEquals(donorRepository.findAll().size(), 1);
         }
 
-        //"user", "password", "User", true, "A_POZ", 123456789, "1Q2W3E", new Date(), LocalDateTime.now(), "ROLE_DONOR"
+    @Test
+    public void registerDonorTest() {
+        //given
+        Donor donor = new Donor (
+                100,"user", "password", "User",
+                true,0,  A_POZ, 123456789, "1Q2W3E", new Date(),
+                LocalDateTime.now(), ROLE_DONOR, null, null
+            );
 
+        //when
+        when(donorRepository.save(donor)).thenReturn(donor);
+
+        //then
+        assertEquals(donorService.register(donor), new ResponseEntity(true, HttpStatus.OK));
+    }
 
 
 }

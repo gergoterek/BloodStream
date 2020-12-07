@@ -34,8 +34,8 @@
         <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && taj.errors.pattern">
             TAJ must contain only numbers!
         </mat-error>
-        <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && taj.hasError('minlength')">
-            Minimum length is 9!
+        <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && (taj.hasError('minlength') || taj.hasError('maxlength'))">
+            TAJ length is 9!
         </mat-error>
     </mat-form-field>
     <!-- <mat-form-field>
@@ -111,4 +111,4 @@
     >Register now</button>
     <!-- (click)=onFormSave() -->
 </form>
-{{donorForm.value | json}}
+<!-- {{donorForm.value | json}} -->
