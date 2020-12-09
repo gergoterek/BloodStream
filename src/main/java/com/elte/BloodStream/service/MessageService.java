@@ -1,9 +1,6 @@
 package com.elte.BloodStream.service;
 
-import com.elte.BloodStream.model.Application;
-import com.elte.BloodStream.model.Donation;
-import com.elte.BloodStream.model.Donor;
-import com.elte.BloodStream.model.Message;
+import com.elte.BloodStream.model.*;
 import com.elte.BloodStream.repository.DonorRepository;
 import com.elte.BloodStream.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +26,10 @@ public class MessageService {
 
 
     //NURSE - /message/create/{msgID}
-    public ResponseEntity<Message> createMessage(Message msg, Integer msgID) {
-
-        Optional<Donor> targetDonor = donorRepository.findById(msgID);
+    public ResponseEntity<Message> createMessage(Message msg, Integer donorID) {
+        Optional<Donor> targetDonor = donorRepository.findById(donorID);
         if (targetDonor.isPresent()) {
             Donor donor = targetDonor.get();
-
             Message newMsg = new Message();
             newMsg.setTitle(msg.getTitle());
             newMsg.setMessage(msg.getMessage());
@@ -44,7 +39,6 @@ public class MessageService {
             newMsg.setSendDate(LocalDateTime.now());
 
             donor.getMessages().add(msg);
-
             return ResponseEntity.ok(messageRepository.save(newMsg));
         } else {
             return ResponseEntity.notFound().build();
@@ -52,12 +46,18 @@ public class MessageService {
     }
 
 
-
     //USER - NURSE - /message/donor/{donorID}
     public Iterable<Message> getDonorMessages( Integer donorId) { return messageRepository.findAllByDonorId(donorId); }
 
     //USER - NURSE - /message/{msgId}
-    public Message getMessage (Integer msgId) { return messageRepository.findByMsgId(msgId).get(); }
+    public ResponseEntity<Message> getMessage (Integer msgId) {
+        Optional<Message> optionalMessage = messageRepository.findByMsgId(msgId);
+        if (optionalMessage.isPresent()) {
+            return ResponseEntity.ok(optionalMessage.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
     //NURSE - /message/all
@@ -69,10 +69,7 @@ public class MessageService {
     //NURSE - /application/set/appeared/{id}
     public ResponseEntity<Message> setSeen(Integer msgID, Message msg) {
         Optional<Message> optionalMsg = messageRepository.findByMsgId(msgID);
-        //System.out.println("MOOOOOOOOOOST" + donorID + msg.getDonor().getId()+ optionalMsg.isPresent());
-        if(
-                optionalMsg.isPresent()
-        ){
+        if( optionalMsg.isPresent() ){
             Message modifiedMsg = optionalMsg.get();
             modifiedMsg.setSeen(msg.getSeen());
 
@@ -85,7 +82,7 @@ public class MessageService {
     void regMessage(Donor donor){
         Message msg = new Message();
         msg.setTitle("Registration");
-        msg.setMessage("Köszönjük, hogy regisztrált oldalunkra! Foglaljon időpontot már most!");
+        msg.setMessage("Thank you, for registrate to our website! Apply for a donation now!");
         msg.setSeen(false);
         msg.setDonor(donor);
         msg.setApplication(null);
@@ -94,7 +91,7 @@ public class MessageService {
         messageRepository.save(msg);
     }
 
-    void transportNewMsg(Application application){
+    public void transportNewMsg(Application application){
         Message msg = new Message();
         msg.setTitle("Feedback about your previous donation");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

@@ -29,7 +29,7 @@ public class MessageController {
     //ROLE_DONOR - ADMIN
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
     @GetMapping("/{id}")
-    public Message getMessage(@PathVariable Integer id) {
+    public ResponseEntity<Message> getMessage(@PathVariable Integer id) {
         return messageService.getMessage(id);
     }
 

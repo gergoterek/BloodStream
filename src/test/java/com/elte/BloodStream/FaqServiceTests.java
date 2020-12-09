@@ -6,7 +6,10 @@ import com.elte.BloodStream.repository.DonorRepository;
 import com.elte.BloodStream.repository.FaqRepository;
 import com.elte.BloodStream.service.DonorService;
 import com.elte.BloodStream.service.FaqService;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -38,66 +41,84 @@ public class FaqServiceTests {
     @MockBean
     private FaqRepository faqRepository;
 
+    Faq faq = null;
+    Faq faq2 = null;
+    Faq faq3 = null;
+
+    @Before
+    public void init() {
+        faq = Mockito.mock(Faq.class);
+        faq2 = Mockito.mock(Faq.class);
+        faq3 = Mockito.mock(Faq.class);
+    }
+
+    @After
+    public void cleanUp() {
+        System.out.println(faq);
+        faq = null;
+        faq2 = null;
+        faq3 = null;
+    }
+
     @Test
     public void getFaqsTest() {
         //given
-        Faq faq1 = new Faq( 10, "What?", "Who?");
-        Faq faq2 = new Faq( 10, "What?", "Who?");
-
         //when
         when(faqRepository.findAll()).thenReturn(
-                Stream.of( faq1, faq2 ).collect(Collectors.toList())
+                Stream.of( faq, faq2, faq3 ).collect(Collectors.toList())
         );
-
         //then
-        assertEquals(faqRepository.findAll().size(), 1);
+        assertEquals(3, faqRepository.findAll().size());
+        verify(faqRepository, times(1)).findAll();
     }
-
 
     @Test
     public void getFaqTest() {
         //given
-        final Faq faq = new Faq( 1, "What?", "Who?");
-
-        //when
+        int faqID = 1;
         Optional<Faq> oFaq = Optional.of(faq);
-        when(faqRepository.findById(1)).thenReturn(oFaq);
-
+        //when
+        when(faq.getFaqId()).thenReturn(faqID);
+        when(faqRepository.findByFaqId(faq.getFaqId())).thenReturn(oFaq);
         //then
-        assertEquals(faqRepository.findByFaqId(faq.getFaqId()), faq);
+        assertEquals(new ResponseEntity(faq, HttpStatus.OK), faqService.getFaq(faq.getFaqId()));
+        verify(faqRepository, times(1)).findByFaqId(faq.getFaqId());
     }
 
     @Test
-    public void deleteFaqTest() {
-
+    public void createFaqTest() {
         //given
-        final Faq faq = new Faq( 1, "What?", "Who?");
-
-        Optional<Faq> oFaq = Optional.of(faq);
-        Mockito.when(faqRepository.findById(1)).thenReturn(oFaq);
-
         //when
-        faqService.deleteFaq(faq);
-
+        Mockito.when(faqRepository.save(any(Faq.class))).thenReturn(faq);
         //then
-        Mockito.verify(faqRepository, times(1)).deleteById(faq.getFaqId());
-
-
-
-
-
-//        final ResponseEntity<Faq> result = faqService.deleteFaq(faq.getFaqId());
-//        verify(faqRepository, times(1)).deleteById(faq.getFaqId());
-//
-//        assertEquals(result, new ResponseEntity(true, HttpStatus.OK));
-
-
-
-
-
-
-
+        assertEquals(new ResponseEntity(faq, HttpStatus.OK), faqService.createFaq(faq));
+        verify(faqRepository, times(1)).save(any(Faq.class));
     }
 
+    @Test
+    public void modifyFaqTest() {
+        //given
+        int faqID = 1;
+        Optional<Faq> oFaq = Optional.of(faq);
+        //when
+        when(faq.getFaqId()).thenReturn(faqID);
+        when(faq2.getFaqId()).thenReturn(faqID);
+        when(faqRepository.findByFaqId(faq.getFaqId())).thenReturn(oFaq);
+        //then
+        assertEquals(new ResponseEntity(HttpStatus.OK), faqService.modifyFaq(faq2.getFaqId(), faq2));
+        verify(faqRepository, times(1)).findByFaqId(faq.getFaqId());
+    }
 
+//    @Test
+//    public void deleteFaqTest() {
+//        //given
+//        int faqID = 1;
+//        Optional<Faq> oFaq = Optional.of(faq);
+//        //when
+//        when(faq.getFaqId()).thenReturn(faqID);
+//        Mockito.when(faqRepository.findByFaqId( faqID )).thenReturn(oFaq);
+//        faqService.deleteFaq(faq);
+//        //then
+//        verify(faqRepository, times(1)).delete(faq);
+//    }
 }

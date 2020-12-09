@@ -36,7 +36,7 @@
         color="primary"      
         type="button"    
         (click)=onFormSave()   
-        [disabled]="msgForm.invalid || !existingID()"
+        [disabled]="msgForm.invalid || (!existingID() && !isDisabled)"
         [routerLink]="['/message']"
     >Send</button>
         

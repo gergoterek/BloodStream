@@ -31,27 +31,13 @@ public class FaqService {
         return ResponseEntity.ok(faqRepository.save(newFaq));
     }
 
-    //NURSE - faq/delete/{id}
-//    public ResponseEntity<Faq> deleteFaq(Integer id) {
-//        Optional<Faq> foundFaq = faqRepository.findByFaqId(id);
-//        if (foundFaq.isPresent()){
-//            System.out.println("1");
-//            faqRepository.deleteById(id);
-//            return ResponseEntity.ok().build();
-//        } else{
-//            System.out.println("2");
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-
-    public ResponseEntity<Faq> deleteFaq(Faq faq) {
-        Optional<Faq> foundFaq = faqRepository.findByFaqId(faq.getFaqId());
+    //NURSE - /faq/delete/{faqID}
+    public ResponseEntity<Faq> deleteFaq(Integer faqId) {
+        Optional<Faq> foundFaq = faqRepository.findByFaqId(faqId);
         if (foundFaq.isPresent()){
-            System.out.println("1");
-            faqRepository.delete(faq);
+            faqRepository.deleteById(faqId);
             return ResponseEntity.ok().build();
         } else{
-            System.out.println("2");
             return ResponseEntity.notFound().build();
         }
     }
@@ -69,7 +55,7 @@ public class FaqService {
     //NURSE - /faq/modify/{id}
     public ResponseEntity<Faq> modifyFaq(Integer faqID, Faq faq) {
 
-        Optional<Faq> oldFaq = faqRepository.findById(faqID);
+        Optional<Faq> oldFaq = faqRepository.findByFaqId(faqID);
 
         if (oldFaq.isPresent()) {
             Faq createdFaq = oldFaq.get();

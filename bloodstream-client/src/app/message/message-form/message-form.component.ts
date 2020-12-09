@@ -17,6 +17,7 @@ export class MessageFormComponent implements OnInit {
   id: number;
   donors: Donor [] = []
   errorMsg = "";
+  isDisabled = false;
   
   constructor(
     private fb: FormBuilder,
@@ -33,12 +34,13 @@ export class MessageFormComponent implements OnInit {
         this.msgForm.patchValue({
           donorID: id
           //(this.donor.bloodType === null) ? "undefined" : this.donor.bloodType,
-        }); 
+        });
+        this.isDisabled = true;
         this.donorID.disable();
       } else {
         this.donors = await this.donorService.getDonors();
         this.donors = this.donors.filter(donor => donor.role === "ROLE_DONOR");
-        console.log(JSON.stringify(this.donors));
+        //console.log(JSON.stringify(this.donors));
       }
 
       

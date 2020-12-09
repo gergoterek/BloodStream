@@ -43,7 +43,9 @@ public class ApplicationController {
 
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
     @GetMapping("/{applyID}")
-    public Application getApplication(@PathVariable Integer applyID) { return applicationService.getApplication(applyID); }
+    public ResponseEntity<Application> getApplication(@PathVariable Integer applyID) {
+        return applicationService.getApplication(applyID);
+    }
 
 
     //DONOR - /application/{donorID}

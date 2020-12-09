@@ -30,6 +30,16 @@ public class PlaceService {
         return placeRepository.findAll();
     }
 
+    //NURSE - faq/{id}
+    public ResponseEntity<Place> getPlace(Integer id) {
+        Optional<Place> foundPlace = placeRepository.findById(id);
+        if (foundPlace.isPresent()){
+            return ResponseEntity.ok(foundPlace.get());
+        } else{
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 //    //Donor
 //    public Iterable<Place> getPlacesByCity(String city) {
 //        return placeRepository.findAllByCity(city);
@@ -95,15 +105,7 @@ public class PlaceService {
     }
 
 
-    //NURSE - faq/{id}
-    public ResponseEntity<Place> getPlace(Integer id) {
-        Optional<Place> foundPlace = placeRepository.findById(id);
-        if (foundPlace.isPresent()){
-            return ResponseEntity.ok(foundPlace.get());
-        } else{
-            return ResponseEntity.badRequest().build();
-        }
-    }
+
 
 
 

@@ -42,10 +42,14 @@ public class ApplicationService {
     public List<Application> getAllApplications() { return applicationRepository.findAll(); }
 
     //DONOR - /application/{applyID}
-    public Application getApplication(Integer id) { return applicationRepository.findByApplyId(id).get(); }
-
-
-
+    public ResponseEntity<Application> getApplication(Integer id) {
+        Optional<Application> optionalApplication = applicationRepository.findByApplyId(id);
+        if (optionalApplication.isPresent()){
+            return ResponseEntity.ok(optionalApplication.get());
+        } else{
+            return ResponseEntity.badRequest().build();
+        }
+    }
 
     //ADMIN - /application/{donorID}
     public List<Application> getDonorPastApplications(Integer id) {
@@ -62,7 +66,6 @@ public class ApplicationService {
 
         Optional<Donor> foundDonor = donorRepository.findById(application.getDonor().getId());
         Optional<Place> foundPlace = placeRepository.findById(application.getPlace().getId());
-
         if (
                 foundDonor.isPresent()
                 && foundPlace.isPresent()
@@ -70,9 +73,9 @@ public class ApplicationService {
                 && application.getDonor().getNextDonationDate().compareTo(LocalDateTime.now())<0)
         {
             Application newApp = new Application();
-            newApp.setDonor(donorRepository.findById(application.getDonor().getId()).get());
-            newApp.setPlace(placeRepository.findById(application.getPlace().getId()).get());
-            System.out.println(application.getAppliedDate());
+            newApp.setDonor(foundDonor.get());
+            newApp.setPlace(foundPlace.get());
+            //System.out.println(application.getAppliedDate());
             newApp.setAppliedDate(application.getAppliedDate());
             newApp.setDonation(null);
 
@@ -87,8 +90,7 @@ public class ApplicationService {
     public ResponseEntity<Application> deleteDonorApplication(Integer applicationID) {
 
         Optional<Application> optionalApplication = applicationRepository.findById(applicationID);
-        System.out.println(applicationID);
-        System.out.println(optionalApplication.get().getDonation() == null);
+
         if(optionalApplication.isPresent() && optionalApplication.get().getDonation() == null){
             optionalApplication.get().getDonor().setNextDonationDate(LocalDateTime.now());
             applicationRepository.deleteById(applicationID);
@@ -101,14 +103,14 @@ public class ApplicationService {
 
     //NURSE - /application/set/appeared/{id}
     public ResponseEntity<Application> setDonation(Integer applicationID, Application application) {
-
         Optional<Application> optionalApplication = applicationRepository.findByApplyId(applicationID);
+        Application oldApp = optionalApplication.get();
         if(
                 optionalApplication.isPresent()
-                && optionalApplication.get().getDonation() == null
-                && optionalApplication.get().getDonor().getBloodType() != null
+                && oldApp.getDonation() == null
+                && oldApp.getDonor().getBloodType() != null
         ){
-            Application modifiedApplication = optionalApplication.get();
+            Application modifiedApplication = oldApp;
             Donation newDonation = new Donation();
             newDonation.setDonationDate(LocalDateTime.now());
             newDonation.setTransportDate(null);
@@ -116,7 +118,7 @@ public class ApplicationService {
 
             modifiedApplication.getDonor().setTotalDonations(modifiedApplication.getDonor().getTotalDonations() + 1);
             modifiedApplication.getDonor().setNextDonationDate(
-                    calculateNextDonationTime(optionalApplication.get().getDonor()));
+                    calculateNextDonationTime(oldApp.getDonor()));
 
 
             donationRepository.save(newDonation);
@@ -126,6 +128,7 @@ public class ApplicationService {
             return ResponseEntity.notFound().build();
         }
     }
+
     //NURSE /application/set/used
     public ResponseEntity<Application> setDonationTransport(Integer donationID, Application application) {
 
@@ -137,9 +140,9 @@ public class ApplicationService {
             modifiedDonation.setTransportDate(LocalDateTime.now());
             modifiedApplication.setDonation(modifiedDonation);
             donationRepository.save(modifiedDonation);
-
+            applicationRepository.save(modifiedApplication);
             messageService.transportNewMsg(modifiedApplication);
-            return ResponseEntity.ok(applicationRepository.save(modifiedApplication));
+            return ResponseEntity.ok().build();
         } else{
             return ResponseEntity.notFound().build();
         }

@@ -55,7 +55,7 @@ public class FaqController {
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @DeleteMapping("/delete/{faqID}")
     public ResponseEntity<Faq> deleteFaq(@PathVariable Integer faqID) {
-        return faqService.deleteFaq(new Faq());
+        return faqService.deleteFaq(faqID);
     }
 
 }

@@ -45,7 +45,7 @@ public class NewsService {
 
     //NURSE - /news/modify
     public ResponseEntity<News> modifyNews(News news, Integer newsID){
-        Optional<News> oldNews = newsRepository.findById(newsID);
+        Optional<News> oldNews = newsRepository.findByNewsId(newsID);
         if (oldNews.isPresent()) {
             News createdNews = oldNews.get();
             createdNews.setTitle(news.getTitle());
