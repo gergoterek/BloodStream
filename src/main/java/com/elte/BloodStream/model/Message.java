@@ -42,7 +42,7 @@ public class Message {
     private Boolean seen = false;
 
     //@JsonBackReference
-    @ManyToOne()
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(referencedColumnName = "DONOR_ID", name = "donor_id")
     //@JsonIgnore
     private Donor donor;

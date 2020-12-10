@@ -98,8 +98,8 @@
                 Directed Donation Code must contain only numbers!
             </mat-error>
             <mat-error *ngIf="directedDonationCode.invalid && (directedDonationCode.dirty || directedDonationCode.touched) 
-                && directedDonationCode.hasError('minlength')">
-                Minimum length is 9!
+                && (directedDonationCode.hasError('minlength') || directedDonationCode.hasError('maxlength'))">
+                Donation code length is 9!
             </mat-error>
         </mat-form-field>
     </div>
@@ -123,7 +123,11 @@
             [disabled]="(!setTime || isFullDate) 
                 || (directedDonationCode.invalid 
                 && (directedDonationCode.dirty || directedDonationCode.touched) 
-                && directedDonationCode.hasError('minlength') || directedDonationCode.hasError('pattern')
+                && (
+                    directedDonationCode.hasError('minlength') 
+                    || directedDonationCode.hasError('pattern') 
+                    || directedDonationCode.hasError('maxlength')
+                )
                 && !isEmpty())"
         > Send application </button>
     </div>
@@ -132,4 +136,4 @@
 
 
 
-{{applicationForm.value | json}}
+<!-- {{applicationForm.value | json}} -->

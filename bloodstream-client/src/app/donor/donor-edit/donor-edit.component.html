@@ -4,19 +4,26 @@
         <h3>ID:  {{ donor.id }}</h3> 
      </div>  
 
-     <mat-form-field>
+    <mat-form-field>
         <input matInput formControlName="taj" required>
         <mat-placeholder class='placeholder'> TAJ </mat-placeholder>
-        <mat-error *ngIf="taj.invalid  && (taj.dirty || taj.touched) && taj.errors.required"
-            >TAJ is required</mat-error>
-        
+        <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && taj.errors.required">
+            TAJ is required</mat-error>
+        <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && taj.errors.pattern">
+            TAJ must contain only numbers!
+        </mat-error>
+        <mat-error *ngIf="taj.invalid && (taj.dirty || taj.touched) && (taj.hasError('minlength') || taj.hasError('maxlength'))">
+            TAJ length is 9!
+        </mat-error>
     </mat-form-field>
+
     <mat-form-field>
         <input matInput formControlName="idCard" required>
         <mat-placeholder class='placeholder'> ID Card </mat-placeholder>
-        <mat-error *ngIf="idCard.invalid  && (idCard.dirty || idCard.touched) && idCard.errors.required"
-            >ID Card is required</mat-error>
-        
+        <mat-error *ngIf="idCard.invalid && (idCard.dirty || idCard.touched) && idCard.errors.required">ID Card is required</mat-error>
+        <mat-error *ngIf="idCard.invalid && (idCard.dirty || idCard.touched) && idCard.hasError('minlength')">
+            Minimum length is 6!
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field >
@@ -49,6 +56,7 @@
     </mat-form-field>
 
     <button
+        *ngIf="donor.role === 'ROLE_DONOR'"
         mat-flat-button
         color="wipe"    
         type="button"    
@@ -56,12 +64,31 @@
     > Cancel </button>
 
     <button
+        *ngIf="donor.role !== 'ROLE_DONOR'"
+        mat-flat-button
+        color="wipe"    
+        type="button"    
+        [routerLink]="['/admin']"
+    > Cancel </button>
+
+    <button
+        *ngIf="donor.role === 'ROLE_DONOR'"
         mat-flat-button
         color="primary"    
         type="button"    
         (click)=onFormSave()
         [disabled]="donorForm.invalid"
         [routerLink]="['/donor']"
+    > Save </button>
+
+    <button
+        *ngIf="donor.role !== 'ROLE_DONOR'"
+        mat-flat-button
+        color="primary"    
+        type="button"    
+        (click)=onFormSave()
+        [disabled]="donorForm.invalid"
+        [routerLink]="['/admin']"
     > Save </button>
 </form>
 <!-- {{donorForm.value | json}} -->

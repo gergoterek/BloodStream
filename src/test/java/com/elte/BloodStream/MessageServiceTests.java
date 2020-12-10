@@ -53,7 +53,6 @@ public class MessageServiceTests {
         }
         @After
         public void cleanUp() {
-            System.out.println(message);
             message = null;
             message2 = null;
             message3 = null;

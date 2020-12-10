@@ -60,8 +60,8 @@ public class DonorService {
             newDonor.setBirthDate(donor.getBirthDate());
             newDonor.setMale(donor.isMale());
 
-            //messageService.regMessage(newDonor);
             donorRepository.save(newDonor);
+            messageService.regMessage(newDonor);
             return ResponseEntity.ok(true);
         } else {
             return ResponseEntity.ok(false);

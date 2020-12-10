@@ -58,7 +58,7 @@ export class ApplicationFormComponent implements OnInit {
 
   applicationForm = this.fb.group({
     appliedDate: [undefined, [Validators.required]],
-    directedDonationCode: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9)]],
+    directedDonationCode: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9), Validators.maxLength(9)]],
   });
 
   get appliedDate() { return this.applicationForm.get('appliedDate'); }

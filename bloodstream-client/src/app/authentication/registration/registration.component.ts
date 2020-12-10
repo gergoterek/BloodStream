@@ -86,7 +86,7 @@ export class RegistrationComponent implements OnInit {
     if (success) {
       this.router.navigate(["/login"])
     } else {
-      this.message = 'Registration failed, try with different username!'
+      this.message = 'Registration was unsuccessful, try with different username!'
     }
   }
 

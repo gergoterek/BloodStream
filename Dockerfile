@@ -9,7 +9,7 @@ COPY src /usr/local/service/src
 
 WORKDIR /usr/local/service
 RUN mvn clean install
-CMD mvn spring-boot:run
+CMD ["mvn", "spring-boot:run"]
 
 WORKDIR /usr/local/service
 

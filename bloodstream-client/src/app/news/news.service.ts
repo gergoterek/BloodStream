@@ -32,7 +32,6 @@ export class NewsService {
   }
 
   modifyNews(id: number, news: News): Promise<News> {
-    console.log(id);
     return this.http.put<News>(
       `${this.newsUrl }/${id}`,
       news,

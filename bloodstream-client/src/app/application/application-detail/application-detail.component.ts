@@ -44,7 +44,7 @@ export class ApplicationDetailComponent implements OnInit {
   delButton(): void {
     //console.log("deleteButton" + this.application.applyId);
     this.appService.deleteApplication(this.application.applyId)
-    if(this.authService.isDonor()){
+    if (this.authService.isDonor()){
       this.router.navigate(['/donation', this.application.applyId]);
     } else {
       this.router.navigate(['/donor/profile', this.application.donor.id, 'del']);

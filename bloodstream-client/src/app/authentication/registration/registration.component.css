@@ -9,3 +9,7 @@ form {
   h1 {
     padding:20px;
   }
+
+.redlight {
+  color: red;
+}

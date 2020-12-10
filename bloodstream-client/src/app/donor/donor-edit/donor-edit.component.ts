@@ -31,7 +31,7 @@ export class DonorEditComponent implements OnInit {
     if (id) {
       this.id = +id;
       this.donor = await this.donorService.getDonor(this.id);
-      console.log(JSON.stringify(this.donor)); 
+      //console.log(JSON.stringify(this.donor)); 
       this.donorForm.patchValue(this.donor);
       this.donorForm.patchValue({
         bloodType: (this.donor.bloodType === null) ? "undefined" : this.donor.bloodType,
@@ -41,9 +41,10 @@ export class DonorEditComponent implements OnInit {
 
 
   donorForm = this.fb.group({
-    taj: ['', [Validators.required]],
-    idCard: ['', [Validators.required]],
+    taj: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9), Validators.maxLength(9)]],
+    idCard: ['', [Validators.required, Validators.minLength(6)]],
     role: [{value: '', disabled: this.authService.isNurse()}, [Validators.required]],
+    
     bloodType: ['', [Validators.required]],
     //nextDonationDate: ['', [Validators.required]],
   });  
@@ -66,7 +67,7 @@ export class DonorEditComponent implements OnInit {
         bloodType: null,
       });
     }
-    console.log(JSON.stringify(this.donorForm.value)); 
+    //console.log(JSON.stringify(this.donorForm.value)); 
     const donor = this.donorForm.value as Donor;
     await this.donorService.modifyDonor(this.id, donor);
 

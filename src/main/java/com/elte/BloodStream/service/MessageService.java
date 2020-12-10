@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class MessageService {
@@ -79,15 +83,16 @@ public class MessageService {
         }
     }
 
-    void regMessage(Donor donor){
+    public void regMessage(Donor donor){
         Message msg = new Message();
         msg.setTitle("Registration");
         msg.setMessage("Thank you, for registrate to our website! Apply for a donation now!");
-        msg.setSeen(false);
-        msg.setDonor(donor);
+        //msg.setSeen(false);
         msg.setApplication(null);
         msg.setSendDate(LocalDateTime.now());
-        // donor.getMessages().add(msg);
+        msg.setDonor(donor);
+        //donorRepository.save(donor);
+        donor.setMessages(Stream.of( msg ).collect(Collectors.toList()));
         messageRepository.save(msg);
     }
 
@@ -97,8 +102,8 @@ public class MessageService {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         msg.setMessage("Thank you for your previous donation has been succesfully transported on ("
                 + formatter.format(new Date()) + ") to the destionation hospital! Have a nice day!");
-        msg.setSendDate(LocalDateTime.now());
         msg.setApplication(application);
+        msg.setSendDate(LocalDateTime.now());
         msg.setDonor(application.getDonor());
         application.getDonor().getMessages().add(msg);
         messageRepository.save(msg);

@@ -3,6 +3,7 @@ package com.elte.BloodStream;
 import com.elte.BloodStream.model.Application;
 import com.elte.BloodStream.model.Donor;
 import com.elte.BloodStream.model.News;
+import com.elte.BloodStream.model.Place;
 import com.elte.BloodStream.repository.ApplicationRepository;
 import com.elte.BloodStream.repository.DonorRepository;
 import com.elte.BloodStream.security.AuthenticatedUser;
@@ -25,6 +26,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
@@ -40,11 +42,12 @@ public class DonorServiceTests {
         @Autowired
         private DonorService donorService;
 
-        @Autowired
-        private AuthenticatedUser authenticatedUser;
 
         @MockBean
         private DonorRepository donorRepository;
+
+//        @MockBean
+//        private PasswordEncoder passwordEncoder;
 
         Donor donor;
         Donor donor2;
@@ -102,6 +105,26 @@ public class DonorServiceTests {
             //then
             assertEquals(new ResponseEntity(donor, HttpStatus.OK), donorService.getDonorProfile(donor.getId()));
             verify(donorRepository, times(1)).findById(donor.getId());
+        }
+
+        @Test
+        public void registerTest() {
+            //given
+            String pw = "password";
+            String name = "Balázs";
+            String username = "balazs";
+            String idCard = "1q2w3e";
+            //when
+            when(donor.getBirthDate()).thenReturn(new Date());
+            when(donor.getDonorName()).thenReturn( name );
+            when( donor.getIdCard()).thenReturn( idCard );
+            when( donor.getUsername()).thenReturn( username );
+            when( donor.getPassword()).thenReturn( pw );
+
+            Mockito.when(donorRepository.findByUsername( donor.getUsername())).thenReturn( Optional.empty());
+            //then
+            assertEquals(new ResponseEntity(true, HttpStatus.OK), donorService.register( donor ));
+            verify(donorRepository, times(1)).save(any(Donor.class));
         }
 
 }

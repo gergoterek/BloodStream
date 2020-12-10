@@ -31,7 +31,7 @@ export class MyApplicationComponent implements OnInit {
     //console.log(String(id))
     if (id) {
       this.id = +id;
-      console.log(JSON.stringify(this.nextApp));    
+      //console.log(JSON.stringify(this.nextApp));    
       // if(this.nextApp !== undefined){
       //   if (this.nextApp.applyId === this.id || this.nextApp.applyId !== null){
       //       this.nextApp = null;           

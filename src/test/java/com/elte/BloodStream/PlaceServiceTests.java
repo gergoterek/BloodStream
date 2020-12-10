@@ -52,7 +52,6 @@ public class PlaceServiceTests {
         }
         @After
         public void cleanUp() {
-            System.out.println(place);
             place = null;
             place2 = null;
             place3 = null;

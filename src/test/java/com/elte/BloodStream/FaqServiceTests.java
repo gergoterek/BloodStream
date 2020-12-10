@@ -54,14 +54,13 @@ public class FaqServiceTests {
 
     @After
     public void cleanUp() {
-        System.out.println(faq);
         faq = null;
         faq2 = null;
         faq3 = null;
     }
 
     @Test
-    public void getFaqsTest() {
+    public void getAllFaqsTest() {
         //given
         //when
         when(faqRepository.findAll()).thenReturn(
@@ -109,16 +108,15 @@ public class FaqServiceTests {
         verify(faqRepository, times(1)).findByFaqId(faq.getFaqId());
     }
 
-//    @Test
-//    public void deleteFaqTest() {
-//        //given
-//        int faqID = 1;
-//        Optional<Faq> oFaq = Optional.of(faq);
-//        //when
-//        when(faq.getFaqId()).thenReturn(faqID);
-//        Mockito.when(faqRepository.findByFaqId( faqID )).thenReturn(oFaq);
-//        faqService.deleteFaq(faq);
-//        //then
-//        verify(faqRepository, times(1)).delete(faq);
-//    }
+    @Test
+    public void deleteFaqTest() {
+        //given
+        int faqID = 1;
+        //when
+        when(faq.getFaqId()).thenReturn(faqID);
+        Mockito.when(faqRepository.findByFaqId( faqID )).thenReturn(Optional.of(faq));
+        faqService.deleteFaq(faqID);
+        //then
+        verify(faqRepository, times(1)).deleteById(faqID);
+    }
 }

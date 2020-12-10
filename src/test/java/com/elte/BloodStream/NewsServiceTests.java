@@ -49,7 +49,6 @@ public class NewsServiceTests {
 
         @After
         public void cleanUp() {
-            System.out.println(news);
             news = null;
             news2= null;
             news3= null;
