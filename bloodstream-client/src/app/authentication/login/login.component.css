@@ -9,6 +9,10 @@ form {
 mat-form-field {
   width: 100%;
 }
+
+.logincolor {
+  color: red;
+}
 /* mat-form-field {
     width: 100%;
     color: black;

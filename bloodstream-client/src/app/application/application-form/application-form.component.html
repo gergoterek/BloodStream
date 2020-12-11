@@ -90,7 +90,7 @@
             (click)="choose(time)"
             [disabled]="!isFreeTime(time)"
         > {{time}} </button>
-        <mat-form-field>
+        <mat-form-field *ngIf="setTime">
             <input matInput formControlName="directedDonationCode">
             <mat-placeholder class='placeholder'> Directed Donation Code (optional) </mat-placeholder>
             <mat-error *ngIf="directedDonationCode.invalid && (directedDonationCode.dirty || directedDonationCode.touched) 
