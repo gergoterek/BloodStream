@@ -29,11 +29,9 @@ public class Donor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DONOR_ID", updatable = false)
-    //@JsonProperty(access = READ_ONLY)
-    private Integer id;                 //donorID
+    private Integer id;
 
     @Column(nullable = false)
-    //@JsonProperty(access = WRITE_ONLY)
     private String username;
 
 
@@ -45,7 +43,7 @@ public class Donor {
     private String donorName;
 
     @Column(nullable = false)
-    private boolean male;    //0: female, 1: male
+    private boolean male;
 
     @Column(columnDefinition="tinyint(1) default 0")
     private int totalDonations = 0;
@@ -67,8 +65,6 @@ public class Donor {
     private String idCard;
 
     @Column(nullable = false)
-    //@JsonFormat(pattern="yyyy-MM-dd")
-    //@CreationTimestamp
     private Date birthDate;
 
     @Column

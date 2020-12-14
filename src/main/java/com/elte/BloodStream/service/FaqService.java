@@ -19,7 +19,7 @@ public class FaqService {
     FaqRepository faqRepository;
 
     //USER - /faq/all
-    public Iterable<Faq> getAllFaq() {
+    public Iterable<Faq> getAllFaqs() {
         return faqRepository.findAll();
     }
 

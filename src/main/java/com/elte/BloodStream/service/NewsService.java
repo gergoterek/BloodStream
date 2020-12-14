@@ -34,7 +34,7 @@ public class NewsService {
     }
 
     //NURSE - news/delete/{id}
-    public ResponseEntity deleteNews(Integer newsID) {
+    public ResponseEntity<News> deleteNews(Integer newsID) {
         try {
             newsRepository.deleteById(newsID);
             return ResponseEntity.ok().build();

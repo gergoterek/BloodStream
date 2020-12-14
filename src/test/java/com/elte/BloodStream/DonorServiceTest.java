@@ -1,9 +1,6 @@
 package com.elte.BloodStream;
 
-import com.elte.BloodStream.model.Application;
-import com.elte.BloodStream.model.Donor;
-import com.elte.BloodStream.model.News;
-import com.elte.BloodStream.model.Place;
+import com.elte.BloodStream.model.*;
 import com.elte.BloodStream.repository.ApplicationRepository;
 import com.elte.BloodStream.repository.DonorRepository;
 import com.elte.BloodStream.security.AuthenticatedUser;
@@ -37,7 +34,7 @@ import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DonorServiceTests {
+public class DonorServiceTest {
 
         @Autowired
         private DonorService donorService;
@@ -46,8 +43,7 @@ public class DonorServiceTests {
         @MockBean
         private DonorRepository donorRepository;
 
-//        @MockBean
-//        private PasswordEncoder passwordEncoder;
+
 
         Donor donor;
         Donor donor2;

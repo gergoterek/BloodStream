@@ -52,7 +52,7 @@ public class ApplicationService {
     }
 
     //ADMIN - /application/{donorID}
-    public List<Application> getDonorPastApplications(Integer id) {
+    public List<Application> getPastApplications(Integer id) {
         return applicationRepository.findAllByDonorIdAndDonationIsNotNull(id);
     }
 
@@ -141,7 +141,7 @@ public class ApplicationService {
             modifiedApplication.setDonation(modifiedDonation);
             donationRepository.save(modifiedDonation);
             applicationRepository.save(modifiedApplication);
-            messageService.transportNewMsg(modifiedApplication);
+            messageService.transportNewMessage(modifiedApplication);
             return ResponseEntity.ok().build();
         } else{
             return ResponseEntity.notFound().build();

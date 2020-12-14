@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class NewsServiceTests {
+public class NewsServiceTest {
 
 
         @Autowired

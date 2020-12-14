@@ -33,7 +33,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FaqServiceTests {
+public class FaqServiceTest {
 
     @Autowired
     private FaqService faqService;

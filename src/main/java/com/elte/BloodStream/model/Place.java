@@ -22,7 +22,6 @@ public class Place {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@JsonProperty(access = READ_ONLY)
     @Column(name = "PLACE_ID", updatable = false)
     private Integer id;
 
@@ -40,11 +39,11 @@ public class Place {
 
     @JsonIgnore
     @OneToMany(mappedBy = "place")
-    private List<Application> appliedUsers;
+    private List<Application> applications;
 
 
     @JsonManagedReference
-    @OneToOne(mappedBy = "place", cascade=CascadeType.ALL)//, cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "place", cascade=CascadeType.ALL)
     private OpeningTime openingTime;
 
 

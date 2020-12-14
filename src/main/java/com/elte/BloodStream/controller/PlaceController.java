@@ -21,23 +21,18 @@ public class PlaceController {
     PlaceService placeService;
 
 
-    //Donor - /place/all
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
     @GetMapping("/all")
     public Iterable<Place> getAllPlaces() {
         return placeService.getAllPlaces();
     }
 
-
-    //NURSE
     @Secured({"ROLE_DONOR","ROLE_NURSE", "ROLE_ADMIN"})
     @GetMapping("/{id}")
     public ResponseEntity<Place> getPlace(@PathVariable Integer id) {
         return placeService.getPlace(id);
     }
 
-
-    //NURSE
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @PostMapping("")
     public ResponseEntity<Place> createPlace(
@@ -46,27 +41,11 @@ public class PlaceController {
         return placeService.createPlace(place);
     }
 
-    //NURSE
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @PutMapping("/{id}")
     public ResponseEntity<Place> modifyPlace(@PathVariable Integer id, @RequestBody Place place) {
         return placeService.modifyPlace(place, id);
     }
 }
-
-//    //Donor
-//    @GetMapping("/city/{city}")
-//    public Iterable<Place> getPlacesByCity(@PathVariable String city) {
-//        return placeService.getPlacesByCity(city);
-//    }
-
-
-
-//    @GetMapping("/ot")
-//    public Iterable<OpeningTime> getAllOpeningTimes(){return placeService.getAllOpeningTimes();}
-
-//    //NURSE
-//    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<Place> deletePlace (@PathVariable Integer id) { return placeService.deletePlace(id); }
 
 

@@ -12,7 +12,10 @@ RUN npm run build --prod
 # stage 2
 FROM nginx:1.18.0-alpine
 COPY --from=node /app/dist/bloodstream-client  /usr/share/nginx/html
-
 COPY nginx.conf /etc/nginx/nginx.conf 
+
+
+
+
 #CMD ["nginx", "-g", "daemon off;"]
 

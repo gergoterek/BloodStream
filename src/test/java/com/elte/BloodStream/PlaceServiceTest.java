@@ -30,7 +30,7 @@ import static org.mockito.Mockito.times;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PlaceServiceTests {
+public class PlaceServiceTest {
 
         @Autowired
         private PlaceService placeService;

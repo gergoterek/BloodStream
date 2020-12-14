@@ -19,35 +19,31 @@ public class MessageController {
     @Autowired
     MessageService messageService;
 
-    //ROLE_DONOR - ADMIN
+
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
-    @GetMapping("/donor/{donorID}")
-    public Iterable<Message> getDonorMessages(@PathVariable Integer donorID) {
-        return messageService.getDonorMessages(donorID);
+    @GetMapping("/donor/{donorId}")
+    public Iterable<Message> getDonorMessages(@PathVariable Integer donorId) {
+        return messageService.getDonorMessages(donorId);
     }
 
-    //ROLE_DONOR - ADMIN
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
     @GetMapping("/{id}")
     public ResponseEntity<Message> getMessage(@PathVariable Integer id) {
         return messageService.getMessage(id);
     }
 
-    //ADMIN
     @GetMapping("/all")
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     public Iterable<Message> getAllMessages() {
         return messageService.getAllMessages();
     }
 
-    //ADMIN
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
-    @PostMapping("send/{donorID}")
-    public ResponseEntity<Message> createMessage(@RequestBody Message msg, @PathVariable Integer donorID) {
-        return messageService.createMessage(msg, donorID);
+    @PostMapping("send/{donorId}")
+    public ResponseEntity<Message> createMessage(@RequestBody Message msg, @PathVariable Integer donorId) {
+        return messageService.createMessage(msg, donorId);
     }
 
-    //ADMIN - /application/set/appeared/{id}
     @Secured({"ROLE_DONOR"})
     @PatchMapping("seen/{id}")
     public ResponseEntity<Message> setSeen(@PathVariable Integer id, @RequestBody Message msg){

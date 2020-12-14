@@ -15,51 +15,40 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class OpeningTime {
 
-    //@JsonProperty(access = READ_ONLY)
     @Id
     @Column(updatable = false)
-    private int id;
+    private Integer id;
 
 
-    @OneToOne//(fetch = FetchType.LAZY)
+    @OneToOne
     @JsonBackReference
     @JoinColumn(referencedColumnName = "PLACE_ID", name = "place_id")
     @MapsId
     private Place place;
 
-
-
     @Column
     private boolean monday;
-
 
     @Column
     private boolean tuesday;
 
-
     @Column
     private boolean wednesday;
-
 
     @Column
     private boolean thursday;
 
-
     @Column
     private boolean friday;
-
 
     @Column
     private boolean saturday;
 
-
     @Column
     private boolean sunday;
 
-
     @Column
     private int startTime;
-
 
     @Column
     private int closingTime;

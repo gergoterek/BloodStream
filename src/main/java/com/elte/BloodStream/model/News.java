@@ -34,9 +34,6 @@ public class News {
     private String text;
 
     @Column(nullable = false)
-//    @JsonFormat( pattern = "yyyy-MM-dd HH:mm a z")
-    //@CreationTimestamp
-    //@UpdateTimestamp
     private Date publishDate;
 
 }

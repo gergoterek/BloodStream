@@ -25,7 +25,6 @@ public class Donation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    //@JsonProperty(access = READ_ONLY)
     private Integer donationId;
 
     @Column

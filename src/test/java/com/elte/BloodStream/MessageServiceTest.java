@@ -31,7 +31,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MessageServiceTests {
+public class MessageServiceTest {
 
         @Autowired
         private MessageService messageService;

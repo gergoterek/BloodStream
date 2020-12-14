@@ -21,13 +21,10 @@ public class FaqController {
     FaqService faqService;
 
 
-
-
     @GetMapping("/all")
     public Iterable<Faq> getAllFaq() {
-        return faqService.getAllFaq();
+        return faqService.getAllFaqs();
     }
-
 
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @GetMapping("/{faqId}")
@@ -35,13 +32,11 @@ public class FaqController {
         return faqService.getFaq(faqId);
     }
 
-
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @PutMapping("/{faqID}")
     public ResponseEntity<Faq> modifyFaq(@PathVariable Integer faqID, @RequestBody Faq faq) {
         return faqService.modifyFaq(faqID, faq);
     }
-
 
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
     @PostMapping("")
@@ -51,11 +46,10 @@ public class FaqController {
         return faqService.createFaq(faq);
     }
 
-
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
-    @DeleteMapping("/delete/{faqID}")
-    public ResponseEntity<Faq> deleteFaq(@PathVariable Integer faqID) {
-        return faqService.deleteFaq(faqID);
+    @DeleteMapping("/delete/{faqId}")
+    public ResponseEntity<Faq> deleteFaq(@PathVariable Integer faqId) {
+        return faqService.deleteFaq(faqId);
     }
 
 }

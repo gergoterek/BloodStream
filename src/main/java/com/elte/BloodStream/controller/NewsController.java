@@ -23,23 +23,19 @@ public class NewsController {
         @Autowired
         NewsService newsService;
 
-        //Fv-ek leellenőrizve 10.14.
 
-        //DONOR
         @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
         @GetMapping("/all")
         public Iterable<News> getAllNews() {
                 return newsService.getAllNews();
         }
 
-        //NURSE
         @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
-        @GetMapping("/{newsID}")
-        public ResponseEntity<News> getNews(@PathVariable Integer newsID) {
-                return newsService.getNews(newsID);
+        @GetMapping("/{newsId}")
+        public ResponseEntity<News> getNews(@PathVariable Integer newsId) {
+                return newsService.getNews(newsId);
         }
 
-        //NURSE
         @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
         @PostMapping("")
         public ResponseEntity<News> createNews(
@@ -48,18 +44,13 @@ public class NewsController {
                 return newsService.createNews(news);
         }
 
-        //NURSE
         @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
-        @PutMapping("/{newsID}")
-        public ResponseEntity<News> modifyNews (@PathVariable Integer newsID, @RequestBody News news) {
-                return newsService.modifyNews(news, newsID);
+        @PutMapping("/{newsId}")
+        public ResponseEntity<News> modifyNews (@PathVariable Integer newsId, @RequestBody News news) {
+                return newsService.modifyNews(news, newsId);
         }
 
-        //NURSE
         @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
-        @DeleteMapping("/delete/{newsID}")
-        public ResponseEntity deleteNews (@PathVariable Integer newsID) { return newsService.deleteNews(newsID); }
-
-
-
+        @DeleteMapping("/delete/{newsId}")
+        public ResponseEntity<News> deleteNews (@PathVariable Integer newsId) { return newsService.deleteNews(newsId); }
 }

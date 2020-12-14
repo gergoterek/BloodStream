@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn){
-      this.authService.logout();
-    }
+    // if (this.authService.isLoggedIn){
+    //   this.authService.logout();
+    // }
     
   }
 

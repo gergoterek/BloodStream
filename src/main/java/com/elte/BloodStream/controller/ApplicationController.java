@@ -27,14 +27,11 @@ public class ApplicationController {
     @Autowired
     ApplicationService applicationService;
 
-    //fv-ek leellenőrizve 10.14.
 
-    //ADMIN - /application/all
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
     @GetMapping("/all")
     public List<Application> getAllApplications() { return applicationService.getAllApplications(); }
 
-    //ROLE_DONOR - /application
     @Secured({"ROLE_DONOR"})
     @PostMapping("/new")
     public ResponseEntity<Application> newApplication(@RequestBody Application application){
@@ -42,45 +39,35 @@ public class ApplicationController {
     }
 
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
-    @GetMapping("/{applyID}")
-    public ResponseEntity<Application> getApplication(@PathVariable Integer applyID) {
-        return applicationService.getApplication(applyID);
+    @GetMapping("/{applyId}")
+    public ResponseEntity<Application> getApplication(@PathVariable Integer applyId) {
+        return applicationService.getApplication(applyId);
     }
 
 
-    //DONOR - /application/{donorID}
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
-    @GetMapping("/donor/{donorID}")
-    public List<Application> getDonorPastApplications(@PathVariable Integer donorID) { return applicationService.getDonorPastApplications(donorID); }
+    @GetMapping("/donor/{donorId}")
+    public List<Application> getPastApplications(@PathVariable Integer donorId) { return applicationService.getPastApplications(donorId); }
 
-    //DONOR - /application/{donorID}
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
     @GetMapping("/next/{donorID}")
     public Application getNextApplication(@PathVariable Integer donorID) { return applicationService.getNextApplication(donorID); }
 
-    //ROLE_DONOR - /application/delete/{id}
-    @DeleteMapping("/delete/{applicationID}")
     @Secured({"ROLE_DONOR", "ROLE_NURSE", "ROLE_ADMIN"})
-    public ResponseEntity<Application> deleteApplication(@PathVariable Integer applicationID) {
-        return applicationService.deleteDonorApplication(applicationID);
+    @DeleteMapping("/delete/{applyId}")
+    public ResponseEntity<Application> deleteApplication(@PathVariable Integer applyId) {
+        return applicationService.deleteDonorApplication(applyId);
     }
 
-    //ADMIN - /application/set/appeared/{id}
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
-    @PatchMapping("/donation/{applicationID}")
-    public ResponseEntity<Application> setDonation(@PathVariable Integer applicationID, @RequestBody Application application){
-        return applicationService.setDonation(applicationID, application);
+    @PatchMapping("/donation/{applyId}")
+    public ResponseEntity<Application> setDonation(@PathVariable Integer applyId, @RequestBody Application application){
+        return applicationService.setDonation(applyId, application);
     }
 
-
-    //ADMIN /application/set/used/{id}
     @Secured({"ROLE_NURSE", "ROLE_ADMIN"})
-    @PatchMapping("/transport/{donationID}")
-    public ResponseEntity<Application> setDonationTransport(@PathVariable Integer donationID, @RequestBody Application application) {
-        return applicationService.setDonationTransport(donationID, application);
+    @PatchMapping("/transport/{donationId}")
+    public ResponseEntity<Application> setDonationTransport(@PathVariable Integer donationId, @RequestBody Application application) {
+        return applicationService.setDonationTransport(donationId, application);
     }
-
-//    @GetMapping("/date/{date}/{id}")
-//    public Boolean isFullDate(@PathVariable Date date, @PathVariable Integer id) { return applicationService.isFullDate(date, id); }
-
 }

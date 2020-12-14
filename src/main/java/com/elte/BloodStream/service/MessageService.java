@@ -83,7 +83,7 @@ public class MessageService {
         }
     }
 
-    public void regMessage(Donor donor){
+    public void registrationMessage(Donor donor){
         Message msg = new Message();
         msg.setTitle("Registration");
         msg.setMessage("Thank you, for registrate to our website! Apply for a donation now!");
@@ -96,7 +96,7 @@ public class MessageService {
         messageRepository.save(msg);
     }
 
-    public void transportNewMsg(Application application){
+    public void transportNewMessage(Application application){
         Message msg = new Message();
         msg.setTitle("Feedback about your previous donation");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

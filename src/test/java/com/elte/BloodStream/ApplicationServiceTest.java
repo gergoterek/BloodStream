@@ -20,7 +20,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -31,7 +33,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ApplicationServiceTests {
+public class ApplicationServiceTest {
 
         @Autowired
         private ApplicationService applicationService;
@@ -82,6 +84,7 @@ public class ApplicationServiceTests {
             );
             //then
             assertEquals(2, applicationRepository.findAll().size());
+            verify(applicationRepository, times(1)).findAll();
         }
 
        @Test
@@ -108,7 +111,7 @@ public class ApplicationServiceTests {
             when(applicationRepository.findAllByDonorIdAndDonationIsNotNull( donorID ))
                     .thenReturn(
                             Stream.of( app ).collect(Collectors.toList())
-            );
+                    );
             //then
             assertEquals(1, applicationRepository.findAllByDonorIdAndDonationIsNotNull(donor.getId()).size());
             verify(applicationRepository, times(1)).findAllByDonorIdAndDonationIsNotNull( donorID );
@@ -128,19 +131,7 @@ public class ApplicationServiceTests {
         assertEquals(app, applicationRepository.findByDonorIdAndDonationIsNull(donor.getId()));
         verify(applicationRepository, times(1)).findByDonorIdAndDonationIsNull( donorID );
     }
-//
-//        @Test
-//        public void modifyFaqTest() {
-//            //given
-//            Faq faq = new Faq( 1, "What?", "Who?");
-//            Faq modifiedFaq = new Faq( 1, "What2?", "Who2?");
-//            //when
-//            Optional<Faq> oFaq = Optional.of(faq);
-//            when(faqRepository.findByFaqId(faq.getFaqId())).thenReturn(oFaq);
-//            //then
-//            assertEquals(new ResponseEntity(HttpStatus.OK), faqService.modifyFaq(modifiedFaq.getFaqId(), modifiedFaq));
-//        }
-//
+
         @Test
         public void deleteApplicationTest() {
             //given
@@ -212,6 +203,6 @@ public class ApplicationServiceTests {
             assertEquals(new ResponseEntity(HttpStatus.OK), applicationService.setDonationTransport(app.getApplyId(), app));
             verify(applicationRepository, times(1)).findByApplyId(app.getApplyId());
             verify( applicationRepository, times(1)).save(any(Application.class));
-            verify(messageService, times(1)).transportNewMsg(any(Application.class));
+            verify(messageService, times(1)).transportNewMessage(any(Application.class));
         }
 }

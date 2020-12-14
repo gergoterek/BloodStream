@@ -41,14 +41,11 @@ public class Message {
     @Column
     private Boolean seen = false;
 
-    //@JsonBackReference
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(referencedColumnName = "DONOR_ID", name = "donor_id")
-    //@JsonIgnore
     private Donor donor;
 
 
-//    @JsonIgnore
     @OneToOne()
     @JoinColumn(referencedColumnName = "applyId", name = "apply_id")
     private Application application;
