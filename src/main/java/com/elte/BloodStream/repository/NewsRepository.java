@@ -13,6 +13,4 @@ import java.util.Optional;
 public interface NewsRepository extends CrudRepository<News, Integer> {
     List<News> findAll();
     Optional<News> findByNewsId(Integer id);
-    //News findFirstByOrderByNewsidDesc();
-    //List<Donors> findAllByDonorsNameIgnoreCaseOrderByNameDesc(String name);
 }

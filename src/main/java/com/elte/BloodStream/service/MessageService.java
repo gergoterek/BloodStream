@@ -87,11 +87,10 @@ public class MessageService {
         Message msg = new Message();
         msg.setTitle("Registration");
         msg.setMessage("Thank you, for registrate to our website! Apply for a donation now!");
-        //msg.setSeen(false);
         msg.setApplication(null);
         msg.setSendDate(LocalDateTime.now());
         msg.setDonor(donor);
-        //donorRepository.save(donor);
+
         donor.setMessages(Stream.of( msg ).collect(Collectors.toList()));
         messageRepository.save(msg);
     }

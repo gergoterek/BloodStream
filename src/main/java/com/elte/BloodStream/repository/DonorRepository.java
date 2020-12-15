@@ -19,7 +19,4 @@ public interface DonorRepository extends CrudRepository<Donor, Integer> {
 
     List<Donor> findAllByBloodType(Donor.BloodTypes type);
     List<Donor> findAllByDonorNameIgnoreCase(String name);
-
-    //List<Donors> findAllByFamilyId(Integer id);
-    //List<Donors> findAllByBloodType(String type);
 }

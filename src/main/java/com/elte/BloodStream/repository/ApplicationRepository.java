@@ -21,7 +21,6 @@ public interface ApplicationRepository extends CrudRepository<Application, Integ
 
     List<Application> findAllByDonorIdAndDonationIsNotNull(Integer donorID);
 
-    //@Query(value = "SELECT * FROM application WHERE donor_id=?1 AND donation_id IS NULL", nativeQuery = true)
     Application findByDonorIdAndDonationIsNull(Integer donorID);
     Optional<Application>  findByApplyId(Integer applyId);
 

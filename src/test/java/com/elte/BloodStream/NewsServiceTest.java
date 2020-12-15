@@ -110,7 +110,6 @@ public class NewsServiceTest {
 
             //when
             when(news.getNewsId()).thenReturn(newsID);
-
             newsService.deleteNews(news.getNewsId());
             //then
             verify(newsRepository, times(1)).deleteById(news.getNewsId());

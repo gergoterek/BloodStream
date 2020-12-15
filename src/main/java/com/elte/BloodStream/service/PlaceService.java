@@ -1,7 +1,5 @@
 package com.elte.BloodStream.service;
 
-import com.elte.BloodStream.model.Faq;
-import com.elte.BloodStream.model.News;
 import com.elte.BloodStream.model.OpeningTime;
 import com.elte.BloodStream.model.Place;
 import com.elte.BloodStream.repository.OpeningTimeRepository;
@@ -9,8 +7,6 @@ import com.elte.BloodStream.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
@@ -40,13 +36,6 @@ public class PlaceService {
         }
     }
 
-//    //Donor
-//    public Iterable<Place> getPlacesByCity(String city) {
-//        return placeRepository.findAllByCity(city);
-//    }
-
-    //public  Iterable<OpeningTime> getAllOpeningTimes(){return openingTimeRepository.findAll();}
-
 
     //NURSE - /news/create
     public ResponseEntity<Place> createPlace(Place place) {
@@ -54,9 +43,7 @@ public class PlaceService {
         createdPlace.setName(place.getName());
         createdPlace.setCity(place.getCity());
         createdPlace.setAddress(place.getAddress());
-        //System.out.println(place.getOpeningTime().getClosingTime());
         createdPlace.setOpeningTime(place.getOpeningTime());
-        //openingTimeRepository.save(place.getOpeningTime());
 
         return ResponseEntity.ok(placeRepository.save(place));
     }
@@ -86,8 +73,6 @@ public class PlaceService {
             ot.setSunday(place.getOpeningTime().isSunday());
 
             createdPlace.setOpeningTime(ot);
-            //System.out.println(place.getOpeningTime().getClosingTime());
-            //openingTimeRepository.save(place.getOpeningTime());
 
             return ResponseEntity.ok(placeRepository.save(createdPlace));
         } else {

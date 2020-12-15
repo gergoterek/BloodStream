@@ -75,11 +75,11 @@ public class ApplicationService {
             Application newApp = new Application();
             newApp.setDonor(foundDonor.get());
             newApp.setPlace(foundPlace.get());
-            //System.out.println(application.getAppliedDate());
+
             newApp.setAppliedDate(application.getAppliedDate());
             newApp.setDonation(null);
 
-            //newApp.setDirectedDonationCode();
+
             return ResponseEntity.ok(applicationRepository.save(application));
         } else {
             return ResponseEntity.badRequest().build();
@@ -122,7 +122,6 @@ public class ApplicationService {
 
 
             donationRepository.save(newDonation);
-            //optionalApplication.get().getDonor().getApplications().add(optionalApplication.get());
             return ResponseEntity.ok(applicationRepository.save(modifiedApplication));
         } else{
             return ResponseEntity.notFound().build();
@@ -149,15 +148,11 @@ public class ApplicationService {
     }
 
     LocalDateTime calculateNextDonationTime (Donor donor){
-        int limitAppNumber;
-        if(donor.isMale()){
-            limitAppNumber = 5;
-        } else {
-            limitAppNumber = 4;
-        }
-
         int countApplications = 0;
-        LocalDateTime l;
+        int limitAppNumber = (donor.isMale()
+                ? 5
+                : 4
+        );
         LocalDateTime minDate = LocalDateTime.now();
         for (Application app : donor.getApplications()){
             LocalDateTime appTime =
@@ -180,29 +175,3 @@ public class ApplicationService {
 
 }
 
-
-
-//    //("/date/{date}")
-//    public Boolean getFullDate(Date date, Integer id) {
-//
-//        List<Application> app = applicationRepository.findAllByPlaceIdAndDonationIsNull(id);
-//
-//
-//        LocalDate ld1 = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).toLocalDate();
-//        //LocalDate ld2 = LocalDateTime.ofInstant(instant2, ZoneId.systemDefault()).toLocalDate();
-//
-////        if (ld1.isEqual(LocalDateTime.ofInstant(a.getAppliedDate().toInstant(), ZoneId.systemDefault()).toLocalDate())) {
-////            System.out.println("blubb");
-////        }
-//
-//        int num = 0;
-//        for(Application a : app){
-//            System.out.println(a.getAppliedDate());
-//
-//            if (ld1.isEqual(LocalDateTime.ofInstant(a.getAppliedDate().toInstant(), ZoneId.systemDefault()).toLocalDate())) {
-//                ++num;
-//            }
-//            System.out.println(num);
-//        }
-//        return num < 1;
-//    }

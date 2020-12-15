@@ -45,7 +45,23 @@ const routes: Routes = [
     }
   },
   {
+    path: 'donor/del',
+    component: DonorListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_NURSE']
+    }
+  },
+  {
     path: 'admin',
+    component: AdminListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN']
+    }
+  },
+  {
+    path: 'admin/del',
     component: AdminListComponent,
     canActivate: [AuthGuard],
     data: {

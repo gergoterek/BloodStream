@@ -11,7 +11,5 @@ import java.util.List;
 public interface DonationRepository extends CrudRepository<Donation, Integer> {
     @Query(value = "SELECT donation_date FROM donation LIMIT 1", nativeQuery = true)
     Donation findFirstDonation();
-    //Donation findFirstByDonationIDOrderByDonationDateDesc(Integer id);
-    //Donation findByDonationId(Integer id);
     List<Donation> findAll();
 }

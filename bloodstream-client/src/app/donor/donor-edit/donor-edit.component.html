@@ -78,7 +78,7 @@
         type="button"    
         (click)=onFormSave()
         [disabled]="donorForm.invalid"
-        [routerLink]="['/donor']"
+        [routerLink]="['/donor/del']"
     > Save </button>
 
     <button
@@ -88,7 +88,7 @@
         type="button"    
         (click)=onFormSave()
         [disabled]="donorForm.invalid"
-        [routerLink]="['/admin']"
+        [routerLink]="['/admin/del']"
     > Save </button>
 </form>
 <!-- {{donorForm.value | json}} -->
